@@ -1,0 +1,25 @@
+# Personal materials and memoirs belong outside the public repository.
+/private/
+/workspace/
+/user-data/
+/exports/
+/backups/
+.env
+.env.*
+!.env.example
+*.key
+*.pem
+*.local.json
+*.log
+node_modules/
+.mfh-runtime/
+__pycache__/
+*.py[cod]
+.DS_Store
+Thumbs.db
+
+# Temporary preview and diagram QA evidence.
+/docs/overview.visual-*
+/docs/overview.delivery.json
+/docs/overview.review.json
+/assets/readme-preview*.png

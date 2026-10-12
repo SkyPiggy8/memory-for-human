@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Memory for Human</title><style>
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;color:#1f2328;background:#f6f8fa;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Microsoft YaHei",sans-serif;font-size:16px;line-height:1.75}a{color:#0969da;text-decoration:none}a:hover{text-decoration:underline}a:focus-visible{outline:2px solid #0969da;outline-offset:3px}.repo{border-bottom:1px solid #d0d7de;background:white;padding:15px 28px;font-size:14px;display:flex;gap:12px;align-items:center;flex-wrap:wrap}.repo .name{font-weight:600;color:#1f2328}.repo .note{color:#656d76}.shell{max-width:1180px;margin:28px auto 60px;padding:0 24px}.document-label{border:1px solid #d0d7de;border-bottom:0;border-radius:7px 7px 0 0;background:white;padding:11px 28px;font-size:13px;color:#656d76;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}article{background:white;border:1px solid #d0d7de;border-radius:0 0 7px 7px;padding:32px 40px;overflow-wrap:anywhere}h1,h2,h3{line-height:1.4;font-weight:600;color:#1f2328;scroll-margin-top:24px}h1{font-size:32px;padding-bottom:12px;border-bottom:1px solid #d8dee4;margin:0 0 18px}h2{font-size:24px;border-bottom:1px solid #d8dee4;padding-bottom:8px;margin:34px 0 16px}h3{font-size:19px;margin:25px 0 12px}p{margin:0 0 16px}li{margin:4px 0}ul,ol{padding-left:27px;margin:0 0 18px}img{max-width:100%;height:auto;display:block;margin:20px auto;border:1px solid #d8dee4;border-radius:5px}code{background:#eff1f3;font-family:ui-monospace,"Cascadia Code",Consolas,monospace;font-size:.88em;padding:2px 5px;border-radius:4px}pre{background:#f6f8fa;border-radius:6px;padding:18px;overflow:auto;font-size:14px;line-height:1.6}pre code{padding:0;background:transparent;white-space:pre;font-size:inherit}blockquote{color:#656d76;border-left:4px solid #d0d7de;padding:0 18px;margin:18px 0}.table-wrap{overflow-x:auto;margin:16px 0 22px}table{border-collapse:collapse;width:100%;font-size:14px;line-height:1.65}td,th{border:1px solid #d0d7de;padding:10px 12px;vertical-align:top;text-align:left}th{font-weight:600;background:#f6f8fa}tr:nth-child(even){background:#fbfcfd}em{color:#656d76}input[type=checkbox]{margin-right:8px;accent-color:#0969da}footer{color:#656d76;font-size:13px;margin-top:18px}footer a{margin-right:18px}@media(max-width:680px){.repo{padding:12px 16px}.shell{padding:0 10px;margin:16px auto 32px}article{padding:22px 18px}.document-label{padding:10px 18px}h1{font-size:27px}h2{font-size:22px}body{font-size:15px}td,th{min-width:115px;padding:8px}table{font-size:13px}pre{font-size:12px;padding:12px}}@media print{body{background:white}.repo,.document-label,footer{display:none}.shell{max-width:none;padding:0;margin:0}article{border:0;padding:0}a{color:inherit}h2,h3{break-after:avoid}img,tr,blockquote{break-inside:avoid}.table-wrap{overflow:visible}}
+</style></head><body><nav class="repo"><a class="name" href="../index.html">Memory for Human</a><span class="note">Documentación local · v0.2</span></nav><main class="shell"><div class="document-label"><span>README.es.md</span><a href="../README.es.md">Texto original</a></div><article><h1 id="memory-for-human">Memory for Human</h1>
+<p><a href="README.html">简体中文</a> · <a href="README.en.html">English</a> · <a href="README.es.html">Español</a></p>
+<p><a href="https://github.com/SkyPiggy8/memory-for-human">Repositorio en GitHub</a> · <a href="https://github.com/SkyPiggy8/memory-for-human/archive/refs/heads/main.zip">Descargar ZIP</a></p>
+<p><strong>Tú cuentas la historia. Tu IA ayuda a ordenarla. Conserva a las personas y los momentos que quieres recordar.</strong></p>
+<p>Nuestra vida se forma con lo que hemos vivido y con lo que está por venir. Memory for Human (MFH) usa la IA para ayudar a conservar recuerdos reales: un encuentro, años compartidos, decisiones importantes y detalles que solo tú recuerdas.</p>
+<p>MFH es ahora una <strong>herramienta local de memorias que funciona (v0.2)</strong>. La interfaz, las preguntas, las explicaciones sencillas y las instrucciones para otra IA están en chino, inglés y español. Usa tu propia API Key o la IA con la que ya hablas, sin conectar una API.</p>
+<p><img src="../assets/overview.es.svg" alt="Elegir unas memorias, recoger materiales, entrevistar, escribir capítulos, revisar y conservar"></p>
+<p>El diagrama muestra la dirección general. La transcripción de archivos de audio, el reconocimiento de imágenes y la integración automática con álbumes o NAS siguen pendientes. <a href="../docs/overview.html">Diagrama interactivo (visor en chino)</a> · <a href="docs/guide.es.html">Guía práctica en español</a></p>
+<h2 id="todo-esto-es-nuevo-para-ti">¿Todo esto es nuevo para ti?</h2>
+<p>Piensa en un cuaderno con un ayudante. Escribes un recuerdo, respondes a una pregunta o recoges las palabras de un familiar. La IA puede ordenarlas para que se lean mejor, usando solo lo que le das. Revisas el resultado y lo guardas o imprimes.</p>
+<p>Solo necesitas uno de dos caminos: <strong>poner tu API Key en la ventana de conexión</strong> o <strong>copiar las instrucciones de “Usar mi propia IA” a la IA que ya utilizas</strong>. Un familiar puede manejar el ordenador mientras una persona mayor cuenta la historia.</p>
+<p>“Cómo funciona” explica con palabras cotidianas la herramienta, la Key, cómo usarla sin Key y adónde van los textos. Si está conectada, tu IA puede volver a explicarlo.</p>
+<h2 id="empezar-en-tu-ordenador">Empezar en tu ordenador</h2>
+<h3 id="windows-abre-un-solo-archivo">Windows: abre un solo archivo</h3>
+<ol>
+<li>Descarga y descomprime el repositorio.</li>
+<li>Haz doble clic en <strong><code>start.cmd</code></strong>. Si falta un entorno adecuado, descarga y verifica Node.js LTS oficial dentro de esta carpeta, sin instalarlo para todo el sistema como administrador.</li>
+<li>Se abre la página local en el navegador. Mantén abierta la ventana de inicio; al cerrarla se detiene el servicio.</li>
+<li>Elige el idioma arriba a la derecha. Empieza unas memorias o prueba el ejemplo, claramente marcado como ficticio.</li>
+</ol>
+<p>Dirección habitual: <code>http://127.0.0.1:4317</code>. La preparación inicial necesita internet. Después puedes escribir, ordenar y hacer copias sin conexión. Si falla, entrega <a href="AI-HANDOFF.es.html">la guía para tu IA</a> a una IA que pueda ayudarte con el ordenador.</p>
+<h3 id="macos--linux">macOS / Linux</h3>
+<p>Pide a tu IA que siga <a href="AI-HANDOFF.es.html">la guía</a>, prepare Node.js 22 o posterior y ejecute <code>sh start.sh</code>. Si conoces la terminal, puedes ejecutar:</p>
+<pre><code class="language-sh">node server.mjs
+</code></pre>
+<p>También puedes abrir <code>index.html</code> directamente para escribir, importar texto, editar y exportar. <strong>El modo de archivo no conecta con APIs.</strong> El archivo y la dirección web local tienen almacenamientos distintos del navegador: descarga una copia antes de cambiar e impórtala después.</p>
+<h2 id="cuatro-pasos-para-un-capítulo">Cuatro pasos para un capítulo</h2>
+<ol>
+<li><strong>Elegir unas memorias.</strong> Ponles nombre, indica de quién es la historia y para quién, y decide si empiezas con un capítulo o un libro largo.</li>
+<li><strong>Contar tu historia.</strong> Responde una pregunta cada vez. Escribe, usa el dictado si el navegador lo permite o importa texto. Las respuestas se pueden editar.</li>
+<li><strong>Crear un capítulo.</strong> Usa la IA conectada, reúne tus palabras originales o pega un capítulo de tu IA habitual. Edita, comprueba y marca como revisado.</li>
+<li><strong>Guardar y crear.</strong> Descarga la copia completa de los textos o un archivo Markdown, o guarda un PDF desde la impresión del navegador. Sigue la lista para hacer un libro físico.</li>
+</ol>
+<p>El trabajo se guarda en el navegador de este dispositivo. Puedes crear varias memorias, cambiar entre ellas y recuperar copias. <strong>El navegador no debe ser tu única copia</strong>: descarga el proyecto y conserva otra copia independiente.</p>
+<h2 id="tu-ia-a-tu-manera">Tu IA, a tu manera</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Camino</th>
+<th>Qué haces</th>
+<th>Para qué sirve</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>API Key</td>
+<td>Eliges el servicio y pones la Key localmente</td>
+<td>Probar la conexión, continuar preguntas, escribir, revisar y explicar</td>
+</tr>
+<tr>
+<td>Tu IA habitual</td>
+<td>Copias instrucciones, incluyes materiales si quieres y pegas el resultado</td>
+<td>Entrevistas, escritura y revisión manuales</td>
+</tr>
+<tr>
+<td>IA que usa el ordenador</td>
+<td>Le das el repositorio y <a href="AI-HANDOFF.es.html">AI-HANDOFF.es.md</a></td>
+<td>Iniciar y configurar la aplicación real, y enseñarte a usarla</td>
+</tr>
+<tr>
+<td>Modelo local</td>
+<td>Pones una dirección local compatible y un modelo en las opciones</td>
+<td>Procesar texto con un modelo instalado por tu cuenta</td>
+</tr>
+</tbody></table></div>
+<p>Hay configuraciones para OpenAI, DeepSeek, Claude, Doubao y servicios compatibles. Se pueden cambiar los valores propuestos. Los permisos, el saldo y los modelos dependen de tu cuenta. Los adaptadores se han implementado con documentación oficial y probado con respuestas simuladas; <strong>no se han probado uno por uno con Keys reales de usuarios</strong>. <a href="docs/api-reference.html">Fuentes y alcance</a></p>
+<p>Una cuenta de chat y una API son caminos diferentes. Tu IA puede ayudarte con el modelo o la dirección. No pongas una Key real en chats, memorias, paquetes de instrucciones ni repositorios públicos. Por defecto, el servidor local solo la mantiene en memoria durante esta ejecución.</p>
+<h2 id="seis-tipos-de-memorias">Seis tipos de memorias</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Tipo</th>
+<th>Estructura sugerida</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Historia de amor</td>
+<td>Encuentro → cercanía → días juntos → cambios → palabras para tu pareja</td>
+</tr>
+<tr>
+<td>Matrimonio y familia</td>
+<td>Encuentro → decisión compartida → boda → hogar → crecer juntos</td>
+</tr>
+<tr>
+<td>Historia de una vida</td>
+<td>Infancia → estudios → trabajo → familia → cambios → últimos años → descendientes</td>
+</tr>
+<tr>
+<td>Compañeros de servicio</td>
+<td>Encuentro → vida compartida → experiencias → despedida → contacto posterior</td>
+</tr>
+<tr>
+<td>Compañeros de trabajo</td>
+<td>Llegada → colaboración → momentos clave → aprendizaje → despedida</td>
+</tr>
+<tr>
+<td>Amigos de la escuela</td>
+<td>Llegada → rutina → recuerdos de grupo → graduación → reencuentro</td>
+</tr>
+</tbody></table></div>
+<p>Las plantillas chinas sugieren unos 3.000–15.000 caracteres para una historia de amor y 30.000–80.000 para una vida. Son referencias opcionales en chino, no cuotas equivalentes de palabras en español. Ajusta la longitud a los recuerdos reales.</p>
+<p>Una vida extensa puede organizarse en unos 10–16 capítulos. Habla de un tema cada vez y descansa cuando haga falta. Ya puedes guardar varios capítulos y continuar después; no se inventa una vida entera con un clic. Empieza con una historia breve o un capítulo de vida.</p>
+<h2 id="añadir-materiales">Añadir materiales</h2>
+<ul>
+<li>Responde directamente, con ayuda de un familiar si hace falta.</li>
+<li>Importa texto UTF-8 <code>.txt</code>, <code>.md</code>, <code>.csv</code> o <code>.json</code>, hasta 1 MB por archivo. Se lee texto, no se adapta cualquier plataforma de chat automáticamente.</li>
+<li>Transcribe antes las grabaciones con tu herramienta y revisa las palabras. El dictado depende del navegador y puede usar internet; no es transcripción de archivos de audio.</li>
+<li>Escribe pies de foto con personas, fecha, lugar e historia. Guarda los originales aparte. No se reconocen imágenes, PDF ni escritura a mano.</li>
+<li>Importa un <code>.mfh.json</code> creado por el botón de copia completa. Se crean unas memorias nuevas sin sustituir las anteriores.</li>
+</ul>
+<p>Los materiales nuevos <strong>no se envían a la IA por defecto</strong>: selecciónalos individualmente. También puedes elegir o excluir respuestas para cada capítulo. Las tareas usan respuestas y materiales seleccionados y el capítulo necesario. Si hay demasiado contexto, se pide dividirlo; no se descarta en silencio. <a href="docs/guide.es.html">Guía práctica</a></p>
+<h2 id="veracidad-y-privacidad">Veracidad y privacidad</h2>
+<p>La IA ayuda a expresar experiencias reales, no a inventarlas. Los borradores conservan referencias como <code>[A1]</code> para respuestas y <code>[M1]</code> para materiales. Quien cuenta la historia decide la versión final. Editar un capítulo revisado lo vuelve a marcar como borrador.</p>
+<p>Una página local no significa que todo sea sin conexión. Las peticiones a una API o a una IA en línea envían el texto seleccionado a ese servicio. Pide permiso para recoger entrevistas, chats, fotos y compartirlos.</p>
+<p>La copia completa de textos contiene respuestas, textos importados, borradores y una respuesta sin terminar. Excluye la API Key y las fotos o grabaciones originales. Guarda esos originales por separado.</p>
+<h2 id="crear-algo-que-puedas-conservar">Crear algo que puedas conservar</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Resultado</th>
+<th>Un camino sencillo</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Libro impreso</td>
+<td>Revisar → descargar → consultar especificaciones → preparar PDF → un ejemplar de prueba → corregir y encuadernar</td>
+</tr>
+<tr>
+<td>Libro de fotos</td>
+<td>Elegir originales → añadir descripciones reales → maquetar → revisar recortes → probar</td>
+</tr>
+<tr>
+<td>Álbum digital / marco</td>
+<td>Probar fotos y tarjetas de historias en una tableta antes de comprar equipos</td>
+</tr>
+<tr>
+<td>Archivo familiar / NAS</td>
+<td>Material local y copias independientes; añadir NAS cuando sea útil y probar la recuperación</td>
+</tr>
+</tbody></table></div>
+<p><a href="docs/guide.es.html">La guía en español</a> explica materiales, impresión, privacidad y herramientas opcionales. Los proyectos independientes se enlazan, no se integran automáticamente.</p>
+<h2 id="entregar-el-trabajo-a-otra-ia">Entregar el trabajo a otra IA</h2>
+<p>“Usar mi propia IA” genera instrucciones para la tarea y el idioma. Los materiales privados solo se incluyen si lo eliges. Copia o descarga el paquete y pega después el capítulo como texto o el JSON indicado.</p>
+<p>Guías del repositorio: <a href="AI-HANDOFF.html">chino</a>, <a href="AI-HANDOFF.en.html">inglés</a>, <a href="AI-HANDOFF.es.html">español</a>. <a href="AGENTS.html">AGENTS.md</a> describe los archivos, el inicio, las verificaciones y los límites para asistentes de programación.</p>
+<h2 id="qué-funciona-y-qué-falta">Qué funciona y qué falta</h2>
+<p><strong>Funciona:</strong> interfaz y preguntas en tres idiomas, explicaciones sencillas, instrucciones para otra IA, seis temas, texto, dictado compatible, varias memorias, guardado local, edición, adaptadores de API, copia y recuperación, Markdown e impresión.</p>
+<p><strong>Pendiente:</strong> transcribir audios subidos, OCR e imágenes, importación de chats específicos, maquetación ilustrada automática, integración con álbumes/NAS, búsqueda en libros largos y revisión de versiones entre autores.</p>
+<p>No hay dependencias de interfaz que instalar. El servidor usa funciones incluidas en Node.js. Verificación para desarrolladores: <code>npm test</code>.</p>
+<h2 id="licencia">Licencia</h2>
+<p><a href="license.html">PolyForm Noncommercial 1.0.0</a> permite el uso, la modificación y la distribución para fines autorizados por la licencia, y restringe el uso comercial no autorizado. Tus materiales y obras privadas no tienen que publicarse. Las herramientas externas mantienen sus propios términos; consulta <a href="THIRD_PARTY_NOTICES.html">THIRD_PARTY_NOTICES.md</a> para el visor del diagrama y otros contenidos de terceros.</p>
+</article><footer><a href="../index.html">Abrir la aplicación</a></footer></main></body></html>

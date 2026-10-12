@@ -1,0 +1,32 @@
+name: 文档与使用反馈
+description: 反馈采访、模板、采集或制作流程中的具体问题
+title: "[反馈] "
+body:
+  - type: markdown
+    attributes:
+      value: "请使用虚构或匿名化描述，不提交私人聊天、照片、录音或 API Key。请说明使用语言、浏览器和遇到问题的步骤。"
+  - type: dropdown
+    id: scene
+    attributes:
+      label: 回忆录类型
+      options:
+        - 恋人
+        - 婚姻
+        - 老人一生
+        - 战友
+        - 同事
+        - 同学
+        - 通用文档
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: 在哪一步遇到什么问题？
+      description: 写明文档位置或模板问题，避免真实私人材料。
+    validations:
+      required: true
+  - type: textarea
+    id: suggestion
+    attributes:
+      label: 希望怎样改进？

@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Memory for Human — a local memoir workspace, guided by your own AI.">
+  <title>Memory for Human</title>
+  <link rel="stylesheet" href="app/styles.css">
+  <script src="app/core.js" defer></script>
+  <script src="app/i18n.js" defer></script>
+  <script src="app/app.js" defer></script>
+</head>
+<body>
+  <header class="header"><div class="header-inner">
+    <div class="brand">Memory for Human<small data-i18n="tagline">把故事留下来</small></div>
+    <div class="header-actions">
+      <button class="quiet header-nav" data-action="workspace" data-i18n="myBook">我的回忆录</button>
+      <button class="quiet header-nav" data-action="help" data-i18n="help">先看怎么用</button>
+      <button class="quiet header-nav" data-action="handoff" data-i18n="handoff">交给我的 AI</button>
+      <select id="language" aria-label="Language / 语言 / Idioma"><option value="zh">简体中文</option><option value="en">English</option><option value="es">Español</option></select>
+    </div>
+  </div></header>
+  <div class="layout">
+    <aside class="sidebar">
+      <label for="projects" data-i18n="books">切换回忆录</label>
+      <div class="project-row"><select id="projects" class="project-select" aria-label="Memoir"></select><button class="quiet small" data-action="new" data-i18n="newBook">新建一本</button></div>
+      <nav class="steps" aria-label="Memoir steps">
+        <button class="step active" data-step="0"><b>1</b><span data-i18n="step1">选一种回忆录</span></button>
+        <button class="step" data-step="1"><b>2</b><span data-i18n="step2">把故事讲出来</span></button>
+        <button class="step" data-step="2"><b>3</b><span data-i18n="step3">整理成章节</span></button>
+        <button class="step" data-step="3"><b>4</b><span data-i18n="step4">保存与制作</span></button>
+      </nav>
+      <div class="sidebar-footer">
+        <div class="connection"><span id="connectionDot" class="status-dot"></span><span id="connectionStatus"></span></div>
+        <button class="small" data-action="connect" id="connectionButton" data-i18n="connect">连接我的 AI</button>
+        <button class="quiet small" data-action="help" data-i18n="help">先看怎么用</button>
+        <button class="quiet small" data-action="handoff" data-i18n="handoff">交给我的 AI</button>
+        <div id="saveStatus" class="save-state" role="status" aria-live="polite"></div>
+      </div>
+    </aside>
+    <main id="main">
+      <section id="workspacePanel">
+        <div class="welcome" id="welcome">
+          <div class="eyebrow">Memory for Human</div><h1 data-i18n="welcome">把你记得的故事，慢慢写下来。</h1>
+          <p data-i18n="intro"></p>
+          <div class="row spaced"><button class="primary" data-action="start" data-i18n="start">开始我的回忆录</button><button data-action="demo" data-i18n="demo"></button></div>
+        </div>
+        <section class="card" data-panel="0">
+          <div class="section-head"><h2 data-i18n="scene"></h2><p class="hint" data-i18n="guide"></p></div>
+          <div id="scenes" class="scene-grid"></div>
+          <div class="field"><label for="bookTitle" data-i18n="bookTitle"></label><input id="bookTitle" maxlength="300" data-placeholder="titlePlaceholder"></div>
+          <div class="grid">
+            <div class="field"><label for="person" data-i18n="person"></label><input id="person" maxlength="300" data-placeholder="personPlaceholder"></div>
+            <div class="field"><label for="reader" data-i18n="reader"></label><input id="reader" maxlength="300" data-placeholder="readerPlaceholder"></div>
+          </div>
+          <div class="field"><label for="target" data-i18n="length"></label><select id="target"><option value="short" data-i18n="lengths.short"></option><option value="medium" data-i18n="lengths.medium"></option><option value="long" data-i18n="lengths.long"></option></select><p class="hint" data-i18n="lengthHint"></p></div>
+        </section>
+        <section class="card" data-panel="1" hidden>
+          <div class="section-head"><h2 data-i18n="storyTitle"></h2><p class="hint" data-i18n="storyHint"></p></div>
+          <div class="question-box"><small data-i18n="question"></small><p id="questionText"></p></div>
+          <div class="field"><label for="answer" data-i18n="answerLabel"></label><textarea id="answer" class="answer-text" data-placeholder="answerPlaceholder"></textarea></div>
+          <div class="row spaced"><button class="primary" data-action="saveAnswer" data-i18n="saveAnswer"></button><button data-action="skip" data-i18n="skip"></button><button data-action="askAI" data-ai data-i18n="askAI"></button><button class="quiet" id="voiceButton" data-action="voice" data-i18n="voice"></button></div>
+          <p class="hint" data-i18n="voiceNote"></p>
+          <div class="subsection"><h3 data-i18n="memories"></h3><div id="answers"></div></div>
+          <div class="subsection"><h3 data-i18n="materials"></h3><p class="hint" data-i18n="materialHint"></p><div class="row"><button data-action="addText" data-i18n="addText"></button><button data-action="importText" data-i18n="importText"></button></div><p class="hint" data-i18n="fileHint"></p><div id="materials"></div></div>
+          <p class="notice" data-i18n="sendNotice"></p>
+        </section>
+        <section class="card" data-panel="2" hidden>
+          <div class="section-head"><h2 data-i18n="writingTitle"></h2></div>
+          <div class="field"><label for="nextChapterTitle" data-i18n="chapterTitle"></label><input id="nextChapterTitle" maxlength="300" data-placeholder="chapterPlaceholder"></div>
+          <div class="row spaced"><button class="primary" data-action="writeAI" data-ai data-i18n="writeAI"></button><button data-action="collect" data-i18n="collect"></button><button data-action="pasteDraft" data-i18n="pasteDraft"></button></div>
+          <p class="notice" data-i18n="sendNotice"></p>
+          <div class="chapter-toolbar"><select id="chapters" aria-label="Chapter"></select><button class="small" data-action="newChapter" data-i18n="newChapter"></button></div>
+          <p id="noChapter" class="empty" data-i18n="noChapters"></p>
+          <div id="chapterEditor" hidden>
+            <div class="row"><span class="badge" id="chapterStatus"></span><span class="hint" id="chapterOrigin"></span></div>
+            <div class="field"><label for="editChapterTitle" data-i18n="chapterTitle"></label><input id="editChapterTitle" maxlength="300"></div>
+            <div class="field"><label for="chapterText" data-i18n="draftLabel"></label><textarea id="chapterText" class="chapter-text"></textarea></div>
+            <div class="row spaced"><button data-action="reviewAI" data-ai data-i18n="reviewAI"></button><button class="primary" id="approvalButton" data-action="approve"></button><button class="quiet danger small" data-action="deleteChapter" data-i18n="remove"></button></div>
+            <section id="reviewPanel" class="subsection" hidden><h3 data-i18n="reviewResult"></h3><div id="reviewOutput" class="review-output"></div></section>
+          </div>
+        </section>
+        <section class="card" data-panel="3" hidden>
+          <div class="section-head"><h2 data-i18n="exportTitle"></h2><p class="hint" data-i18n="exportHint"></p></div>
+          <div class="export-option"><div><h3 data-i18n="backup"></h3><p class="hint" data-i18n="backupHint"></p></div><button class="primary" data-action="backup" data-i18n="backup"></button></div>
+          <div class="export-option"><div><h3 data-i18n="restore"></h3><p class="hint" data-i18n="restoreHint"></p></div><button data-action="restore" data-i18n="restore"></button></div>
+          <div class="export-option"><div><h3 data-i18n="exportMD"></h3><p class="hint" data-i18n="exportMDHint"></p></div><button data-action="exportMD" data-i18n="exportMD"></button></div>
+          <div class="export-option"><div><h3 data-i18n="print"></h3><p class="hint" data-i18n="printHint"></p></div><button data-action="print" data-i18n="print"></button></div>
+          <p class="hint" data-i18n="printing"></p>
+          <div class="subsection"><h3 data-i18n="bom"></h3><ol id="checklist" class="checklist"></ol><a id="productionLink" class="help-link" href="preview/docs/production-checklist.html" target="_blank" data-i18n="productionDoc"></a></div>
+        </section>
+        <div class="bottom-nav"><button class="quiet" data-action="back" id="backButton" data-i18n="back"></button><button class="primary" data-action="next" id="nextButton" data-i18n="next"></button></div>
+      </section>
+      <section class="card" id="helpPanel" hidden>
+        <div class="section-head"><h1 data-i18n="explanationTitle"></h1><p class="hint" data-i18n="explanationIntro"></p></div>
+        <div id="faqButtons" class="help-questions"></div><div id="faqAnswer" class="help-answer"></div>
+        <div class="subsection"><div class="field"><label for="explainQuestion" data-i18n="explainQuestion"></label><input id="explainQuestion" maxlength="3000" data-placeholder="explainPlaceholder"></div><button class="primary spaced" data-action="explainAI" data-ai data-i18n="explainAI"></button><div id="explainOutput" class="review-output" hidden></div></div>
+        <div class="row spaced"><button data-action="workspace" data-i18n="myBook"></button><button data-action="handoff" data-i18n="handoff"></button></div>
+      </section>
+      <section class="card" id="handoffPanel" hidden>
+        <div class="section-head"><h1 data-i18n="handoffTitle"></h1><p class="hint" data-i18n="handoffIntro"></p></div>
+        <div class="field"><label for="handoffTask" data-i18n="handoffTask"></label><select id="handoffTask"><option value="interview" data-i18n="tasks.interview"></option><option value="draft" data-i18n="tasks.draft"></option><option value="review" data-i18n="tasks.review"></option><option value="setup" data-i18n="tasks.setup"></option></select></div>
+        <label class="material-choice"><input id="handoffInclude" type="checkbox"><span data-i18n="includeMemories"></span></label>
+        <p class="hint" data-i18n="handoffPrivacy"></p><textarea id="handoffText" class="handoff-text" readonly aria-label="AI instructions"></textarea>
+        <div class="row spaced"><button class="primary" data-action="copyHandoff" data-i18n="copyInstructions"></button><button data-action="downloadHandoff" data-i18n="downloadInstructions"></button></div>
+        <p class="hint" data-i18n="handoffFormat"></p>
+        <div class="field"><label for="returnedAI" data-i18n="returnedAI"></label><textarea id="returnedAI" class="return-result" data-placeholder="returnedHint"></textarea></div>
+        <button class="primary spaced" data-action="importResult" data-i18n="importResult"></button>
+      </section>
+      <div id="busyLine" class="busy-line" role="status" hidden data-i18n="busy"></div>
+      <footer class="footnote"><span data-i18n="localHint"></span> · <a id="readmeLink" href="preview/README.html" target="_blank" data-i18n="moreDoc"></a></footer>
+    </main>
+  </div>
+  <dialog id="connectionDialog">
+    <div class="dialog-head"><h2 data-i18n="connectionTitle"></h2><button class="quiet small" data-close="connectionDialog" data-i18n="close"></button></div>
+    <p class="hint" data-i18n="connectionHint"></p>
+    <div id="fileMode" class="notice" hidden><p data-i18n="fileMode"></p><a href="http://127.0.0.1:4317" data-i18n="openLocal"></a></div>
+    <form id="connectionForm">
+      <div class="field"><label for="provider" data-i18n="provider"></label><select id="provider"><option value="openai">OpenAI</option><option value="deepseek">DeepSeek</option><option value="anthropic">Claude</option><option value="doubao">豆包 / Doubao</option><option value="custom" data-i18n="customProvider"></option></select></div>
+      <div class="field"><label for="apiKey" data-i18n="apiKey"></label><input id="apiKey" type="password" autocomplete="off" spellcheck="false" data-placeholder="keyPlaceholder"></div>
+      <details id="advanced"><summary data-i18n="advanced"></summary><div class="field"><label for="model" data-i18n="model"></label><input id="model" maxlength="200"><p class="hint" data-i18n="modelHint"></p></div><div class="field"><label for="baseURL" data-i18n="baseURL"></label><input id="baseURL" type="url" maxlength="500"></div></details>
+      <p class="hint" data-i18n="connectionNote"></p><p id="connectionError" class="notice" role="alert" hidden></p>
+      <div class="row spaced"><button id="connectSubmit" class="primary" type="submit" data-i18n="connectButton"></button><button type="button" data-action="disconnect" data-i18n="disconnect"></button></div>
+    </form>
+  </dialog>
+  <dialog id="materialDialog"><div class="dialog-head"><h2 data-i18n="addText"></h2><button class="quiet small" data-close="materialDialog" data-i18n="close"></button></div><form id="materialForm"><div class="field"><label for="materialName" data-i18n="materialName"></label><input id="materialName" maxlength="300" required></div><div class="field"><label for="materialContent" data-i18n="materialContent"></label><textarea id="materialContent" rows="10" required></textarea></div><button class="primary spaced" data-i18n="add"></button></form></dialog>
+  <dialog id="editAnswerDialog"><div class="dialog-head"><h2 data-i18n="edit"></h2><button class="quiet small" data-close="editAnswerDialog" data-i18n="close"></button></div><form id="editAnswerForm"><div class="field"><label for="editQuestion" data-i18n="question"></label><textarea id="editQuestion" rows="2"></textarea></div><div class="field"><label for="editAnswer" data-i18n="answerLabel"></label><textarea id="editAnswer" rows="10"></textarea></div><button class="primary spaced" data-i18n="saveAnswer"></button></form></dialog>
+  <input type="file" id="textFile" accept=".txt,.md,.csv,.json" multiple hidden>
+  <input type="file" id="backupFile" accept=".json" hidden>
+  <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+  <section id="printView" class="print-view"></section>
+  <noscript><p>请允许 JavaScript 运行。Please enable JavaScript. Activa JavaScript.</p></noscript>
+</body>
+</html>

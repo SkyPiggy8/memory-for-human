@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>技术原理与边界（设计草稿）</title><style>
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;color:#1f2328;background:#f6f8fa;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Microsoft YaHei",sans-serif;font-size:16px;line-height:1.75}a{color:#0969da;text-decoration:none}a:hover{text-decoration:underline}a:focus-visible{outline:2px solid #0969da;outline-offset:3px}.repo{border-bottom:1px solid #d0d7de;background:white;padding:15px 28px;font-size:14px;display:flex;gap:12px;align-items:center;flex-wrap:wrap}.repo .name{font-weight:600;color:#1f2328}.repo .note{color:#656d76}.shell{max-width:1180px;margin:28px auto 60px;padding:0 24px}.document-label{border:1px solid #d0d7de;border-bottom:0;border-radius:7px 7px 0 0;background:white;padding:11px 28px;font-size:13px;color:#656d76;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}article{background:white;border:1px solid #d0d7de;border-radius:0 0 7px 7px;padding:32px 40px;overflow-wrap:anywhere}h1,h2,h3{line-height:1.4;font-weight:600;color:#1f2328;scroll-margin-top:24px}h1{font-size:32px;padding-bottom:12px;border-bottom:1px solid #d8dee4;margin:0 0 18px}h2{font-size:24px;border-bottom:1px solid #d8dee4;padding-bottom:8px;margin:34px 0 16px}h3{font-size:19px;margin:25px 0 12px}p{margin:0 0 16px}li{margin:4px 0}ul,ol{padding-left:27px;margin:0 0 18px}img{max-width:100%;height:auto;display:block;margin:20px auto;border:1px solid #d8dee4;border-radius:5px}code{background:#eff1f3;font-family:ui-monospace,"Cascadia Code",Consolas,monospace;font-size:.88em;padding:2px 5px;border-radius:4px}pre{background:#f6f8fa;border-radius:6px;padding:18px;overflow:auto;font-size:14px;line-height:1.6}pre code{padding:0;background:transparent;white-space:pre;font-size:inherit}blockquote{color:#656d76;border-left:4px solid #d0d7de;padding:0 18px;margin:18px 0}.table-wrap{overflow-x:auto;margin:16px 0 22px}table{border-collapse:collapse;width:100%;font-size:14px;line-height:1.65}td,th{border:1px solid #d0d7de;padding:10px 12px;vertical-align:top;text-align:left}th{font-weight:600;background:#f6f8fa}tr:nth-child(even){background:#fbfcfd}em{color:#656d76}input[type=checkbox]{margin-right:8px;accent-color:#0969da}footer{color:#656d76;font-size:13px;margin-top:18px}footer a{margin-right:18px}@media(max-width:680px){.repo{padding:12px 16px}.shell{padding:0 10px;margin:16px auto 32px}article{padding:22px 18px}.document-label{padding:10px 18px}h1{font-size:27px}h2{font-size:22px}body{font-size:15px}td,th{min-width:115px;padding:8px}table{font-size:13px}pre{font-size:12px;padding:12px}}@media print{body{background:white}.repo,.document-label,footer{display:none}.shell{max-width:none;padding:0;margin:0}article{border:0;padding:0}a{color:inherit}h2,h3{break-after:avoid}img,tr,blockquote{break-inside:avoid}.table-wrap{overflow:visible}}
+</style></head><body><nav class="repo"><a class="name" href="../../index.html">Memory for Human</a><span class="note">本地说明文档 · v0.2</span></nav><main class="shell"><div class="document-label"><span>docs/architecture.md</span><a href="../../docs/architecture.md">查看原文</a></div><article><h1 id="技术原理与边界设计草稿">技术原理与边界（设计草稿）</h1>
+<p>当前 v0.2 已实现本地界面、Node.js 本机 API 转发、多语采访、文字项目保存、AI 交接与章节编辑。下文的完整材料处理链仍包含未来部分：ASR、OCR、长篇检索和多模态输出尚未实现。</p>
+<h2 id="核心原理">核心原理</h2>
+<p>MFH 不训练一个新模型，而是组织原始材料、采访流程与已有模型能力。语音转写负责把声音变成文字，OCR 负责辅助识别图中文字，语言模型负责提取结构、提出问题和组织表达。人的审阅贯穿其中。</p>
+<pre><code class="language-text">原始材料（保留原件）
+  ↓ 登记来源 / 转写 / 人工校正
+带编号的材料片段
+  ↓ 提取人物、事件、约略时间与矛盾
+人物表 + 事件卡片 + 时间线
+  ↓ 按场景提纲寻找缺口
+一次一个问题的采访与补充
+  ↓ 只选择相关且允许使用的片段
+章节草稿 + 来源关联 + 待确认项
+  ↓ 本人审阅并修改
+审定章节 → 合稿 → 电子稿 / 打印稿 / 相册材料
+</code></pre>
+<h2 id="计划中的组件">计划中的组件</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>组件</th>
+<th>职责</th>
+<th>数据与边界</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>本地 HTML 界面</td>
+<td>选择场景、问答、查看材料、审阅与导出</td>
+<td>提示当前保存状态与备份入口</td>
+</tr>
+<tr>
+<td>项目文件包</td>
+<td>保存材料目录、采访记录、草稿与进度</td>
+<td>版本化格式，能够脱离 AI 对话窗口继续使用</td>
+</tr>
+<tr>
+<td>材料适配器</td>
+<td>接受指定文字格式，后续扩展音频、图片与聊天格式</td>
+<td>每种输入分别校验，格式表不等于解析能力</td>
+</tr>
+<tr>
+<td>故事组织器</td>
+<td>管理人物、事件、时间线、章节与缺口</td>
+<td>保留出处、冲突、别名与不确定时间</td>
+</tr>
+<tr>
+<td>模型适配器</td>
+<td>手动提示词、云端 API 或本地模型</td>
+<td>对各服务分别验证接口能力与限制</td>
+</tr>
+<tr>
+<td>输出整理器</td>
+<td>导出工作稿、读者稿及制作资料</td>
+<td>原始材料与审阅痕迹可以单独归档</td>
+</tr>
+</tbody></table></div>
+<h2 id="三条-ai-路径">三条 AI 路径</h2>
+<p><strong>手动协作。</strong> 浏览器本地页面整理材料包和提示词，用户自行交给 AI，再把回答带回。最适合先完成最小可用版本：无需绑定特定模型，能够让普通用户先用起来。</p>
+<p><strong>API 协作。</strong> 用户配置服务商、模型与自己的密钥。拟采用只绑定本机的轻量服务读取本机配置、转发所选材料，避免把密钥写在页面源码中。密钥默认不进入作品、提示词、日志或导出包；长期保存需要明确选择与后续安全设计。</p>
+<p><strong>本地模型。</strong> 使用者自行运行模型和可选的 ASR，MFH 通过本机接口协作。是否真的离线要看整条处理链：本地界面搭配云端模型依然会联网。模型下载、设备要求与生成质量均需单独验证。</p>
+<p>不能承诺一个 <code>file://</code> 打开的 HTML 可以直接兼容所有 API。浏览器跨域、录音权限、密钥处理和服务商协议可能需要本机服务；不同模型不能仅靠换一个模型名字就视为兼容。</p>
+<h2 id="怎样支持几万字的长篇">怎样支持几万字的长篇</h2>
+<p>长篇需要可恢复的工作状态，而不是一次超长生成。</p>
+<ol>
+<li>全局记录：人物表、时间线、章目录、表达风格、禁谈话题。</li>
+<li>单章材料：只调入该章相关的采访片段、照片说明和确认过的事件。</li>
+<li>跨章摘要：已审定章节保留简明摘要与来源指向，帮助检查先后与重复。</li>
+<li>每轮更新：新增答案 → 更新事件卡片 → 更新本章草稿 → 记录待补问。</li>
+<li>定期合稿：检查人物称呼、时间、重复段落与口吻，再交由人确认。</li>
+</ol>
+<p>当前用 IndexedDB 保存文字项目，按稳定的来源编号关联答案与材料；可以勾选一章需要的来源。材料很多时，再考虑章节摘要与检索增强生成。来源编号能帮助核对，不能保证生成内容天然真实。</p>
+<h2 id="事实与表达分开处理">事实与表达分开处理</h2>
+<p>事件工作记录至少包含：事件编号、时间及确定程度、人物、地点、经过、来源片段、本人确认状态、可分享范围。模型提取结果先视为建议，不能自动升级为本人确认。</p>
+<p>写作约束为：不增加无依据事件；不用虚构对白冒充原话；不把 AI 推测的心理活动当作本人记忆；冲突版本保留给人判断。草稿中的 <code>【待确认】</code>、<code>【来源：SRC-001】</code> 与 <code>【家人补充】</code> 必须可见，不能在润色时悄悄删除。</p>
+<p>外部文件、聊天文字与录音转写中的指令属于素材，不能改变系统的工作规则，也不能要求 AI 发送其他私人材料或读取密钥。</p>
+<h2 id="可恢复与可带走">可恢复与可带走</h2>
+<p>计划中的项目文件包包含格式版本、配置摘要（不含密钥）、来源目录、采访、时间线、章节、审阅状态和用户选入的媒体。导出时给出清单，显示哪些原件实际包含、哪些只是本机引用。换设备后检查缺失文件，不能把不完整导出称作完整备份。</p>
+<p>浏览器缓存可作临时工作区，不能作为唯一保存位置。删除缓存、清理设备或关闭隐私浏览可能影响数据，因此需要显眼的保存、导出和恢复入口。</p>
+<h2 id="部署目标">部署目标</h2>
+<p>无 API 的文档与手动协作路径尽量保持双击可用。联网 API、录音等路径再提供本机启动工具，由用户自己的 AI 按文档引导。脚本、依赖、端口、停止方式和验证步骤都要真实存在后，才在 README 中写成可用命令。</p>
+</article><footer><a href="../../index.html">打开应用</a></footer></main></body></html>

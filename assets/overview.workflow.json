@@ -1,0 +1,38 @@
+{
+  "schema_version": 2,
+  "diagram_type": "workflow",
+  "meta": {
+    "title": "Memory for Human · 从回忆到作品（设计草稿）",
+    "locale": "zh-CN",
+    "quality_profile": "showcase"
+  },
+  "lanes": [
+    { "id": "memoir", "label": "回忆录制作流程" },
+    { "id": "support", "label": "材料与 AI" }
+  ],
+  "mainPath": ["scope", "materials", "interview", "chapters", "review", "keepsake"],
+  "nodes": [
+    { "id": "scope", "lane": "memoir", "col": 0, "type": "frontend", "label": "选择回忆录", "sublabel": "对象 · 篇幅 · 口吻", "width": 152 },
+    { "id": "materials", "lane": "memoir", "col": 1, "type": "database", "label": "收集原始材料", "sublabel": "文字 · 语音 · 照片", "width": 152 },
+    { "id": "interview", "lane": "memoir", "col": 2, "type": "backend", "label": "时间线与采访", "sublabel": "整理事件 · 追问缺口", "width": 152 },
+    { "id": "chapters", "lane": "memoir", "col": 3, "type": "backend", "label": "逐章写成故事", "sublabel": "依据来源 · 保留口吻", "width": 152 },
+    { "id": "review", "lane": "memoir", "col": 4, "type": "security", "label": "本人审阅", "sublabel": "确认事实 · 修改删减", "width": 152 },
+    { "id": "keepsake", "lane": "memoir", "col": 5, "type": "external", "label": "制作与保存", "sublabel": "书籍 · 相册 · 存档", "width": 152 },
+    { "id": "archive", "lane": "support", "col": 1, "type": "database", "label": "保留原始档案", "sublabel": "原件 · 转写 · 编号", "width": 152 },
+    { "id": "own_ai", "lane": "support", "col": 3, "type": "external", "label": "使用自己的 AI", "sublabel": "提示词 / API / 本地模型", "width": 180 }
+  ],
+  "edges": [
+    { "id": "scope-materials", "from": "scope", "to": "materials", "role": "main" },
+    { "id": "materials-interview", "from": "materials", "to": "interview", "role": "main" },
+    { "id": "interview-chapters", "from": "interview", "to": "chapters", "role": "main" },
+    { "id": "chapters-review", "from": "chapters", "to": "review", "role": "main" },
+    { "id": "review-keepsake", "from": "review", "to": "keepsake", "label": "确认后", "role": "main" },
+    { "id": "materials-archive", "from": "materials", "to": "archive", "label": "留存", "variant": "dashed", "role": "branch" },
+    { "id": "ai-chapters", "from": "own_ai", "to": "chapters", "label": "协助写作", "variant": "dashed" }
+  ],
+  "cards": [
+    { "dot": "cyan", "title": "六类回忆录", "items": ["恋人 · 婚姻 · 老人一生", "战友 · 同事 · 同学"] },
+    { "dot": "amber", "title": "事实由人确认", "items": ["AI 整理表达，缺失经历继续追问", "不确定的时间与细节保留标记"] },
+    { "dot": "emerald", "title": "作品留在自己手中", "items": ["电子稿与打印稿分别整理", "原始材料与成品一起备份"] }
+  ]
+}

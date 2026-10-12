@@ -1,0 +1,23 @@
+name: 功能建议
+description: 提出具体使用场景与期望结果
+title: "[建议] "
+body:
+  - type: markdown
+    attributes:
+      value: "请先阅读 docs/roadmap.md。描述需要完成的事情，无需提供私人原始材料。"
+  - type: textarea
+    id: scenario
+    attributes:
+      label: 谁在什么情况下需要这个功能？
+    validations:
+      required: true
+  - type: textarea
+    id: result
+    attributes:
+      label: 希望得到什么结果？
+    validations:
+      required: true
+  - type: textarea
+    id: workaround
+    attributes:
+      label: 现在怎样完成这件事？
