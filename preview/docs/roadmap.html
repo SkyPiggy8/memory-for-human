@@ -1,19 +1,52 @@
 <!doctype html>
-<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>开发计划与当前状态</title><style>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>现在做到哪里，接下来做什么</title><style>
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;color:#1f2328;background:#f6f8fa;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Microsoft YaHei",sans-serif;font-size:16px;line-height:1.75}a{color:#0969da;text-decoration:none}a:hover{text-decoration:underline}a:focus-visible{outline:2px solid #0969da;outline-offset:3px}.repo{border-bottom:1px solid #d0d7de;background:white;padding:15px 28px;font-size:14px;display:flex;gap:12px;align-items:center;flex-wrap:wrap}.repo .name{font-weight:600;color:#1f2328}.repo .note{color:#656d76}.shell{max-width:1180px;margin:28px auto 60px;padding:0 24px}.document-label{border:1px solid #d0d7de;border-bottom:0;border-radius:7px 7px 0 0;background:white;padding:11px 28px;font-size:13px;color:#656d76;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}article{background:white;border:1px solid #d0d7de;border-radius:0 0 7px 7px;padding:32px 40px;overflow-wrap:anywhere}h1,h2,h3{line-height:1.4;font-weight:600;color:#1f2328;scroll-margin-top:24px}h1{font-size:32px;padding-bottom:12px;border-bottom:1px solid #d8dee4;margin:0 0 18px}h2{font-size:24px;border-bottom:1px solid #d8dee4;padding-bottom:8px;margin:34px 0 16px}h3{font-size:19px;margin:25px 0 12px}p{margin:0 0 16px}li{margin:4px 0}ul,ol{padding-left:27px;margin:0 0 18px}img{max-width:100%;height:auto;display:block;margin:20px auto;border:1px solid #d8dee4;border-radius:5px}code{background:#eff1f3;font-family:ui-monospace,"Cascadia Code",Consolas,monospace;font-size:.88em;padding:2px 5px;border-radius:4px}pre{background:#f6f8fa;border-radius:6px;padding:18px;overflow:auto;font-size:14px;line-height:1.6}pre code{padding:0;background:transparent;white-space:pre;font-size:inherit}blockquote{color:#656d76;border-left:4px solid #d0d7de;padding:0 18px;margin:18px 0}.table-wrap{overflow-x:auto;margin:16px 0 22px}table{border-collapse:collapse;width:100%;font-size:14px;line-height:1.65}td,th{border:1px solid #d0d7de;padding:10px 12px;vertical-align:top;text-align:left}th{font-weight:600;background:#f6f8fa}tr:nth-child(even){background:#fbfcfd}em{color:#656d76}input[type=checkbox]{margin-right:8px;accent-color:#0969da}footer{color:#656d76;font-size:13px;margin-top:18px}footer a{margin-right:18px}@media(max-width:680px){.repo{padding:12px 16px}.shell{padding:0 10px;margin:16px auto 32px}article{padding:22px 18px}.document-label{padding:10px 18px}h1{font-size:27px}h2{font-size:22px}body{font-size:15px}td,th{min-width:115px;padding:8px}table{font-size:13px}pre{font-size:12px;padding:12px}}@media print{body{background:white}.repo,.document-label,footer{display:none}.shell{max-width:none;padding:0;margin:0}article{border:0;padding:0}a{color:inherit}h2,h3{break-after:avoid}img,tr,blockquote{break-inside:avoid}.table-wrap{overflow:visible}}
-</style></head><body><nav class="repo"><a class="name" href="../../index.html">Memory for Human</a><span class="note">本地说明文档 · v0.2</span></nav><main class="shell"><div class="document-label"><span>docs/roadmap.md</span><a href="../../docs/roadmap.md">查看原文</a></div><article><h1 id="开发计划与当前状态">开发计划与当前状态</h1>
-<h2 id="v02本地可操作工具">v0.2：本地可操作工具</h2>
-<p>已实现三语界面与采访问题、通俗解释、AI 交接、六类场景、文字材料、固定问答与 API 追问、多本项目的本机浏览器保存、可编辑章节、事实检查请求、人工审阅状态、文字备份恢复、Markdown 与浏览器打印。Windows 启动器可准备官方 Node.js LTS。</p>
-<p>API 适配按官方资料实现，测试使用模拟响应。未用真实使用者 Key 逐一验证每家服务的账号权限和连通性。浏览器语音输入依赖设备与浏览器，不等于音频文件转写。</p>
-<h2 id="下一步真实使用验证">下一步：真实使用验证</h2>
-<p>先请使用者完成恋人短篇或老人一章：能否理解开头说明，找到 Key / 自己的 AI 入口，保存并恢复，写出像本人的文字，最后做成可读样品。根据卡住的地方改界面，不先扩充模型数量。</p>
-<h2 id="后续功能">后续功能</h2>
-<ul>
-<li>上传音频文件的 ASR，转写校对和原音频位置关联。</li>
-<li>图片、扫描信件与 OCR；明确区分识别与事实确认。</li>
-<li>指定平台聊天格式适配，不把“JSON 能读”称作所有聊天都支持。</li>
-<li>老人长篇的章节材料管理、摘要与检索；多人的冲突版本保留。</li>
-<li>图文排版与打印打样、相册和 NAS 的可选衔接。</li>
-</ul>
-<p>每项完成后再修改能力说明，不宣称已自动部署外部项目或完成真实打印验证。</p>
+</style></head><body><nav class="repo"><a class="name" href="../../index.html">Memory for Human</a><span class="note">本地说明文档 · v0.2</span></nav><main class="shell"><div class="document-label"><span>docs/roadmap.md</span><a href="../../docs/roadmap.md">查看原文</a></div><article><h1 id="现在做到哪里接下来做什么">现在做到哪里，接下来做什么</h1>
+<h2 id="v02-已经可以用的部分">v0.2 已经可以用的部分</h2>
+<p>本机界面支持中文、英文、西班牙语，六类采访各有问题和模板。现在可以填写、导入文字、保存多本回忆录、逐章编辑、手动交给自己的 AI，或接入 API 采访和写作。章节有本人审阅状态，可以备份恢复、导出 Markdown 和浏览器打印。Windows 启动器可以准备官方 Node.js LTS。</p>
+<p>每种语言的问题库从 60 个扩为 156 个，一生回忆从 18 个扩为 48 个。AI 追问规则改为先补具体场景，再转到未聊的话题，一次只问一个问题。是否问得合适，还需要真实采访验证。</p>
+<p>API 传输测试使用模拟响应，没有逐一验证使用者真实账号。语音输入取决于浏览器，不是上传录音的自动转写。</p>
+<h2 id="先验证一章">先验证一章</h2>
+<p>找愿意试用的家庭，分别完成一段恋人故事和一章老人的经历。看他们能否打开工具、理解问题、找到自己的 AI、保存恢复，以及把稿子改成像本人说的话。记录卡住的步骤，再改界面和问法。这些使用验证尚未完成。</p>
+<h2 id="后续开发">后续开发</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>工作</th>
+<th>要解决的问题</th>
+<th>做完后怎样检查</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>音频文件转写</td>
+<td>录音能转成可校对文字，仍能回到原音</td>
+<td>人名、方言、多发言人和时间位置</td>
+</tr>
+<tr>
+<td>图片与 OCR</td>
+<td>保存原图，识别文本单独核对</td>
+<td>误识别可修改，原件不丢</td>
+</tr>
+<tr>
+<td>指定聊天格式</td>
+<td>正确识别某个平台的导出内容</td>
+<td>时间、发言人、附件与异常格式</td>
+</tr>
+<tr>
+<td>长篇事件和章节索引</td>
+<td>管理先后、来源与不同说法</td>
+<td>摘要或检索不抹去不确定项</td>
+</tr>
+<tr>
+<td>多人审阅</td>
+<td>各人的补充和修改有归属</td>
+<td>不替多人决定哪个版本真实</td>
+</tr>
+<tr>
+<td>图文排版与存档</td>
+<td>稿件能制成实物、以后还能找回</td>
+<td>实际打样、备份恢复与设备兼容</td>
+</tr>
+</tbody></table></div>
+<p>完成一项，再把它写进能力说明。相关设计依据见<a href="architecture.html">技术说明</a>和<a href="related-work.html">参考项目</a>。</p>
 </article><footer><a href="../../index.html">打开应用</a></footer></main></body></html>

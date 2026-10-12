@@ -49,3 +49,7 @@ Prueba fotos y tarjetas de historias en una tableta o marco existente antes de c
 Mantén copias independientes de grabaciones, textos, fotos, obra final y lista de fuentes. El NAS es opcional; sincronizar no basta para recuperar. Usa distintos medios y, cuando sea posible, otro lugar, y prueba abrir o recuperar archivos.
 
 Proyectos independientes opcionales: [faster-whisper](https://github.com/SYSTRAN/faster-whisper) para transcribir, [Immich](https://github.com/immich-app/immich) para fotos, [picframe](https://github.com/helgeerbe/picframe) para un marco con Raspberry Pi y [Paperless-ngx](https://github.com/paperless-ngx/paperless-ngx) para documentos. MFH los enlaza; no ha integrado ni verificado tu instalación. Sigue sus documentos y condiciones.
+
+## Entrevista y diseño técnico
+
+[Preguntas y entrevista](interviewing.es.md) · [Diseño técnico](architecture.es.md) · [Proyectos de referencia](related-work.es.md)

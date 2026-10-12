@@ -115,6 +115,16 @@ A full text backup includes answers, imported text, drafts, and an unfinished an
 
 Repository handoff documents: [Chinese](AI-HANDOFF.md), [English](AI-HANDOFF.en.md), [Spanish](AI-HANDOFF.es.md). [AGENTS.md](AGENTS.md) describes files, startup, verification, and limitations for coding assistants.
 
+## The technical work
+
+MFH focuses on **traceable sources, model-independent tasks, human review, and recoverable progress**. Answers and materials have stable IDs; only selected sources enter writing requests. Manual AI handoff and API use share task rules. Editing a reviewed chapter resets it to draft; restoring a backup adds a new project.
+
+The buildless frontend and Node.js built-in server keep runtime dependencies small and credentials separate from the work. Six relationships, three languages, relatives helping record, and production instructions connect interviewing to a finished keepsake. [Technical design](docs/architecture.en.md) explains the data, request scope, review state, and long-manuscript limits.
+
+StorySage emphasizes specialized agents; memoir uses structured records and context management. MFH emphasizes families starting with their own AI and keeping work they can continue. These projects share some principles; MFH's distinction is its combination of workflow and audience. [Reference projects and differences](docs/related-work.en.md)
+
+Each language now has **156 starting questions**: partners 24, marriage 24, a life 48, service friends 20, workmates 20, classmates 20. AI follows concrete details before moving to another topic, one question at a time. [Interview guide](docs/interviewing.en.md)
+
 ## Implemented and planned
 
 **Working:** three-language UI and questions, simple explanations, AI handoff, six themes, text material, browser dictation where supported, multiple memoirs, local saving, chapter editing, API adapters, backup/restore, Markdown, browser print.

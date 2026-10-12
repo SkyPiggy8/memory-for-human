@@ -1,112 +1,88 @@
 <!doctype html>
-<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>材料采集指南</title><style>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>把旧材料整理进来</title><style>
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;color:#1f2328;background:#f6f8fa;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Microsoft YaHei",sans-serif;font-size:16px;line-height:1.75}a{color:#0969da;text-decoration:none}a:hover{text-decoration:underline}a:focus-visible{outline:2px solid #0969da;outline-offset:3px}.repo{border-bottom:1px solid #d0d7de;background:white;padding:15px 28px;font-size:14px;display:flex;gap:12px;align-items:center;flex-wrap:wrap}.repo .name{font-weight:600;color:#1f2328}.repo .note{color:#656d76}.shell{max-width:1180px;margin:28px auto 60px;padding:0 24px}.document-label{border:1px solid #d0d7de;border-bottom:0;border-radius:7px 7px 0 0;background:white;padding:11px 28px;font-size:13px;color:#656d76;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}article{background:white;border:1px solid #d0d7de;border-radius:0 0 7px 7px;padding:32px 40px;overflow-wrap:anywhere}h1,h2,h3{line-height:1.4;font-weight:600;color:#1f2328;scroll-margin-top:24px}h1{font-size:32px;padding-bottom:12px;border-bottom:1px solid #d8dee4;margin:0 0 18px}h2{font-size:24px;border-bottom:1px solid #d8dee4;padding-bottom:8px;margin:34px 0 16px}h3{font-size:19px;margin:25px 0 12px}p{margin:0 0 16px}li{margin:4px 0}ul,ol{padding-left:27px;margin:0 0 18px}img{max-width:100%;height:auto;display:block;margin:20px auto;border:1px solid #d8dee4;border-radius:5px}code{background:#eff1f3;font-family:ui-monospace,"Cascadia Code",Consolas,monospace;font-size:.88em;padding:2px 5px;border-radius:4px}pre{background:#f6f8fa;border-radius:6px;padding:18px;overflow:auto;font-size:14px;line-height:1.6}pre code{padding:0;background:transparent;white-space:pre;font-size:inherit}blockquote{color:#656d76;border-left:4px solid #d0d7de;padding:0 18px;margin:18px 0}.table-wrap{overflow-x:auto;margin:16px 0 22px}table{border-collapse:collapse;width:100%;font-size:14px;line-height:1.65}td,th{border:1px solid #d0d7de;padding:10px 12px;vertical-align:top;text-align:left}th{font-weight:600;background:#f6f8fa}tr:nth-child(even){background:#fbfcfd}em{color:#656d76}input[type=checkbox]{margin-right:8px;accent-color:#0969da}footer{color:#656d76;font-size:13px;margin-top:18px}footer a{margin-right:18px}@media(max-width:680px){.repo{padding:12px 16px}.shell{padding:0 10px;margin:16px auto 32px}article{padding:22px 18px}.document-label{padding:10px 18px}h1{font-size:27px}h2{font-size:22px}body{font-size:15px}td,th{min-width:115px;padding:8px}table{font-size:13px}pre{font-size:12px;padding:12px}}@media print{body{background:white}.repo,.document-label,footer{display:none}.shell{max-width:none;padding:0;margin:0}article{border:0;padding:0}a{color:inherit}h2,h3{break-after:avoid}img,tr,blockquote{break-inside:avoid}.table-wrap{overflow:visible}}
-</style></head><body><nav class="repo"><a class="name" href="../../index.html">Memory for Human</a><span class="note">本地说明文档 · v0.2</span></nav><main class="shell"><div class="document-label"><span>docs/collection.md</span><a href="../../docs/collection.md">查看原文</a></div><article><h1 id="材料采集指南">材料采集指南</h1>
-<p>当前 v0.2 可在本地页面填写、粘贴或导入文字材料，并选择交给连接的 AI 或自己的 AI。支持读取 .txt、.md、.csv、.json 文字，不提供音频文件 ASR、图片/OCR 或所有聊天格式的自动适配。原始媒体仍保存在私人文件夹。</p>
-<h2 id="先确定讲述者与采集者">先确定讲述者与采集者</h2>
-<p>讲述者可以是本人、老人、伴侣，也可以是几位同学或战友。采集者负责操作设备，不能代替讲述者确认经历。第一步问清：这份回忆录写给谁，谁可以阅读，哪些话题不希望出现，是否同意录音与外部 AI 处理。</p>
-<p>如果多人回忆同一件事，分别保留各自的说法。约略年份、方言、人名旧称和「已经记不清」都是需要保留的信息。</p>
-<h2 id="四种采集入口">四种采集入口</h2>
+</style></head><body><nav class="repo"><a class="name" href="../../index.html">Memory for Human</a><span class="note">本地说明文档 · v0.2</span></nav><main class="shell"><div class="document-label"><span>docs/collection.md</span><a href="../../docs/collection.md">查看原文</a></div><article><h1 id="把旧材料整理进来">把旧材料整理进来</h1>
+<p>先收一段能读懂的文字，就能开始。不要为了写回忆录，把所有聊天记录、照片和录音一次搬进来。原件留在自己的文件夹里，选出和这一章有关的部分。</p>
+<h2 id="页面能接收什么">页面能接收什么</h2>
 <div class="table-wrap"><table>
 <thead>
 <tr>
 <th>入口</th>
-<th>当前做法</th>
-<th>计划中的应用入口</th>
+<th>准备的内容</th>
+<th>目前怎样处理</th>
 </tr>
 </thead>
 <tbody><tr>
-<td>固定模板填写</td>
-<td>复制 <code>templates/</code> 中对应文件，在每个问题下写答案</td>
-<td>「填写模板」</td>
+<td>问题下面的回答框</td>
+<td>自己写，或家人代记录</td>
+<td>保留问题和回答，分配 <code>A…</code> 编号</td>
 </tr>
 <tr>
-<td>问答采访</td>
-<td>使用 <code>prompts/memoir-assistant.md</code>，每轮只回答一个问题</td>
-<td>「开始采访」与「继续上次采访」</td>
+<td>粘贴文字 / 选择文字文件</td>
+<td>UTF-8 的 <code>.txt</code>、<code>.md</code>、<code>.csv</code>、<code>.json</code>，每份最多 1 MB</td>
+<td>按文字读取，分配 <code>M…</code> 编号；默认不交给 AI</td>
 </tr>
 <tr>
-<td>已有文字与聊天</td>
-<td>导出或复制相关片段，登记来源与参与者</td>
-<td>「导入文字」与「导入聊天」</td>
+<td>浏览器语音输入</td>
+<td>对着麦克风说话</td>
+<td>需要浏览器支持，可能联网；识别后请核对</td>
 </tr>
 <tr>
-<td>音频、照片与扫描件</td>
-<td>保存原件，附转写或说明</td>
-<td>「导入录音」与「导入图片」</td>
+<td>导入以前的备份</td>
+<td>MFH 导出的 <code>.mfh.json</code></td>
+<td>恢复成新的一本，原来的作品保留</td>
 </tr>
 </tbody></table></div>
-<p>页面实际入口是「把故事讲出来」「粘贴一段文字」「选择文字文件」；音频、照片入口仍是后续规划。新材料默认不交给 AI，可逐份勾选。长篇按章节选择材料，避免一次发送全部采访。</p>
-<h2 id="一次舒服的口述采访">一次舒服的口述采访</h2>
-<ol>
-<li>选一个具体主题，如「你第一份工作的一天」，不要一开始就要求讲完一生。</li>
-<li>在安静环境中用手机或录音设备录制，先试录几十秒，回放确认声音可听清。</li>
-<li>推荐每次聊 20–40 分钟，疲倦时随时停止；短录音也有价值。</li>
-<li>让对方先自由讲，停顿后再补问「在哪里」「还有谁」「哪件小事最难忘」。</li>
-<li>保存原始录音。转写稿另存，核对人名、地名、数字、方言与否定句。</li>
-<li>将整理后的短段落读给本人听，记录修改，不把 AI 的表达当作原话。</li>
-<li>记下下次想聊的话题，避免重复询问已经确认的经历。</li>
-</ol>
-<p>原始音频可以是 <code>.m4a</code>、<code>.mp3</code>、<code>.wav</code>；具体转写工具是否接受某种编码要另行核对。首次可能需要下载模型，使用云端 ASR 则需说明材料发送位置。转写可参考 <a href="https://github.com/SYSTRAN/faster-whisper">faster-whisper 官方仓库</a>，MFH 暂未集成。</p>
-<p>ASR 不保证准确；有多人发言时，要人工检查谁说了什么。声音难辨、姓名不清就写「听不清」，不要由 AI 猜测补全。</p>
-<h2 id="文字和聊天记录">文字和聊天记录</h2>
-<p>建议使用 UTF-8 编码的 Markdown（<code>.md</code>）或纯文本（<code>.txt</code>）。Markdown 就是能在普通文本编辑器中打开、用标题和列表组织的文字文件。</p>
-<p>聊天材料优先保留时间、发言人、正文，附件另存。通过聊天工具允许的方式导出或手动复制即可；不同平台不保证有统一导出方式。无需为了开始写作而导入全部聊天历史。</p>
-<pre><code class="language-text">材料编号：SRC-003
-来源：双方同意选取的聊天片段
-参与者：甲、乙（化名）
+<p><code>.csv</code> 或 <code>.json</code> 文件能读作文字，不代表能自动解析各平台聊天记录。音频、图片、PDF 和手写信目前不能直接识别。录音先转写，照片先写说明，再把文字放进来。</p>
+<h2 id="录音怎么整理">录音怎么整理</h2>
+<p>先问本人愿不愿意录、给谁看、是否允许外部 AI 处理。试录几十秒，回放听清楚以后再开始。一次聊一个主题，疲倦时停下。</p>
+<p>保留 <code>.m4a</code>、<code>.mp3</code> 或 <code>.wav</code> 原件。用自己选的转写工具生成文字，工具是否支持某种编码要看它的说明。<a href="https://github.com/SYSTRAN/faster-whisper">faster-whisper</a>可作为独立工具参考，MFH 尚未集成。</p>
+<p>转写后先核对姓名、地名、数字、方言和否定句。多人说话时，注明每句是谁说的。听不清的地方留下标记，不让 AI 猜。把整理后的短段落读给本人听，再修改。<a href="interviewing.html">采访方法</a>有追问示例。</p>
+<h2 id="聊天和日记怎么整理">聊天和日记怎么整理</h2>
+<p>使用聊天工具允许的导出方式，或手动复制有关片段，保留时间、发言人和原文。文字不需要 ASR。Markdown（<code>.md</code>）就是可以用标题、列表组织的普通文字文件；不会用的话，纯文本也可以。</p>
+<pre><code class="language-text">材料名称：两人第一次旅行的聊天片段
+讲述者：甲、乙（化名）
 事件时间：2022 年夏，具体日期待确认
-整理日期：2026-10-12
+来源：双方同意选取的聊天
 允许用途：家庭阅读，不公开
 
 [原始时间] 甲：原文……
 [原始时间] 乙：原文……
-说明：这里省略了与回忆录无关的私密对话。
+说明：与本章无关的私密对话已省略。
 </code></pre>
-<p><code>.csv</code> / <code>.json</code> 可保留结构化记录，但现阶段没有解析器。建议字段为 <code>timestamp</code>、<code>speaker</code>、<code>text</code>、<code>attachment</code>。未知日期留空；不要把采访日期误当作事件日期。不要上传账号密码、会话令牌或整个平台备份数据库。</p>
-<h2 id="照片手写信和扫描件">照片、手写信和扫描件</h2>
-<p>保留 <code>.jpg</code> / <code>.png</code> 原图；扫描文件可为 <code>.pdf</code>。照片附一段说明，比单独给 AI 一张图更有价值：画面上是谁、谁拍摄、发生什么、哪些细节确定、哪些仍不确定。</p>
-<p>手写字和旧照片中的文字可以借助 OCR，但要人工核对。照片只能证明画面中能确认的内容，不能自动证明拍摄年代、人物关系或某人的内心想法。</p>
+<p>采访日期和事件日期分开写。不知道日期就留空或写“大约”。账号密码、会话令牌和整个平台数据库不属于写作材料。</p>
+<h2 id="照片信件和扫描件">照片、信件和扫描件</h2>
+<p>原图与扫描件另存。附上人物、时间、地点、发生的事，以及哪些信息还不确定。OCR 得到的文字仍要校对；照片不能证明某人的内心，也不能单靠画面猜年代。</p>
 <pre><code class="language-text">照片编号：PHOTO-002
-文件：PHOTO-002_毕业合影.jpg
-人物：左起第三人为讲述者（已由本人确认）
+原件：PHOTO-002_毕业合影.jpg
+人物：左起第三人是讲述者（本人已确认）
 时间：约 1978 年，月份不详
 地点：旧校舍门口（待同学确认）
-事件：毕业时拍的合影
 来源：家庭相册扫描
-可用范围：家庭回忆录
+用途：家庭回忆录
 </code></pre>
-<h2 id="私人材料目录约定">私人材料目录约定</h2>
-<p>以下目录创建在 <code>private/</code> 中，或放在仓库外。仓库已经忽略 <code>private/</code>，但这只是防止误提交的一项辅助措施，不是加密。</p>
+<h2 id="原件放在哪里">原件放在哪里</h2>
+<p>放在仓库外，或仓库的 <code>private/</code> 目录中。后者已被 Git 忽略，但没有加密；发布前仍要检查文件列表。</p>
 <pre><code class="language-text">private/爷爷的一生/
-├── project.md                 对象、篇幅、读者、口吻与禁谈话题
-├── sources.md                 从来源登记模板复制
-├── raw/                       原始录音、照片、信件和聊天片段
-├── transcripts/               原样转写与人工校正稿
-├── interviews/                每次采访的问题和答案
-├── timeline.md                事件时间线，保留不确定项
-├── chapters/                  逐章工作稿与审定稿
-└── exports/                   最终电子稿、打印文件和分享版
+├── sources.md          来源登记和允许用途
+├── raw/                原始录音、照片、信件
+├── transcripts/        转写与校正稿
+├── interviews/         采访记录
+├── chapters/           工作稿与审定稿
+└── exports/            文字备份、成品和分享版
 </code></pre>
-<p>文件名建议：<code>SRC-001_2026-10-12_采访_童年.m4a</code>、<code>SRC-001_转写.md</code>。文件名里的日期是采集日期；事件发生时间写在材料内容中。文件编号不要复用。</p>
-<h2 id="一张事件卡片">一张事件卡片</h2>
-<pre><code class="language-markdown"># EVENT-001：第一次离开家乡
-- 事件时间：约 1965 年，月份待确认
-- 人物：讲述者与母亲
-- 地点：家乡车站（具体站名待确认）
-- 已知经过：按讲述者已经确认的内容填写
-- 可以保留的原话：没有准确记录就留空
-- 来源：SRC-001，录音 00:12:40–00:15:10
-- 补问：那次出发是去上学还是工作？
-- 审阅状态：待本人确认
+<p>文件可按 <code>SRC-001_2026-10-13_采访_童年.m4a</code> 命名。文件名里的日期是采集日期，故事发生的时间写在正文里。手工原件编号 <code>SRC…</code>、<code>PHOTO…</code> 与页面的 <code>A…</code>、<code>M…</code> 不同，导入时可在材料说明里写清对应关系。<a href="../templates/source-register.html">来源登记表</a>可以复制使用。</p>
+<h2 id="手工事件卡可选">手工事件卡（可选）</h2>
+<p>长篇可以先用下面的记录核对先后。它是手工模板，当前应用不会自动生成或管理事件卡。</p>
+<pre><code class="language-text">事件：第一次离开家乡
+时间：约 1965 年，月份待确认
+人物：讲述者、母亲
+地点：家乡车站，站名待确认
+经过：只写已讲出的内容
+原话：没有准确记录就留空
+来源：SRC-001，录音 00:12:40–00:15:10
+补问：那次出发是去上学还是工作？
+状态：待本人确认
 </code></pre>
-<h2 id="交给-ai-前检查">交给 AI 前检查</h2>
-<ul>
-<li><input disabled="" type="checkbox"> 相关人同意采集与此次使用范围。</li>
-<li><input disabled="" type="checkbox"> 讲述、家人补充、历史资料与 AI 生成内容已分别标明。</li>
-<li><input disabled="" type="checkbox"> 人名、时间、地点与数字已经校对，不确定项仍有标记。</li>
-<li><input disabled="" type="checkbox"> 已删除不需要的账号、地址、隐私对话与保密资料。</li>
-<li><input disabled="" type="checkbox"> 原始材料另有备份，没有只剩一个 AI 对话窗口。</li>
-<li><input disabled="" type="checkbox"> 知道这次内容会由本地工具处理，还是发送给外部服务。</li>
-</ul>
+<p>交给 AI 前，再看一遍使用范围和所选内容。让本人讲述、家人补充、历史资料各自有出处，原件有独立备份，不确定的地方仍然看得见。</p>
 </article><footer><a href="../../index.html">打开应用</a></footer></main></body></html>

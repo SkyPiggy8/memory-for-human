@@ -1,42 +1,37 @@
 <!doctype html>
-<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>可参考的延伸工具</title><style>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>需要时再选这些工具</title><style>
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;color:#1f2328;background:#f6f8fa;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Microsoft YaHei",sans-serif;font-size:16px;line-height:1.75}a{color:#0969da;text-decoration:none}a:hover{text-decoration:underline}a:focus-visible{outline:2px solid #0969da;outline-offset:3px}.repo{border-bottom:1px solid #d0d7de;background:white;padding:15px 28px;font-size:14px;display:flex;gap:12px;align-items:center;flex-wrap:wrap}.repo .name{font-weight:600;color:#1f2328}.repo .note{color:#656d76}.shell{max-width:1180px;margin:28px auto 60px;padding:0 24px}.document-label{border:1px solid #d0d7de;border-bottom:0;border-radius:7px 7px 0 0;background:white;padding:11px 28px;font-size:13px;color:#656d76;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}article{background:white;border:1px solid #d0d7de;border-radius:0 0 7px 7px;padding:32px 40px;overflow-wrap:anywhere}h1,h2,h3{line-height:1.4;font-weight:600;color:#1f2328;scroll-margin-top:24px}h1{font-size:32px;padding-bottom:12px;border-bottom:1px solid #d8dee4;margin:0 0 18px}h2{font-size:24px;border-bottom:1px solid #d8dee4;padding-bottom:8px;margin:34px 0 16px}h3{font-size:19px;margin:25px 0 12px}p{margin:0 0 16px}li{margin:4px 0}ul,ol{padding-left:27px;margin:0 0 18px}img{max-width:100%;height:auto;display:block;margin:20px auto;border:1px solid #d8dee4;border-radius:5px}code{background:#eff1f3;font-family:ui-monospace,"Cascadia Code",Consolas,monospace;font-size:.88em;padding:2px 5px;border-radius:4px}pre{background:#f6f8fa;border-radius:6px;padding:18px;overflow:auto;font-size:14px;line-height:1.6}pre code{padding:0;background:transparent;white-space:pre;font-size:inherit}blockquote{color:#656d76;border-left:4px solid #d0d7de;padding:0 18px;margin:18px 0}.table-wrap{overflow-x:auto;margin:16px 0 22px}table{border-collapse:collapse;width:100%;font-size:14px;line-height:1.65}td,th{border:1px solid #d0d7de;padding:10px 12px;vertical-align:top;text-align:left}th{font-weight:600;background:#f6f8fa}tr:nth-child(even){background:#fbfcfd}em{color:#656d76}input[type=checkbox]{margin-right:8px;accent-color:#0969da}footer{color:#656d76;font-size:13px;margin-top:18px}footer a{margin-right:18px}@media(max-width:680px){.repo{padding:12px 16px}.shell{padding:0 10px;margin:16px auto 32px}article{padding:22px 18px}.document-label{padding:10px 18px}h1{font-size:27px}h2{font-size:22px}body{font-size:15px}td,th{min-width:115px;padding:8px}table{font-size:13px}pre{font-size:12px;padding:12px}}@media print{body{background:white}.repo,.document-label,footer{display:none}.shell{max-width:none;padding:0;margin:0}article{border:0;padding:0}a{color:inherit}h2,h3{break-after:avoid}img,tr,blockquote{break-inside:avoid}.table-wrap{overflow:visible}}
-</style></head><body><nav class="repo"><a class="name" href="../../index.html">Memory for Human</a><span class="note">本地说明文档 · v0.2</span></nav><main class="shell"><div class="document-label"><span>docs/ecosystem.md</span><a href="../../docs/ecosystem.md">查看原文</a></div><article><h1 id="可参考的延伸工具">可参考的延伸工具</h1>
-<p>以下条目根据项目官方仓库资料整理，查阅日期为 2026-10-12。它们用于帮助你选择独立工具，不代表 MFH 已完成集成、联合开发或部署验证。版本、硬件要求和许可以各项目当时文档为准。</p>
+</style></head><body><nav class="repo"><a class="name" href="../../index.html">Memory for Human</a><span class="note">本地说明文档 · v0.2</span></nav><main class="shell"><div class="document-label"><span>docs/ecosystem.md</span><a href="../../docs/ecosystem.md">查看原文</a></div><article><h1 id="需要时再选这些工具">需要时再选这些工具</h1>
+<p>第一份作品只需要文字、自己的 AI 和已有材料。录音多了再找转写工具，照片多了再考虑相册管理，不用先安装一整套服务。</p>
+<p>以下介绍沿用 2026-10-12 查阅的官方资料。它们是独立项目，MFH 目前只提供链接，没有集成或验证具体安装。使用前按各自当前文档确认环境、备份方法和许可。</p>
 <div class="table-wrap"><table>
 <thead>
 <tr>
 <th>项目</th>
-<th>可以用于什么</th>
-<th>在 MFH 流程中的位置</th>
-<th>需要注意</th>
+<th>适合做什么</th>
+<th>怎样接入你的制作过程</th>
 </tr>
 </thead>
 <tbody><tr>
 <td><a href="https://github.com/SYSTRAN/faster-whisper">faster-whisper</a></td>
-<td>Whisper 的转写实现，基于 CTranslate2</td>
-<td>口述录音转成文字后，人工校正再写作</td>
-<td>需要运行环境与模型；不是聊天记录导出器</td>
+<td>用 Whisper / CTranslate2 转写录音</td>
+<td>先转文字，核对后导入 MFH；它不负责导出聊天记录</td>
 </tr>
 <tr>
 <td><a href="https://github.com/immich-app/immich">Immich</a></td>
-<td>自托管照片与视频管理，提供相册、搜索等能力</td>
-<td>保存家庭照片与成品相册素材</td>
-<td>自托管需要维护与备份，不是回忆录生成器</td>
+<td>自托管照片与视频管理</td>
+<td>存原图和相册素材；需要自己维护和备份</td>
 </tr>
 <tr>
 <td><a href="https://github.com/helgeerbe/picframe">picframe</a></td>
-<td>面向树莓派的照片展示，可通过 MQTT 等接口控制</td>
-<td>硬件相框展示照片与已制作的故事卡</td>
-<td>根据当前文档选择设备；文字卡可先排成图片</td>
+<td>在受支持的树莓派设备上展示照片</td>
+<td>先做照片和故事卡，再按其文档搭相框</td>
 </tr>
 <tr>
 <td><a href="https://github.com/paperless-ngx/paperless-ngx">Paperless-ngx</a></td>
 <td>扫描、索引与归档文档</td>
-<td>整理信件、扫描件和最终文稿</td>
-<td>不是照片相框，也不能代替原件与独立备份</td>
+<td>整理信件、扫描件和成稿；原件仍需另存</td>
 </tr>
 </tbody></table></div>
-<p>第一份作品只需要自己的 AI、文字编辑器与已有材料。上述工具都是可选扩展：先有实际需求，再选择一种，不要求安装整套服务。</p>
-<p>这些项目遵循各自许可。MFH 的非商业许可不会替代或改变它们的条款；当前仓库只链接资料，没有复制或重新打包它们的代码。</p>
+<p>AI 采访与回忆录项目的参考另见<a href="related-work.html">设计取舍</a>。这些项目遵循各自条款，MFH 的非商业许可不改变它们的许可。</p>
 </article><footer><a href="../../index.html">打开应用</a></footer></main></body></html>

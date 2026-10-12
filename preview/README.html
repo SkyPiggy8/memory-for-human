@@ -4,12 +4,12 @@
 </style></head><body><nav class="repo"><a class="name" href="../index.html">Memory for Human</a><span class="note">本地说明文档 · v0.2</span></nav><main class="shell"><div class="document-label"><span>README.md</span><a href="../README.md">查看原文</a></div><article><h1 id="memory-for-human">Memory for Human</h1>
 <p><a href="README.html">简体中文</a> · <a href="README.en.html">English</a> · <a href="README.es.html">Español</a></p>
 <p><a href="https://github.com/SkyPiggy8/memory-for-human">GitHub 仓库</a> · <a href="https://github.com/SkyPiggy8/memory-for-human/archive/refs/heads/main.zip">下载 ZIP</a></p>
-<p><strong>你讲故事，AI 帮你整理。把值得记住的人和事，留成一本回忆录。</strong></p>
-<p>人的一生，由已经走过的经历与仍未抵达的未来共同构成。Memory for Human（MFH）希望用 AI 帮我们照顾那些真实发生过的生活：一次相遇、一段陪伴、一生的选择，还有只有你记得的细节。</p>
-<p>MFH 现在是一个<strong>可在本地操作的回忆录工具（v0.2）</strong>。界面、采访问题、入门解释和 AI 交接说明支持中文、英文、西班牙语。API Key 使用者自行提供；没有 Key，也可以整理材料并交给平时使用的 AI。</p>
+<p><strong>把你记得的生活，留成一本能继续写、能交给家人的回忆录。</strong></p>
+<p>我想做这件事，是因为有些故事只有一个人记得。家里的老人讲过，却没人记下来；两个人走过很多年，照片还在，当时的小事已经说不清了。Memory for Human（MFH）让 AI 帮忙提问和整理，让这些经历有地方留下，也让家人以后还能接着补。</p>
+<p>MFH v0.2 已有<strong>可在本机使用的回忆录工具</strong>。界面、采访问题、入门解释和 AI 交接说明支持中文、英文、西班牙语。API Key 使用者自行提供；没有 Key，也可以整理材料并交给平时使用的 AI。</p>
 <p><img src="../assets/overview.svg" alt="Memory for Human：选择场景、收集材料、采访、逐章写作、本人审阅、制作保存"></p>
 <p>上图是整体方向；语音文件自动转写、照片识别与相册/NAS 自动集成仍是后续计划。<a href="../docs/overview.html">交互流程图</a> · <a href="docs/architecture.html">技术说明</a></p>
-<h2 id="不知道这是什么先这样理解">不知道这是什么？先这样理解</h2>
+<h2 id="没用过这类工具也能开始">没用过这类工具，也能开始</h2>
 <p>把它想成一个会帮忙整理的小本子。你写一段话、回答一个问题，或者把家人的话记下来。AI 只能依据这些内容，帮你写得连贯些。你检查后，留下文字，或者打印成书。</p>
 <p>你只需要会两件事中的一种：<strong>在页面里填自己的 API Key</strong>，或<strong>把“交给我的 AI”里的说明复制给平时使用的 AI</strong>。不会操作的老人可以只负责讲，家人负责填写与核对。</p>
 <p>页面里的「先看怎么用」会用日常语言解释用途、操作、Key、没有 Key 时的办法和资料去向。连接后，还可以让自己的 AI 再解释一次。</p>
@@ -27,7 +27,7 @@
 <pre><code class="language-sh">node server.mjs
 </code></pre>
 <p>只想先看看或填写？也可双击 <code>index.html</code>。<strong>直接打开文件时不提供 API 连接</strong>，但可以填写、导入文字、编辑、导出和备份。文件模式与本地网页是不同的浏览器保存位置，切换前先下载备份，再导入。</p>
-<h2 id="四步完成一章">四步完成一章</h2>
+<h2 id="先写好一章">先写好一章</h2>
 <ol>
 <li><strong>选一种回忆录。</strong> 取名字，写明讲述者、读者，决定先写一章还是慢慢写长篇。</li>
 <li><strong>把故事讲出来。</strong> 一次一个问题。直接输入、使用支持的浏览器语音输入，或导入文字材料。答案可以修改。</li>
@@ -108,7 +108,8 @@
 <td>5,000–20,000 字</td>
 </tr>
 </tbody></table></div>
-<p>老人长篇适合分成约 10–16 章，每次只聊一个主题，累了就停。当前支持多章节、保存与继续填写；不会一键凭空生成几万字的人生。第一版可以先验证「恋人短篇」与「老人一章试读」。</p>
+<p>长篇可以分成约 10–16 章，每次只聊一个主题，累了就停。先写一章给本人读，再决定继续。篇幅是参考，材料少就短一点，不靠重复和编造凑字数。</p>
+<p>三种语言各有 <strong>156 个起始问题</strong>：恋人 24、婚姻 24、一生 48、战友 20、同事 20、同学 20。AI 追问会先接着已讲出的动作、人物、地点或旧物，场景清楚后再换主题。一次一个问题，可以跳过。<a href="docs/interviewing.html">怎样把故事聊出来</a></p>
 <h2 id="材料怎样交进来">材料怎样交进来</h2>
 <ul>
 <li><strong>直接填写：</strong> 在问题下面回答，家人可以代记录。</li>
@@ -118,11 +119,11 @@
 <li><strong>完整备份：</strong> 从「下载完整文字备份」得到 <code>.mfh.json</code>，导入会创建一本新回忆录，不覆盖原来那本。</li>
 </ul>
 <p>新导入的材料默认<strong>不交给 AI</strong>，可以逐份勾选。答案也可按章取消或勾选。AI 处理时使用勾选的答案与材料，以及任务所需的章节。材料过多会提示拆分，不悄悄截掉整个人生。<a href="docs/collection.html">详细采集指南</a></p>
-<h2 id="真实性与隐私">真实性与隐私</h2>
+<h2 id="写过以后还要本人核对">写过以后，还要本人核对</h2>
 <p>AI 整理已有经历、提问和润色，不能替人填造事实。工作稿保留 <code>[A1]</code>（采访答案）、<code>[M1]</code>（勾选材料）等来源标记；检查疑点后由本人决定最终版本。修改章节会将其重新标为草稿。</p>
 <p>本地页面不等于所有处理都离线。调用在线 AI 或把交接包粘贴给在线工具，所选文字就会交给该服务。采访、聊天和照片的采集与分享范围请先取得相关人同意。<a href="docs/privacy.html">隐私说明</a></p>
 <p>完整文字备份包含本项目的回答、导入文字、草稿与未提交的回答，不包含 API Key、原始照片和音频文件。原件请另行保存。</p>
-<h2 id="从故事到纪念物">从故事到纪念物</h2>
+<h2 id="打印相册和长期保存">打印、相册和长期保存</h2>
 <div class="table-wrap"><table>
 <thead>
 <tr>
@@ -151,7 +152,11 @@
 <h2 id="ai-怎么接手这个项目">AI 怎么接手这个项目</h2>
 <p>页面里的「交给我的 AI」会按任务与语言生成说明。默认不附私人材料；勾选后才加入已保存答案与选中材料。可以复制或下载 Markdown，再把 AI 的普通章节文字或约定 JSON 粘贴回来。</p>
 <p>仓库同时提供 <a href="AI-HANDOFF.html">中文</a>、<a href="AI-HANDOFF.en.html">英文</a>、<a href="AI-HANDOFF.es.html">西班牙语</a>交接文档，供能读取文件或操作电脑的 AI 使用。<a href="AGENTS.html">AGENTS.md</a>说明真实文件、启动方式、验证要求与能力边界。</p>
-<h2 id="当前能力与后续计划">当前能力与后续计划</h2>
+<h2 id="mfh-的技术工作">MFH 的技术工作</h2>
+<p>项目的工作集中在四件事：<strong>来源可追溯、模型解耦、人工审阅、进度可恢复</strong>。答案和材料各有稳定编号，写作只使用选中的部分；自己的聊天 AI 和 API 共用任务规则，结果回到同一本作品；章节修改后重新审阅；恢复备份新增一本，避免覆盖。</p>
+<p>前端是无需构建的原生网页，本机服务使用 Node.js 内置模块，密钥与作品分开。六类关系、三语操作、家人代记录和制作清单，组成从采访到成品的完整流程。<a href="docs/architecture.html">技术设计</a>解释数据结构、请求范围、确认状态和长篇限制。</p>
+<p>StorySage 重点研究多智能体采访与写作，memoir 采用工具调用和结构化时间线。MFH 把重点放在普通家庭怎样用自己的 AI 开始、怎样保留材料和带走作品。来源保留与本人审阅也见于其他项目，本项目的差异来自这些设计的组合。<a href="docs/related-work.html">参考项目与具体区别</a></p>
+<h2 id="已完成与接下来要做的部分">已完成与接下来要做的部分</h2>
 <p><strong>已实现：</strong> 三语界面与问题、低门槛解释、AI 交接、六类场景、文字材料、浏览器语音输入（需支持）、多本回忆录、本机保存、编辑章节、API 调用路径、备份恢复、Markdown 导出、浏览器打印。</p>
 <p><strong>待实现：</strong> 上传音频 ASR、图片/OCR、平台专属聊天适配、自动图文排版、自动 NAS/相册衔接、长篇检索与多人冲突审阅。<a href="docs/roadmap.html">开发计划</a></p>
 <p>无需安装前端依赖；本机服务仅使用 Node.js 内置能力。开发验证：<code>npm test</code>。<a href="CONTRIBUTING.html">贡献说明</a> · <a href="docs/github-publishing.html">GitHub 发布配置</a></p>

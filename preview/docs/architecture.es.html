@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Diseño técnico: fuentes, modelos y capítulos revisados</title><style>
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;color:#1f2328;background:#f6f8fa;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Microsoft YaHei",sans-serif;font-size:16px;line-height:1.75}a{color:#0969da;text-decoration:none}a:hover{text-decoration:underline}a:focus-visible{outline:2px solid #0969da;outline-offset:3px}.repo{border-bottom:1px solid #d0d7de;background:white;padding:15px 28px;font-size:14px;display:flex;gap:12px;align-items:center;flex-wrap:wrap}.repo .name{font-weight:600;color:#1f2328}.repo .note{color:#656d76}.shell{max-width:1180px;margin:28px auto 60px;padding:0 24px}.document-label{border:1px solid #d0d7de;border-bottom:0;border-radius:7px 7px 0 0;background:white;padding:11px 28px;font-size:13px;color:#656d76;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}article{background:white;border:1px solid #d0d7de;border-radius:0 0 7px 7px;padding:32px 40px;overflow-wrap:anywhere}h1,h2,h3{line-height:1.4;font-weight:600;color:#1f2328;scroll-margin-top:24px}h1{font-size:32px;padding-bottom:12px;border-bottom:1px solid #d8dee4;margin:0 0 18px}h2{font-size:24px;border-bottom:1px solid #d8dee4;padding-bottom:8px;margin:34px 0 16px}h3{font-size:19px;margin:25px 0 12px}p{margin:0 0 16px}li{margin:4px 0}ul,ol{padding-left:27px;margin:0 0 18px}img{max-width:100%;height:auto;display:block;margin:20px auto;border:1px solid #d8dee4;border-radius:5px}code{background:#eff1f3;font-family:ui-monospace,"Cascadia Code",Consolas,monospace;font-size:.88em;padding:2px 5px;border-radius:4px}pre{background:#f6f8fa;border-radius:6px;padding:18px;overflow:auto;font-size:14px;line-height:1.6}pre code{padding:0;background:transparent;white-space:pre;font-size:inherit}blockquote{color:#656d76;border-left:4px solid #d0d7de;padding:0 18px;margin:18px 0}.table-wrap{overflow-x:auto;margin:16px 0 22px}table{border-collapse:collapse;width:100%;font-size:14px;line-height:1.65}td,th{border:1px solid #d0d7de;padding:10px 12px;vertical-align:top;text-align:left}th{font-weight:600;background:#f6f8fa}tr:nth-child(even){background:#fbfcfd}em{color:#656d76}input[type=checkbox]{margin-right:8px;accent-color:#0969da}footer{color:#656d76;font-size:13px;margin-top:18px}footer a{margin-right:18px}@media(max-width:680px){.repo{padding:12px 16px}.shell{padding:0 10px;margin:16px auto 32px}article{padding:22px 18px}.document-label{padding:10px 18px}h1{font-size:27px}h2{font-size:22px}body{font-size:15px}td,th{min-width:115px;padding:8px}table{font-size:13px}pre{font-size:12px;padding:12px}}@media print{body{background:white}.repo,.document-label,footer{display:none}.shell{max-width:none;padding:0;margin:0}article{border:0;padding:0}a{color:inherit}h2,h3{break-after:avoid}img,tr,blockquote{break-inside:avoid}.table-wrap{overflow:visible}}
+</style></head><body><nav class="repo"><a class="name" href="../../index.html">Memory for Human</a><span class="note">Documentación local · v0.2</span></nav><main class="shell"><div class="document-label"><span>docs/architecture.es.md</span><a href="../../docs/architecture.es.md">Texto original</a></div><article><h1 id="diseño-técnico-fuentes-modelos-y-capítulos-revisados">Diseño técnico: fuentes, modelos y capítulos revisados</h1>
+<p><a href="architecture.html">简体中文</a> · <a href="architecture.en.html">English</a> · <a href="architecture.es.html">Español</a></p>
+<p>MFH convierte una entrevista en un proyecto que se puede continuar. Las respuestas originales se guardan aparte de los borradores. La persona elige qué recibe el modelo, modifica el resultado y lo revisa. Esta página describe v0.2; los <a href="related-work.es.html">proyectos de referencia</a> explican su posición.</p>
+<h2 id="proceso-de-trabajo">Proceso de trabajo</h2>
+<pre><code class="language-text">Respuestas / textos → identificadores estables A… / M…
+    → fuentes elegidas → instrucciones de la tarea
+    → entrega manual O servidor API local
+    → borrador editable → revisión de quien cuenta
+    → copia de textos / Markdown / impresión del navegador
+</code></pre>
+<p>Cada idioma tiene 156 preguntas iniciales para seis tipos de relación, incluidas 48 sobre una vida. La entrevista por API pide una sola pregunta a partir de respuestas seleccionadas. No hay planificación automática de cobertura ni grafo de conocimiento.</p>
+<h2 id="fuentes-que-se-pueden-consultar">Fuentes que se pueden consultar</h2>
+<p><code>app/core.js</code> define el formato <code>memory-for-human</code> v2. Respuestas, materiales y capítulos son registros separados. Los identificadores <code>A1</code>… y <code>M1</code>… se conservan al borrar otros registros, guardar copias y recuperarlas. Los materiales importados no se envían a la IA por defecto; también se pueden desmarcar respuestas.</p>
+<p><code>context()</code> incluye las fuentes elegidas y, para revisar, el capítulo actual. Las instrucciones piden referencias como <code>[A1]</code>. El programa conserva los identificadores y el texto original, pero no verifica las citas frase por frase. Una referencia ayuda a comprobar; no demuestra que algo sea cierto.</p>
+<h2 id="tareas-independientes-del-modelo">Tareas independientes del modelo</h2>
+<p><code>taskPrompt()</code> define entrevista, redacción de un capítulo, revisión y explicación sencilla. La entrega manual incluye las reglas y el idioma; la API usa las mismas reglas de tarea. El texto o JSON devuelto crea un capítulo nuevo como borrador, sin aprobar los hechos.</p>
+<p><code>server.mjs</code> adapta por separado OpenAI compatible y Anthropic Messages. El usuario configura servicio, modelo y dirección. Un modelo local necesita su propio servidor compatible. MFH no entrena un modelo base; cambiar de IA no borra fuentes ni capítulos.</p>
+<h2 id="revisión-humana-y-recuperación">Revisión humana y recuperación</h2>
+<p>Cada capítulo guarda contenido, origen, fecha y estado <code>approved</code>. Empieza como borrador. La persona lo marca revisado; modificarlo lo devuelve a borrador. La revisión de IA señala detalles sin apoyo, fechas contradictorias y privacidad, pero no aprueba capítulos. El estado corresponde al capítulo, no a una cola de aprobación de cada hecho.</p>
+<p>Las instrucciones dentro de una fuente se tratan como datos. La regla está en los prompts; no se ha realizado una evaluación completa de ataques de inyección de instrucciones.</p>
+<p><code>app/app.js</code> guarda varios proyectos en IndexedDB, incluida la respuesta sin enviar y el capítulo activo. <code>publicProject()</code> exporta campos permitidos sin credenciales. <code>validateProject()</code> comprueba formato, versión y tamaño. Recuperar crea una identidad nueva, conserva los identificadores de fuente y mantiene la obra anterior. Los datos demasiado grandes se rechazan, no se recortan en silencio.</p>
+<p>La copia contiene textos, no fotos, escaneos ni grabaciones originales. El navegador no cifra estos datos. Otro navegador, dirección, puerto o modo de archivo puede tener otro espacio de guardado; descarga una copia antes de cambiar.</p>
+<h2 id="ejecución-local-y-key">Ejecución local y Key</h2>
+<p>La interfaz usa scripts clásicos, sin compilación. El archivo HTML permite escribir, editar y guardar copias. La API requiere Node.js 22+ con módulos incluidos y escucha en <code>127.0.0.1</code>. El iniciador de Windows puede descargar LTS oficial y comprobar SHA-256 antes de extraerlo.</p>
+<p>El servidor comprueba Host, Origin y un token de sesión por ejecución. Solo sirve archivos permitidos, no la configuración privada. La Key introducida queda en memoria durante esa ejecución. Los errores del proveedor se filtran antes de mostrarse. La inferencia en línea envía los textos elegidos al servicio; consulta la <a href="guide.es.html">guía de privacidad</a>.</p>
+<h2 id="obras-largas-y-límites">Obras largas y límites</h2>
+<p>Se escribe por capítulos con fuentes elegidas. La extensión orienta; no justifica inventar. Un JSON de materiales de más de 100.000 caracteres exige reducir o dividir. Es un límite de caracteres, no un presupuesto automático de tokens por modelo. Los resultados cortados conservan el aviso de límite de salida.</p>
+<p>Fechas, nombres y repeticiones entre capítulos requieren coordinación humana. Resúmenes automáticos, búsqueda semántica y revisión de coherencia del libro siguen pendientes. Tampoco están implementados ASR de archivos, OCR, aprobación de hechos por varios narradores ni maquetación ilustrada.</p>
+<h2 id="archivos-principales">Archivos principales</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Archivo</th>
+<th>Trabajo</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>app/core.js</code></td>
+<td>Formato, validación, selección, reglas y exportación</td>
+</tr>
+<tr>
+<td><code>app/app.js</code></td>
+<td>Entrevista, guardado, edición, entrega e impresión</td>
+</tr>
+<tr>
+<td><code>app/i18n.js</code></td>
+<td>Interfaz, explicaciones y preguntas en tres idiomas</td>
+</tr>
+<tr>
+<td><code>server.mjs</code></td>
+<td>Autenticación local, adaptadores y errores filtrados</td>
+</tr>
+<tr>
+<td><code>templates/</code>, <code>prompts/</code></td>
+<td>Instrucciones para familiares y otra IA</td>
+</tr>
+</tbody></table></div>
+<p>Las pruebas cubren recuperación, selección, límites, acceso local y transporte API simulado. Las comprobaciones en un navegador real cubren escritura, idiomas, entrega, recuperación, edición e impresión. No prueban acceso real a proveedores, calidad de la entrevista ni una obra larga completa.</p>
+</article><footer><a href="../../index.html">Abrir la aplicación</a></footer></main></body></html>

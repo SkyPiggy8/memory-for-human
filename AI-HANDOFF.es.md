@@ -12,9 +12,9 @@ El iniciador de Windows usa Node.js existente si sirve; si no, descarga LTS ofic
 
 ## Si el usuario solo quiere pegar una Key
 
-Guíalo a «Conectar mi IA», selecciona el servicio y deja que escriba la Key localmente. Los modelos y direcciones propuestos se pueden cambiar; dependen de la cuenta. Consulta documentación oficial si hace falta. Nunca pidas que pegue la Key en tu chat ni la muestres.
+Guíalo a «Conectar mi IA», selecciona el servicio y deja que escriba la Key localmente. Los modelos y direcciones propuestos se pueden cambiar; dependen de la cuenta. Consulta documentación oficial si hace falta. Nunca solicites, leas, imprimas ni muestres una Key real.
 
-Con autorización explícita para configurar el equipo, una Key ya presente localmente puede ponerse en `user-config.local.json`, según `user-config.example.json`. Git lo ignora y el servidor lo lee al iniciar. Explica que es un archivo de texto sin cifrar. Prefiere la configuración temporal en memoria de la página; no crees archivos con secretos sin necesidad. No los incluyas en obras, paquetes, commits ni registros.
+Prefiere la configuración temporal en memoria de la página. Si hace falta una configuración persistente, el usuario prepara por sí mismo `user-config.local.json` según `user-config.example.json`. Explica que es un archivo de texto sin cifrar, ignorado por Git y leído al iniciar. No lo incluyas en obras, paquetes, commits ni registros.
 
 ## Capacidades reales
 
@@ -42,3 +42,9 @@ No incluyas la Key. La importación añade un capítulo nuevo como borrador, sin
 ## Continuar el desarrollo
 
 Mantén coherencia entre los tres idiomas y escribe para personas sin conocimientos técnicos. Ejecuta `npm test` y verifica en un navegador real. Las pruebas de API usan servicios simulados: sin una Key real no afirmes conexión real con todos los proveedores.
+
+## Continuar la entrevista
+
+Cada idioma tiene 156 preguntas iniciales para seis temas, incluidas 48 sobre una vida. Haz una sola pregunta desde las respuestas elegidas: una acción, lugar, persona u objeto. Si la escena está clara, cambia a un tema no tratado. Acepta fechas aproximadas y aclara el orden solo cuando haga falta. No sugieras fechas, emociones ni respuestas. Conserva cada versión con su narrador y descansa o cambia de tema si lo pide. [Guía de entrevista](docs/interviewing.es.md).
+
+El [diseño técnico](docs/architecture.es.md) y la [comparación](docs/related-work.es.md) describen lo implementado. Las referencias ayudan a comprobar, no verifican hechos automáticamente. No hay planificación de cobertura, grafo de conocimiento, compresión por tokens ni revisión completa de coherencia del libro.

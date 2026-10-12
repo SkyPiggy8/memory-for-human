@@ -115,6 +115,16 @@ La copia completa de textos contiene respuestas, textos importados, borradores y
 
 Guías del repositorio: [chino](AI-HANDOFF.md), [inglés](AI-HANDOFF.en.md), [español](AI-HANDOFF.es.md). [AGENTS.md](AGENTS.md) describe los archivos, el inicio, las verificaciones y los límites para asistentes de programación.
 
+## El trabajo técnico
+
+MFH se centra en **fuentes consultables, tareas independientes del modelo, revisión humana y progreso recuperable**. Respuestas y materiales tienen identificadores estables; las peticiones usan solo fuentes elegidas. La entrega manual y la API comparten reglas. Editar un capítulo revisado lo devuelve a borrador; recuperar una copia crea un proyecto nuevo.
+
+La interfaz sin compilación y el servidor con módulos incluidos en Node.js reducen dependencias y separan la Key de la obra. Seis relaciones, tres idiomas, ayuda de familiares y pasos de producción conectan entrevista y recuerdo terminado. El [diseño técnico](docs/architecture.es.md) explica datos, alcance de peticiones, revisión y límites de obras largas.
+
+StorySage trabaja con agentes especializados; memoir con registros y gestión del contexto. MFH facilita que una familia empiece con su propia IA y conserve una obra que pueda continuar. Comparten algunos principios; la diferencia de MFH está en su combinación y público. [Referencias y diferencias](docs/related-work.es.md)
+
+Cada idioma tiene **156 preguntas iniciales**: pareja 24, matrimonio 24, una vida 48, servicio 20, trabajo 20 y estudios 20. La IA sigue detalles concretos antes de cambiar de tema, con una pregunta cada vez. [Guía de entrevista](docs/interviewing.es.md)
+
 ## Qué funciona y qué falta
 
 **Funciona:** interfaz y preguntas en tres idiomas, explicaciones sencillas, instrucciones para otra IA, seis temas, texto, dictado compatible, varias memorias, guardado local, edición, adaptadores de API, copia y recuperación, Markdown e impresión.

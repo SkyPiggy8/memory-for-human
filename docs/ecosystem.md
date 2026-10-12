@@ -1,14 +1,14 @@
-# 可参考的延伸工具
+# 需要时再选这些工具
 
-以下条目根据项目官方仓库资料整理，查阅日期为 2026-10-12。它们用于帮助你选择独立工具，不代表 MFH 已完成集成、联合开发或部署验证。版本、硬件要求和许可以各项目当时文档为准。
+第一份作品只需要文字、自己的 AI 和已有材料。录音多了再找转写工具，照片多了再考虑相册管理，不用先安装一整套服务。
 
-| 项目 | 可以用于什么 | 在 MFH 流程中的位置 | 需要注意 |
-| --- | --- | --- | --- |
-| [faster-whisper](https://github.com/SYSTRAN/faster-whisper) | Whisper 的转写实现，基于 CTranslate2 | 口述录音转成文字后，人工校正再写作 | 需要运行环境与模型；不是聊天记录导出器 |
-| [Immich](https://github.com/immich-app/immich) | 自托管照片与视频管理，提供相册、搜索等能力 | 保存家庭照片与成品相册素材 | 自托管需要维护与备份，不是回忆录生成器 |
-| [picframe](https://github.com/helgeerbe/picframe) | 面向树莓派的照片展示，可通过 MQTT 等接口控制 | 硬件相框展示照片与已制作的故事卡 | 根据当前文档选择设备；文字卡可先排成图片 |
-| [Paperless-ngx](https://github.com/paperless-ngx/paperless-ngx) | 扫描、索引与归档文档 | 整理信件、扫描件和最终文稿 | 不是照片相框，也不能代替原件与独立备份 |
+以下介绍沿用 2026-10-12 查阅的官方资料。它们是独立项目，MFH 目前只提供链接，没有集成或验证具体安装。使用前按各自当前文档确认环境、备份方法和许可。
 
-第一份作品只需要自己的 AI、文字编辑器与已有材料。上述工具都是可选扩展：先有实际需求，再选择一种，不要求安装整套服务。
+| 项目 | 适合做什么 | 怎样接入你的制作过程 |
+| --- | --- | --- |
+| [faster-whisper](https://github.com/SYSTRAN/faster-whisper) | 用 Whisper / CTranslate2 转写录音 | 先转文字，核对后导入 MFH；它不负责导出聊天记录 |
+| [Immich](https://github.com/immich-app/immich) | 自托管照片与视频管理 | 存原图和相册素材；需要自己维护和备份 |
+| [picframe](https://github.com/helgeerbe/picframe) | 在受支持的树莓派设备上展示照片 | 先做照片和故事卡，再按其文档搭相框 |
+| [Paperless-ngx](https://github.com/paperless-ngx/paperless-ngx) | 扫描、索引与归档文档 | 整理信件、扫描件和成稿；原件仍需另存 |
 
-这些项目遵循各自许可。MFH 的非商业许可不会替代或改变它们的条款；当前仓库只链接资料，没有复制或重新打包它们的代码。
+AI 采访与回忆录项目的参考另见[设计取舍](related-work.md)。这些项目遵循各自条款，MFH 的非商业许可不改变它们的许可。

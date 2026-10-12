@@ -1,10 +1,10 @@
 name: 功能建议
-description: 提出具体使用场景与期望结果
+description: 告诉我们你想完成什么，现在还缺哪一步
 title: "[建议] "
 body:
   - type: markdown
     attributes:
-      value: "请先阅读 docs/roadmap.md。描述需要完成的事情，无需提供私人原始材料。"
+      value: "先看看 docs/roadmap.md，再说你希望怎样用。描述事情就好，不用附私人原件。"
   - type: textarea
     id: scenario
     attributes:

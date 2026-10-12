@@ -12,9 +12,9 @@ The Windows launcher uses existing Node.js when suitable; otherwise it downloads
 
 ## When the user only wants to paste a Key
 
-Guide them to “Connect my AI”, choose the Key’s service, and enter it locally. Preset model names and endpoints can be changed; account availability varies. Consult that service’s official docs when needed. Never ask them to paste a Key into your chat or print it.
+Guide them to “Connect my AI”, choose the Key’s service, and enter it locally. Preset model names and endpoints can be changed; account availability varies. Consult that service’s official docs when needed. Never request, read, print, or output a real Key.
 
-With explicit local configuration authorization, a locally held Key can be configured in `user-config.local.json`, following `user-config.example.json`. Git ignores it and startup reads it. Tell the user that this is a local plaintext file. Prefer the page’s temporary in-memory configuration; do not create a secret file unnecessarily. Never include it in work, handoffs, commits, or logs.
+Prefer the page’s temporary in-memory configuration. If persistent local configuration is needed, the user prepares `user-config.local.json` themselves, following `user-config.example.json`. Explain that it is a plaintext file, ignored by Git and read at startup. Never include it in work, handoffs, commits, or logs.
 
 ## Actual capabilities
 
@@ -42,3 +42,9 @@ No Key belongs in the result. Import adds a new draft chapter; it does not perfo
 ## Continuing development
 
 Keep all three languages consistent and write for nontechnical users. Run `npm test` and real browser checks. API tests currently use simulated services; without a real user Key, do not claim live success with every provider.
+
+## Continue the interview
+
+Each language has 156 starting questions across six themes, including 48 for a life story. Ask one follow-up grounded in selected answers: an action, place, person, or object. If a scene is clear, move to an uncovered topic. Allow approximate dates and clarify order only when needed. Do not suggest a date, emotion, or answer. Preserve each speaker's conflicting account; pause or change topic when asked. [Interview guide](docs/interviewing.en.md).
+
+The [technical design](docs/architecture.en.md) and [reference comparison](docs/related-work.en.md) describe the implementation. Source markers support checking, not automatic fact verification. There is no automatic coverage planner, knowledge graph, token compression, or full-book consistency checker.

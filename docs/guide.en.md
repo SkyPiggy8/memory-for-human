@@ -49,3 +49,7 @@ Try photos and story cards on an old tablet or existing frame before buying equi
 Keep independent backups of original recordings, text, pictures, final work, and the source list. A NAS is optional; synchronization alone is not a recovery plan. Keep copies on different media and, when possible, another location, and test opening or restoring them.
 
 Optional independent projects: [faster-whisper](https://github.com/SYSTRAN/faster-whisper) for transcription, [Immich](https://github.com/immich-app/immich) for photos, [picframe](https://github.com/helgeerbe/picframe) for a Raspberry Pi frame, and [Paperless-ngx](https://github.com/paperless-ngx/paperless-ngx) for document archiving. MFH links them; it has not integrated or tested your deployment. Follow their own documentation and terms.
+
+## Interview and technical guides
+
+[Interview methods](interviewing.en.md) · [Technical design](architecture.en.md) · [Reference projects](related-work.en.md)

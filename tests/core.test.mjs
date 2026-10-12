@@ -29,5 +29,14 @@ test('all three UI languages have the same keys and scene-specific question cove
   const flatten=(obj,p='')=>Object.entries(obj).flatMap(([k,v])=>typeof v==='object'&&!Array.isArray(v)?flatten(v,p+k+'.'):[p+k]).sort();
   const {MFH_LOCALES:L,MFH_QUESTIONS:Q}=sandbox.window;
   assert.deepEqual(flatten(L.zh),flatten(L.en));assert.deepEqual(flatten(L.zh),flatten(L.es));
-  for(const lang of ['zh','en','es']){assert.equal(L[lang].faqLabels.length,6);assert.equal(L[lang].faqAnswers.length,6);for(const scene of C.scenes)assert(Q[lang][scene].length>=8);assert(Q[lang].life.length>Q[lang].lovers.length);}
+  for(const lang of ['zh','en','es']){
+    assert.equal(L[lang].faqLabels.length,6);assert.equal(L[lang].faqAnswers.length,6);
+    for(const scene of C.scenes){
+      assert(Q[lang][scene].length>=(scene==='life'?40:20),`${lang}/${scene} needs enough starting topics`);
+      assert.equal(Q[lang][scene].length,Q.zh[scene].length,`${lang}/${scene} has untranslated questions`);
+      assert(Q[lang][scene].every(q=>typeof q==='string'&&q.trim().length>5),`${lang}/${scene} has an empty question`);
+      assert.equal(new Set(Q[lang][scene]).size,Q[lang][scene].length,`${lang}/${scene} repeats a starting question`);
+    }
+    assert(Q[lang].life.length>Q[lang].lovers.length);
+  }
 });

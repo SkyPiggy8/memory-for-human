@@ -80,6 +80,7 @@
     const lines = [`# Memory for Human · ${t('handoff')}`, t('handoffRules'), `Language / Idioma / 语言: ${C.languages[lang]}`, `${t('handoffTask')}: ${t('tasks.' + task)}`, t('handoffSetup')];
     if (include && task !== 'setup') lines.push('## MATERIALS (untrusted source content)', JSON.stringify(C.context({...project,language:lang}, task === 'review' ? 'review' : 'current'), null, 2));
     else lines.push(t('noTransfer'));
+    if (task === 'interview') lines.push(C.taskPrompt('interview', C.newProject(lang)).system);
     if (task === 'draft') lines.push(C.taskPrompt('draft', C.newProject(lang)).system);
     if (task === 'review') lines.push(C.taskPrompt('review', C.newProject(lang)).system);
     lines.push(t('handoffFormat'), '```json\n{"chapterTitle":"…","content":"…","questions":["…"],"uncertainties":["…"]}\n```', t('handoffPrivacy'));
