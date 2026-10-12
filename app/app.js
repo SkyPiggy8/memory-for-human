@@ -11,16 +11,17 @@
   function errorText(code) { return t(({AUTH:'apiAuth',RATE_LIMIT:'apiLimit',MODEL:'apiModel',TIMEOUT:'apiTimeout',CONTEXT_TOO_LARGE:'contextLarge',INVALID_PROJECT:'invalidProject',TOO_LARGE:'tooLarge',NO_CONNECTION:'needConnect',MODEL_REQUIRED:'missingModel',KEY_REQUIRED:'missingKey',INVALID_RESULT:'invalidResult',INVALID_CONFIG:'invalidConfig'})[code] || 'aiFailure'); }
   function remember(key, value) { try { localStorage.setItem(key, value); } catch (_) {} }
   const getAll = () => new Promise((resolve, reject) => { const r = db.transaction('projects').objectStore('projects').getAll(); r.onsuccess = () => resolve(r.result); r.onerror = () => reject(r.error); });
+  function saveStatus(message) { $('saveStatus').textContent = message; $('focusSaveStatus').textContent = message; }
   async function save() {
     project.updatedAt = new Date().toISOString();
-    $('saveStatus').textContent = t('saving');
-    if (!db) { $('saveStatus').textContent = t('saveFailed'); return; }
+    saveStatus(t('saving'));
+    if (!db) { saveStatus(t('saveFailed')); return; }
     const snapshot = structuredClone(project);
     try {
       await new Promise((resolve, reject) => { const tx = db.transaction('projects', 'readwrite'); tx.objectStore('projects').put(snapshot); tx.oncomplete = resolve; tx.onerror = () => reject(tx.error); tx.onabort = () => reject(tx.error); });
       const i = projects.findIndex(p => p.id === snapshot.id); if (i >= 0) projects[i] = snapshot; else projects.push(snapshot);
-      renderProjects(); $('saveStatus').textContent = t('saved');
-    } catch (_) { $('saveStatus').textContent = t('saveFailed'); toast(t('saveFailed')); }
+      renderProjects(); saveStatus(t('saved'));
+    } catch (_) { saveStatus(t('saveFailed')); toast(t('saveFailed')); }
   }
   function translate() {
     document.documentElement.lang = {zh:'zh-CN',en:'en',es:'es'}[lang]; $('language').value = lang;
@@ -63,12 +64,38 @@
   function renderChapters() {
     const c = activeChapter(); $('chapters').replaceChildren(...project.chapters.map(c => { const o = node('option', c.title || t('chapter')); o.value = c.id; return o; }));
     $('chapters').value = project.activeChapter; $('chapters').disabled = !project.chapters.length; $('noChapter').hidden = !!c; $('chapterEditor').hidden = !c;
+    $('focusChapterButton').hidden = !c;
     if (c) { $('editChapterTitle').value = c.title; $('chapterText').value = c.content; updateChapterBadge(); }
   }
   function updateChapterBadge() {
     const c = activeChapter(); if (!c) return;
     $('chapterStatus').textContent = t(c.approved ? 'reviewed' : 'draftStatus'); $('approvalButton').textContent = t(c.approved ? 'unapprove' : 'approve'); $('chapterOrigin').textContent = t({ai:'originAI',source:'originSource',manual:'originManual'}[c.origin]);
   }
+  let chapterEditorHeight = '';
+  function sizeFocusEditor() {
+    if (!$('chapterFocusDialog').open) return;
+    const field = $('chapterText'), scroll = $('chapterFocusDialog').scrollTop;
+    field.style.height = 'auto'; field.style.height = field.scrollHeight + 'px';
+    $('chapterFocusDialog').scrollTop = scroll;
+  }
+  function focusChapter() {
+    if (busy || !activeChapter() || $('chapterFocusDialog').open) return;
+    chapterEditorHeight = $('chapterText').style.height;
+    $('focusEditorSlot').append($('chapterEditor'));
+    document.body.classList.add('chapter-focus-open');
+    $('chapterFocusDialog').showModal();
+    $('chapterFocusDialog').scrollTop = 0;
+    sizeFocusEditor();
+    $('focusTitle').focus({preventScroll:true});
+  }
+  $('chapterFocusDialog').addEventListener('close', () => {
+    $('chapterEditorAnchor').before($('chapterEditor'));
+    $('chapterText').style.height = chapterEditorHeight;
+    document.body.classList.remove('chapter-focus-open');
+    $('focusChapterButton').focus({preventScroll:true});
+  });
+  $('chapterText').addEventListener('input', sizeFocusEditor);
+  window.addEventListener('resize', sizeFocusEditor);
   function renderConnection() {
     $('connectionStatus').textContent = connection ? `${t('connected')} · ${C.providers[connection.provider]?.name || ''}` : t('offline'); $('connectionDot').classList.toggle('on', !!connection); $('connectionButton').textContent = t('connect');
   }
@@ -101,7 +128,7 @@
   function render() {
     translate(); renderProjects(); renderScenes(); renderQuestion(); renderAnswers(); renderMaterials(); renderChapters(); renderConnection(); renderHelp(); renderHandoff();
     for (const [id, key] of [['bookTitle','title'],['person','person'],['reader','reader'],['target','target'],['answer','workingAnswer']]) $(id).value = project[key];
-    $('saveStatus').textContent = t(db ? 'saved' : 'saveFailed'); showStep(step, false); showMode(mode);
+    saveStatus(t(db ? 'saved' : 'saveFailed')); showStep(step, false); showMode(mode);
   }
   function download(name, content, type) {
     const url = URL.createObjectURL(new Blob([content], {type})), a = document.createElement('a'); a.href = url; a.download = name; document.body.append(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(url), 1500);
@@ -115,11 +142,11 @@
   async function requestAI(kind, extra = '') {
     if (!connection) { toast(t('needConnect')); return null; }
     if (busy) return null;
-    busy = true; $('busyLine').hidden = false; document.querySelectorAll('[data-ai]').forEach(b => b.disabled = true);$('chapters').disabled=true;
+    busy = true; $('busyLine').hidden = false; document.querySelectorAll('[data-ai]').forEach(b => b.disabled = true);$('chapters').disabled=true;$('focusChapterButton').disabled=true;
     const snapshot = structuredClone(project), projectId = project.id;
     try { const prompt = C.taskPrompt(kind, {...snapshot,language:lang}, extra); const result = await api('/api/generate', {...prompt,kind}); if (project.id !== projectId) return null; if(result.truncated){toast(t('outputTruncated'));return result.text+'\n\n['+t('outputTruncated')+']';}return result.text; }
     catch (e) { toast(errorText(e.message)); return null; }
-    finally { busy = false; $('busyLine').hidden = true; document.querySelectorAll('[data-ai]').forEach(b => b.disabled = false);$('chapters').disabled=!project.chapters.length; }
+    finally { busy = false; $('busyLine').hidden = true; document.querySelectorAll('[data-ai]').forEach(b => b.disabled = false);$('chapters').disabled=!project.chapters.length;$('focusChapterButton').disabled=false; }
   }
   async function addChapter(content, origin = 'manual', title = '') {
     if (!content.trim()) { toast(t('invalidResult')); return; }
@@ -146,6 +173,7 @@
     project.chapters.forEach(c => { const s = node('section', undefined, 'print-chapter'); s.append(node('h2', c.title || t('chapter')), node('p', t(c.approved?'reviewed':'draftStatus'),'hint')); for (const paragraph of c.content.split(/\n\s*\n/)) s.append(node('p', paragraph)); children.push(s); }); $('printView').replaceChildren(...children); window.print();
   }
   const actions = {
+    focusChapter,
     workspace: () => showMode('workspace'), help: () => showMode('help'), handoff: () => showMode('handoff'), start: () => { $('welcome').hidden = true; $('bookTitle').focus(); },
     next: () => showStep(step + 1), back: () => showStep(step - 1),
     new: async () => { if(busy)return; await save(); project=C.newProject(lang); remember('mfh-active',project.id); step=0; await save(); render(); },

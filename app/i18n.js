@@ -557,3 +557,19 @@ window.MFH_QUESTIONS = {
     ]
   }
 };
+
+Object.assign(window.MFH_LOCALES.zh, {
+  focusChapter:'专心写这一章', returnToChapters:'返回章节',
+  focusHint:'把注意力留给文字。这里的修改照常保存，返回不会撤销修改。',
+  focusReviewHint:'写到这里也可以。返回章节后，再慢慢核对与审阅。'
+});
+Object.assign(window.MFH_LOCALES.en, {
+  focusChapter:'Focus on this chapter', returnToChapters:'Back to chapters',
+  focusHint:'Make room for your words. Changes save as usual; going back does not undo them.',
+  focusReviewHint:'This can be a good place to pause. Go back to check and review your chapter when you are ready.'
+});
+Object.assign(window.MFH_LOCALES.es, {
+  focusChapter:'Escribir sin distracciones', returnToChapters:'Volver a capítulos',
+  focusHint:'Deja espacio para tus palabras. Los cambios se guardan como siempre; volver no los deshace.',
+  focusReviewHint:'Puedes hacer una pausa aquí. Vuelve a los capítulos para comprobar y revisar el texto con calma.'
+});
