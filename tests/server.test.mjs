@@ -34,3 +34,40 @@ test('custom local models can omit a Key, remote HTTP and redirecting credential
   assert.equal((await s.post('/api/connect',{provider:'custom',baseURL:'http://remote.example/v1',model:'m',apiKey:'DUMMY'})).status,400);
   assert.equal((await s.post('/api/connect',{provider:'openai',baseURL:'https://other.example/v1',apiKey:'DUMMY'})).status,400);
 });
+
+for (const replacing of [false, true]) {
+  test(`disconnect invalidates a pending ${replacing ? 'replacement' : 'first'} connection and releases busy state`, {timeout:5000}, async t => {
+    const started=Promise.withResolvers(), release=Promise.withResolvers();
+    t.after(()=>release.resolve());
+    let calls=0;
+    const s=await setup(t,async()=>{
+      calls++;
+      if(calls===(replacing?2:1)){started.resolve();await release.promise;}
+      return Response.json({choices:[{message:{content:'OK'}}]});
+    });
+    const candidate={provider:'openai',apiKey:'DUMMY-PENDING'};
+    const generate={kind:'explain',system:'Rules',user:'Fictional example'};
+    const connection=async()=>(await(await fetch(s.base+'/api/session')).json()).connection;
+    if(replacing){
+      assert.equal((await s.post('/api/connect',{provider:'deepseek',apiKey:'DUMMY-OLD'})).status,200);
+    }
+    const pending=s.post('/api/connect',candidate);
+    await started.promise;
+    assert.equal((await connection())?.provider,replacing?'deepseek':undefined);
+    assert.equal((await(await s.post('/api/connect',candidate)).json()).code,'BUSY');
+    assert.equal((await s.post('/api/disconnect',{})).status,200);
+    assert.equal(await connection(),null);
+    // Keep the lock until the old provider call settles; disconnect must not release it.
+    assert.equal((await(await s.post('/api/generate',generate)).json()).code,'BUSY');
+    release.resolve();
+    const stale=await pending;
+    assert.equal(stale.status,409);
+    assert.equal((await stale.json()).code,'NO_CONNECTION');
+    assert.equal(await connection(),null);
+    assert.equal((await(await s.post('/api/generate',generate)).json()).code,'NO_CONNECTION');
+    assert.equal((await s.post('/api/connect',candidate)).status,200);
+    assert.equal((await connection()).provider,'openai');
+    assert.equal((await s.post('/api/generate',generate)).status,200);
+    assert.equal(calls,replacing?4:3);
+  });
+}

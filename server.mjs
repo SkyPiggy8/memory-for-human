@@ -32,7 +32,7 @@ async function readJson(req, max = 1500000) {
 function json(res, status, body) { res.writeHead(status,{'Content-Type':'application/json; charset=utf-8','Cache-Control':'no-store','X-Content-Type-Options':'nosniff'});res.end(JSON.stringify(body)); }
 export function createApp({root=ROOT, fetchImpl=fetch, initialConfig=null, timeoutMs=120000}={}) {
   let config=initialConfig?cleanConfig(initialConfig):null;
-  const token=randomBytes(32).toString('hex');let requestInFlight=false;
+  const token=randomBytes(32).toString('hex');let requestInFlight=false, connectionVersion=0;
   async function modelCall(c, system, user, maxTokens) {
     const anthropic=c.protocol==='anthropic';
     const headers={'Content-Type':'application/json'};
@@ -67,11 +67,16 @@ export function createApp({root=ROOT, fetchImpl=fetch, initialConfig=null, timeo
         if(req.method!=='POST')throw new AppError('METHOD',405);
         const body=await readJson(req);
         if(!body||typeof body!=='object'||Array.isArray(body))throw new AppError('INVALID_REQUEST');
-        if(pathname==='/api/disconnect'){config=null;json(res,200,{ok:true});return;}
+        if(pathname==='/api/disconnect'){connectionVersion++;config=null;json(res,200,{ok:true});return;}
         if(requestInFlight)throw new AppError('BUSY',409);
         if(pathname==='/api/connect'){
-          const candidate=cleanConfig(body);requestInFlight=true;
-          try{await modelCall(candidate,'Reply briefly.','Reply with OK only.',256);config=candidate;json(res,200,safeConnection(config));}finally{requestInFlight=false;}return;
+          const candidate=cleanConfig(body), version=connectionVersion;requestInFlight=true;
+          try{
+            await modelCall(candidate,'Reply briefly.','Reply with OK only.',256);
+            // A disconnect while the provider was responding invalidates this candidate.
+            if(version!==connectionVersion)throw new AppError('NO_CONNECTION',409);
+            config=candidate;json(res,200,safeConnection(config));
+          }finally{requestInFlight=false;}return;
         }
         if(pathname==='/api/generate'){
           if(!config)throw new AppError('NO_CONNECTION',409);
