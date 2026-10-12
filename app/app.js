@@ -2,7 +2,7 @@
   'use strict';
   const C = window.MFHCore, locales = window.MFH_LOCALES, questions = window.MFH_QUESTIONS;
   const $ = id => document.getElementById(id);
-  let lang = 'zh', project, db, projects = [], step = 0, mode = 'workspace', faq = 0, token = '', connection = null, busy = false, editingAnswer = '', recognition = null, toastTimer;
+  let lang = 'zh', project, db, projects = [], step = 0, mode = 'workspace', faq = 0, token = '', connection = null, connectionVersion = 0, busy = false, editingAnswer = '', recognition = null, toastTimer;
   try { lang = localStorage.getItem('mfh-language') || navigator.language.slice(0, 2); } catch (_) {}
   if (!locales[lang]) lang = 'zh';
   const t = key => key.split('.').reduce((a, p) => a?.[p], locales[lang]) || key;
@@ -179,7 +179,7 @@
     copyHandoff: async () => { try{await navigator.clipboard.writeText($('handoffText').value);toast(t('copied'));}catch(_){$('handoffText').select();toast(t('copyFailed'));} },
     downloadHandoff: () => download('MFH-AI-'+lang+'.md',$('handoffText').value,'text/markdown;charset=utf-8'), importResult: importAIResult,
     connect: () => { $('fileMode').hidden=!!token;$('connectionError').hidden=true;$('connectionDialog').showModal(); },
-    disconnect: async () => { if(token)await api('/api/disconnect',{});connection=null;$('apiKey').value='';renderConnection();toast(t('disconnected')); }
+    disconnect: async () => { connectionVersion++;if(token)await api('/api/disconnect',{});connection=null;$('apiKey').value='';renderConnection();toast(t('disconnected')); }
   };
   document.addEventListener('click', async e => {
     const close=e.target.closest('[data-close]');if(close){$(close.dataset.close).close();return;}
@@ -201,9 +201,15 @@
   $('connectionForm').addEventListener('submit',async e=>{
     e.preventDefault();if(!token){toast(t('fileMode'));return;}const provider=$('provider').value,apiKey=$('apiKey').value.trim(),model=$('model').value.trim();
     if(provider!=='custom'&&!apiKey){toast(t('missingKey'));return;}if(!model){$('advanced').open=true;toast(t('missingModel'));return;}
+    const version=++connectionVersion;
     $('connectSubmit').disabled=true;$('connectSubmit').textContent=t('connecting');$('connectionError').hidden=true;
-    try{connection=await api('/api/connect',{provider,apiKey,model,baseURL:$('baseURL').value.trim()});$('apiKey').value='';$('connectionDialog').close();renderConnection();toast(t('connected'));}
-    catch(err){$('connectionError').textContent=errorText(err.message);$('connectionError').hidden=false;}
+    try{
+      const result=await api('/api/connect',{provider,apiKey,model,baseURL:$('baseURL').value.trim()});
+      // Ignore even a successful response if the user disconnected before it arrived.
+      if(version!==connectionVersion)return;
+      connection=result;$('apiKey').value='';$('connectionDialog').close();renderConnection();toast(t('connected'));
+    }
+    catch(err){if(version===connectionVersion){$('connectionError').textContent=errorText(err.message);$('connectionError').hidden=false;}}
     finally{$('connectSubmit').disabled=false;$('connectSubmit').textContent=t('connectButton');}
   });
   $('materialForm').addEventListener('submit',async e=>{e.preventDefault();const name=$('materialName').value.trim(),content=$('materialContent').value.trim();if(!name||!content)return;const existing=project.materials.find(m=>m.id===$('materialForm').dataset.edit);if(existing){existing.name=name;existing.content=content;}else project.materials.push({id:C.uuid(),sourceId:'M'+project.nextMaterial++,name,content,include:false});await save();renderMaterials();$('materialDialog').close();});
