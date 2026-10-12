@@ -52,7 +52,8 @@ try{
     if(output&&!reduced){await page.locator('#toast').waitFor({state:'hidden'});await page.locator('#exportOverview').evaluate(e=>e.scrollIntoView({block:'start'}));await page.screenshot({path:path.join(output,`after-${lang}-${device}.png`)});}
     await page.locator('#exportChapterList button').nth(1).focus();await page.keyboard.press('Enter');await page.locator('#returnToExport').waitFor();
     assert.equal(await page.locator('#chapterText').inputValue(),fixture.chapters[2].content);assert(await page.locator('#chapterEditor').evaluate(e=>e===document.activeElement));
-    await page.keyboard.press('Tab');assert(await page.locator('#returnToExport').evaluate(e=>e===document.activeElement));await page.keyboard.press('Enter');
+    assert(await page.locator('#returnToExport').evaluate(e=>!e.closest('#chapterEditor')));
+    await page.keyboard.press('Shift+Tab');assert(await page.locator('#returnToExport').evaluate(e=>e===document.activeElement));await page.keyboard.press('Enter');
     await counts(page,3,1);assert(await page.locator('#exportOverview').evaluate(e=>e===document.activeElement));assert.deepEqual((await data(page)).chapters,before);
     const motion=await page.evaluate(()=>['#exportReviewNote','.manuscript-chevron'].map(s=>getComputedStyle(document.querySelector(s)).transitionDuration));if(reduced)assert.deepEqual(motion,['0s','0s']);
     assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));await context.close();console.log(`PASS ${lang} ${width}px reduced=${reduced}: empty/mixed counts, directory, keyboard check/return, unchanged text, export access, layout`);
