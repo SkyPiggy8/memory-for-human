@@ -44,21 +44,69 @@
   }
   function currentQuestion() { const q = questions[lang][project.scene]; return project.aiQuestion || q[project.questionIndex % q.length]; }
   function renderQuestion() { $('questionText').textContent = currentQuestion(); }
-  function renderAnswers() {
-    const records = project.answers.map(a => {
-      const r = node('div', undefined, 'record'); r.append(node('h3', a.question), node('p', a.answer));
-      const choice=node('label',undefined,'material-choice'), checkbox=document.createElement('input');checkbox.type='checkbox';checkbox.checked=a.include!==false;checkbox.dataset.answerSource=a.id;choice.append(checkbox,node('span',t('includeAI')));r.append(choice);
-      const tools = node('div', undefined, 'tools'); for (const action of ['editAnswer', 'deleteAnswer']) { const b = node('button', t(action === 'editAnswer' ? 'edit' : 'remove'), 'quiet small'); b.dataset.action = action; b.dataset.id = a.id; tools.append(b); }
-      r.append(tools); return r;
-    }); $('answers').replaceChildren(...(records.length ? records : [node('p', t('noAnswers'), 'empty')]));
+  // Search and expansion belong to this view, never to the saved project or AI context.
+  let sourceProjectId = '', sourceQuery = '';
+  const expandedSources = new Set();
+  const searchText = value => value.normalize('NFKD').replace(/\p{M}/gu, '').toLowerCase();
+  function matchesSource(source) {
+    const text = `[${source.sourceId}] ${source.question ?? source.name ?? ''} ${source.answer ?? source.content ?? ''}`;
+    return searchText(text).includes(searchText(sourceQuery.trim()));
   }
-  function renderMaterials() {
-    const records = project.materials.map(m => {
-      const r = node('div', undefined, 'record'); r.append(node('h3', m.name), node('p', m.content.length > 400 ? m.content.slice(0, 400) + '…' : m.content));
-      const l = node('label', undefined, 'material-choice'), input = document.createElement('input'); input.type = 'checkbox'; input.checked = m.include; input.dataset.material = m.id; l.append(input, node('span', t('includeAI'))); r.append(l);
-      const tools = node('div', undefined, 'tools'); for (const action of ['editMaterial', 'deleteMaterial']) { const b = node('button', t(action === 'editMaterial' ? 'edit' : 'remove'), 'quiet small'); b.dataset.action = action; b.dataset.id = m.id; tools.append(b); } r.append(tools); return r;
-    }); $('materials').replaceChildren(...(records.length ? records : [node('p', t('noMaterials'), 'empty')]));
+  function sourceFeedback(source, message) {
+    return matchesSource(source) ? message : t('sourceOutsideSearch');
   }
+  function sourceNotice(message) { if ($('saveStatus').textContent !== t('saveFailed')) toast(message); }
+  function sourceSummary(group, id) {
+    return Array.from($(group).querySelectorAll('details')).find(e => e.dataset.recordId === id)?.querySelector('summary');
+  }
+  function focusSource(group, id) { (sourceSummary(group, id) || $('sourceSearch')).focus({preventScroll:true}); }
+  function renderSourceList(group) {
+    if (sourceProjectId !== project.id) {
+      sourceProjectId = project.id; sourceQuery = ''; expandedSources.clear(); $('sourceSearch').value = '';
+    }
+    const list = $(group), answer = group === 'answers', sources = project[group];
+    const focusedId = list.contains(document.activeElement) ? document.activeElement.closest('details')?.dataset.recordId : null;
+    const records = sources.filter(matchesSource).map(source => {
+      const record = node('details', undefined, 'source-record'), summary = node('summary');
+      const key = group + ':' + source.id, included = answer ? source.include !== false : source.include;
+      record.dataset.recordId = source.id; record.dataset.sourceId = source.sourceId; record.open = expandedSources.has(key);
+      record.addEventListener('toggle', () => {
+        if (!record.isConnected) return;
+        if (record.open) expandedSources.add(key); else expandedSources.delete(key);
+        fullText.textContent = record.open ? content : '';
+      });
+      const meta = node('span', undefined, 'source-meta');
+      meta.append(node('span', `[${source.sourceId}]`, 'source-id'), node('span', t(included ? 'sourceIncluded' : 'sourceExcluded'), 'source-inclusion'));
+      const content = answer ? source.answer : source.content, excerpt = content.replace(/\s+/g, ' ').trim();
+      const arrow = node('span', '›', 'source-arrow'); arrow.setAttribute('aria-hidden', 'true');
+      summary.append(meta, node('span', answer ? source.question : source.name, 'source-title'), node('span', excerpt.slice(0,140) + (excerpt.length > 140 ? '…' : ''), 'source-excerpt'), arrow);
+      const body = node('div', undefined, 'source-body'), choice = node('label', undefined, 'material-choice'), checkbox = document.createElement('input');
+      checkbox.type = 'checkbox'; checkbox.checked = included;
+      checkbox.dataset[answer ? 'answerSource' : 'material'] = source.id;
+      checkbox.setAttribute('aria-label', `${t('includeAI')} · ${source.sourceId}`);
+      choice.append(checkbox, node('span', t('includeAI')));
+      const tools = node('div', undefined, 'tools');
+      for (const action of [answer ? 'editAnswer' : 'editMaterial', answer ? 'deleteAnswer' : 'deleteMaterial']) {
+        const label = t(action.startsWith('edit') ? 'edit' : 'remove'), button = node('button', label, 'quiet small');
+        button.dataset.action = action; button.dataset.id = source.id; button.setAttribute('aria-label', `${label} · ${source.sourceId}`); tools.append(button);
+      }
+      const fullText = node('p', record.open ? content : '', 'source-content');
+      summary.addEventListener('click', () => { if (!record.open) fullText.textContent = content; });
+      body.append(fullText, choice, tools); record.append(summary, body); return record;
+    });
+    list.replaceChildren(...(records.length ? records : [node('p', t(sources.length ? 'sourceNoMatches' : answer ? 'noAnswers' : 'noMaterials'), 'empty')]));
+    const all = [...project.answers, ...project.materials];
+    $('sourceSearchStatus').textContent = t('sourceResults').replace('{shown}', all.filter(matchesSource).length).replace('{total}', all.length);
+    $('clearSourceSearch').disabled = !sourceQuery;
+    if (focusedId) focusSource(group, focusedId);
+  }
+  function renderAnswers() { renderSourceList('answers'); }
+  function renderMaterials() { renderSourceList('materials'); }
+  function updateSourceInclusion(input) {
+    input.closest('details').querySelector('.source-inclusion').textContent = t(input.checked ? 'sourceIncluded' : 'sourceExcluded');
+  }
+  $('sourceSearch').addEventListener('input', () => { sourceQuery = $('sourceSearch').value; renderAnswers(); renderMaterials(); });
+  $('clearSourceSearch').addEventListener('click', () => { sourceQuery = ''; $('sourceSearch').value = ''; $('sourceSearch').focus({preventScroll:true}); renderAnswers(); renderMaterials(); });
   const activeChapter = () => project.chapters.find(c => c.id === project.activeChapter);
   function renderChapters() {
     const c = activeChapter(); $('chapters').replaceChildren(...project.chapters.map(c => { const o = node('option', c.title || t('chapter')); o.value = c.id; return o; }));
@@ -150,7 +198,7 @@
     next: () => showStep(step + 1), back: () => showStep(step - 1),
     new: async () => { if(busy)return; await save(); project=C.newProject(lang); remember('mfh-active',project.id); step=0; await save(); render(); },
     demo: async () => { if(busy)return; project=C.newProject(lang); project.title=t('demoName'); project.scene='life'; project.materials.push({id:C.uuid(),sourceId:'M'+project.nextMaterial++,name:t('demoNotice'),content:t('demoNotice'),include:true}); project.answers.push({id:C.uuid(),sourceId:'A'+project.nextAnswer++,include:true,question:t('demoQuestion'),answer:t('demoAnswer'),date:new Date().toISOString()}); remember('mfh-active',project.id); await save(); step=1; render(); toast(t('demoNotice')); },
-    saveAnswer: async () => { const answer=$('answer').value.trim(); if(!answer){toast(t('emptyAnswer'));return;} project.answers.push({id:C.uuid(),sourceId:'A'+project.nextAnswer++,include:true,question:currentQuestion(),answer,date:new Date().toISOString()}); project.workingAnswer=''; project.questionIndex++; project.aiQuestion=''; $('answer').value=''; await save(); renderAnswers(); renderQuestion(); toast(t('answerSaved')); },
+    saveAnswer: async () => { const answer=$('answer').value.trim(); if(!answer){toast(t('emptyAnswer'));return;} const record={id:C.uuid(),sourceId:'A'+project.nextAnswer++,include:true,question:currentQuestion(),answer,date:new Date().toISOString()};project.answers.push(record); project.workingAnswer=''; project.questionIndex++; project.aiQuestion=''; $('answer').value=''; await save(); renderAnswers(); renderQuestion(); sourceNotice(sourceFeedback(record,t('answerSaved'))); },
     skip: async () => { project.questionIndex++; project.aiQuestion=''; await save(); renderQuestion(); },
     askAI: async () => { const result=await requestAI('interview'); if(result){project.aiQuestion=result.slice(0,2000); await save(); renderQuestion();} },
     voice: () => {
@@ -161,10 +209,10 @@
       try{r.start();$('voiceButton').textContent=t('stopVoice');}catch(_){recognition=null;toast(t('voiceFailed'));}
     },
     editAnswer: (id) => { const a=project.answers.find(a=>a.id===id); if(!a)return; editingAnswer=id;$('editQuestion').value=a.question;$('editAnswer').value=a.answer;$('editAnswerDialog').showModal(); },
-    deleteAnswer: async id => { if(!confirm(t('deleteConfirm')))return;project.answers=project.answers.filter(a=>a.id!==id);await save();renderAnswers(); },
+    deleteAnswer: async id => { if(!confirm(t('deleteConfirm')))return;project.answers=project.answers.filter(a=>a.id!==id);await save();renderAnswers();sourceNotice(t('sourceRemoved')); },
     addText: () => { $('materialForm').reset();$('materialForm').dataset.edit='';$('materialDialog').showModal(); },
     editMaterial: id => { const m=project.materials.find(m=>m.id===id);if(!m)return;$('materialName').value=m.name;$('materialContent').value=m.content;$('materialForm').dataset.edit=id;$('materialDialog').showModal(); },
-    deleteMaterial: async id => { if(!confirm(t('deleteConfirm')))return;project.materials=project.materials.filter(m=>m.id!==id);await save();renderMaterials(); },
+    deleteMaterial: async id => { if(!confirm(t('deleteConfirm')))return;project.materials=project.materials.filter(m=>m.id!==id);await save();renderMaterials();sourceNotice(t('sourceRemoved')); },
     importText: () => $('textFile').click(),
     writeAI: async () => { if(!project.answers.some(a=>a.include!==false)&&!project.materials.some(m=>m.include)){toast(t('needSources'));return;}const result=await requestAI('draft',$('nextChapterTitle').value);if(result)await addChapter(result,'ai'); },
     collect: async () => { if(!project.answers.some(a=>a.include!==false)&&!project.materials.some(m=>m.include)){toast(t('needSources'));return;}await addChapter(C.sourceDraft(project,locales[lang]),'source'); },
@@ -192,8 +240,8 @@
   $('projects').addEventListener('change',async()=>{const selectedId=$('projects').value;if(busy){$('projects').value=project.id;return;}await save();const selected=projects.find(p=>p.id===selectedId);if(!selected)return;project=structuredClone(selected);remember('mfh-active',project.id);step=0;$('reviewPanel').hidden=true;render();});
   $('scenes').addEventListener('change',async e=>{project.scene=e.target.value;project.questionIndex=0;project.aiQuestion='';await save();renderQuestion();});
   for(const [id,key] of [['bookTitle','title'],['person','person'],['reader','reader'],['target','target'],['answer','workingAnswer']]) $(id).addEventListener(id==='target'?'change':'input',()=>{project[key]=$(id).value;void save();});
-  $('materials').addEventListener('change',async e=>{const m=project.materials.find(m=>m.id===e.target.dataset.material);if(m){m.include=e.target.checked;await save();}});
-  $('answers').addEventListener('change',async e=>{const a=project.answers.find(a=>a.id===e.target.dataset.answerSource);if(a){a.include=e.target.checked;await save();}});
+  $('materials').addEventListener('change',async e=>{const m=project.materials.find(m=>m.id===e.target.dataset.material);if(m){m.include=e.target.checked;updateSourceInclusion(e.target);await save();}});
+  $('answers').addEventListener('change',async e=>{const a=project.answers.find(a=>a.id===e.target.dataset.answerSource);if(a){a.include=e.target.checked;updateSourceInclusion(e.target);await save();}});
   for(const [id,key] of [['editChapterTitle','title'],['chapterText','content']])$(id).addEventListener('input',()=>{const c=activeChapter();if(!c)return;c[key]=$(id).value;c.approved=false;c.updatedAt=new Date().toISOString();updateChapterBadge();void save();});
   $('chapters').addEventListener('change',async()=>{project.activeChapter=$('chapters').value;await save();$('reviewPanel').hidden=true;renderChapters();});
   for(const id of ['handoffTask','handoffInclude'])$(id).addEventListener('change',renderHandoff);
@@ -212,10 +260,21 @@
     catch(err){if(version===connectionVersion){$('connectionError').textContent=errorText(err.message);$('connectionError').hidden=false;}}
     finally{$('connectSubmit').disabled=false;$('connectSubmit').textContent=t('connectButton');}
   });
-  $('materialForm').addEventListener('submit',async e=>{e.preventDefault();const name=$('materialName').value.trim(),content=$('materialContent').value.trim();if(!name||!content)return;const existing=project.materials.find(m=>m.id===$('materialForm').dataset.edit);if(existing){existing.name=name;existing.content=content;}else project.materials.push({id:C.uuid(),sourceId:'M'+project.nextMaterial++,name,content,include:false});await save();renderMaterials();$('materialDialog').close();});
-  $('editAnswerForm').addEventListener('submit',async e=>{e.preventDefault();const a=project.answers.find(a=>a.id===editingAnswer);if(a){a.question=$('editQuestion').value;a.answer=$('editAnswer').value;await save();renderAnswers();}$('editAnswerDialog').close();});
+  $('materialForm').addEventListener('submit',async e=>{
+    e.preventDefault();const name=$('materialName').value.trim(),content=$('materialContent').value.trim();if(!name||!content)return;
+    let record=project.materials.find(m=>m.id===$('materialForm').dataset.edit);
+    if(record){record.name=name;record.content=content;}else{record={id:C.uuid(),sourceId:'M'+project.nextMaterial++,name,content,include:false};project.materials.push(record);}
+    await save();renderMaterials();$('materialDialog').close();focusSource('materials',record.id);sourceNotice(sourceFeedback(record,t('sourceUpdated')));
+  });
+  $('editAnswerForm').addEventListener('submit',async e=>{
+    e.preventDefault();const a=project.answers.find(a=>a.id===editingAnswer);
+    if(a){a.question=$('editQuestion').value;a.answer=$('editAnswer').value;await save();renderAnswers();}
+    $('editAnswerDialog').close();focusSource('answers',editingAnswer);if(a)sourceNotice(sourceFeedback(a,t('sourceUpdated')));
+  });
   $('textFile').addEventListener('change',async()=>{
-    for(const file of $('textFile').files){if(!/\.(txt|md|csv|json)$/i.test(file.name)){toast(t('unsupportedFile'));continue;}if(file.size>1024*1024){toast(t('tooLarge'));continue;}project.materials.push({id:C.uuid(),sourceId:'M'+project.nextMaterial++,name:file.name,content:await file.text(),include:false});}await save();renderMaterials();$('textFile').value='';
+    let added=false, outsideSearch=false, rejected=false;
+    for(const file of $('textFile').files){if(!/\.(txt|md|csv|json)$/i.test(file.name)){rejected=true;toast(t('unsupportedFile'));continue;}if(file.size>1024*1024){rejected=true;toast(t('tooLarge'));continue;}const record={id:C.uuid(),sourceId:'M'+project.nextMaterial++,name:file.name,content:await file.text(),include:false};project.materials.push(record);added=true;outsideSearch ||= !matchesSource(record);}
+    await save();renderMaterials();$('textFile').value='';if(added&&!rejected)sourceNotice(t(outsideSearch?'sourceOutsideSearch':'sourceUpdated'));
   });
   $('backupFile').addEventListener('change',async()=>{const file=$('backupFile').files[0];if(!file)return;try{if(file.size>20*1024*1024)throw new Error('TOO_LARGE');const restored=C.validateProject(JSON.parse(await file.text()));project=restored;remember('mfh-active',project.id);await save();step=0;render();toast(t('restoreDone'));}catch(err){toast(errorText(err.message==='TOO_LARGE'?'TOO_LARGE':'INVALID_PROJECT'));}$('backupFile').value='';});
   try {

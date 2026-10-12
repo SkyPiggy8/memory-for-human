@@ -557,3 +557,25 @@ window.MFH_QUESTIONS = {
     ]
   }
 };
+
+Object.assign(window.MFH_LOCALES.zh, {
+  findSources:'查找已保存的回忆',sourceSearchPlaceholder:'搜索文字、问题、材料名，或 A7 / M3',
+  sourceSearchHint:'搜索当前回忆录的完整内容。筛选只改变显示，不改变哪些来源交给 AI。',
+  clearSourceSearch:'清除搜索',sourceResults:'显示 {shown} / {total} 条来源',
+  sourceIncluded:'已纳入 AI',sourceExcluded:'未纳入 AI',sourceNoMatches:'这里没有匹配项。试试其他词，或清除搜索。',
+  sourceOutsideSearch:'列表已更新。有条目不符合当前搜索，清除搜索即可查看。',sourceUpdated:'列表已更新。',sourceRemoved:'条目已移除，来源编号不会重新排列。'
+});
+Object.assign(window.MFH_LOCALES.en, {
+  findSources:'Find your saved memories',sourceSearchPlaceholder:'Search text, questions, material names, or A7 / M3',
+  sourceSearchHint:'Search the full text of this memoir. Filtering only changes what you see, not which sources go to AI.',
+  clearSourceSearch:'Clear search',sourceResults:'Showing {shown} / {total} sources',
+  sourceIncluded:'Included for AI',sourceExcluded:'Excluded from AI',sourceNoMatches:'No matches here. Try another word or clear the search.',
+  sourceOutsideSearch:'List updated. Some items do not match this search; clear it to see them.',sourceUpdated:'List updated.',sourceRemoved:'Item removed. Source IDs have not been renumbered.'
+});
+Object.assign(window.MFH_LOCALES.es, {
+  findSources:'Buscar recuerdos guardados',sourceSearchPlaceholder:'Buscar texto, preguntas, materiales o A7 / M3',
+  sourceSearchHint:'Busca en todo el texto de estas memorias. Filtrar solo cambia lo que ves, no las fuentes que se envían a la IA.',
+  clearSourceSearch:'Borrar búsqueda',sourceResults:'Se muestran {shown} / {total} fuentes',
+  sourceIncluded:'Incluido para la IA',sourceExcluded:'Excluido de la IA',sourceNoMatches:'No hay coincidencias aquí. Prueba otra palabra o borra la búsqueda.',
+  sourceOutsideSearch:'Lista actualizada. Hay elementos que no coinciden con esta búsqueda; bórrala para verlos.',sourceUpdated:'Lista actualizada.',sourceRemoved:'Elemento eliminado. Los identificadores de las fuentes no se han renumerado.'
+});
