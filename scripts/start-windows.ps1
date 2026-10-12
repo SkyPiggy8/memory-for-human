@@ -45,8 +45,8 @@ if ($NoOpen) { & $taskNode (Join-Path $taskProjectRoot 'server.mjs') }
 else { & $taskNode (Join-Path $taskProjectRoot 'server.mjs') --open }
 exit $LASTEXITCODE
 } catch {
-  Write-Host '暂时没能打开回忆录。请把仓库和 AI-HANDOFF.md 交给自己的 AI 帮忙。'
-  Write-Host 'Could not start. Ask your AI to read AI-HANDOFF.en.md and help you.'
-  Write-Host 'No se pudo iniciar. Pide a tu IA que lea AI-HANDOFF.es.md y te ayude.'
+  Write-Host '暂时没能打开回忆录。请把仓库和 docs/ai-handoff.md 交给自己的 AI 帮忙。'
+  Write-Host 'Could not start. Ask your AI to read docs/translations/AI-HANDOFF.en.md and help you.'
+  Write-Host 'No se pudo iniciar. Pide a tu IA que lea docs/translations/AI-HANDOFF.es.md y te ayude.'
   exit 1
 }

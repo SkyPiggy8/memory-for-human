@@ -83,8 +83,8 @@ export function createApp({root=ROOT, fetchImpl=fetch, initialConfig=null, timeo
       }
       if(!['GET','HEAD'].includes(req.method))throw new AppError('METHOD',405);
       let relative;try{relative=decodeURIComponent(pathname).replace(/^\/+/, '')||'index.html';}catch(_){throw new AppError('NOT_FOUND',404);}
-      const rootFiles=['index.html','README.md','README.en.md','README.es.md','AI-HANDOFF.md','AI-HANDOFF.en.md','AI-HANDOFF.es.md','AGENTS.md','THIRD_PARTY_NOTICES.md','LICENSE','CONTRIBUTING.md'];
-      if(relative.includes('\\')||relative.split('/').some(p=>p==='..'||p.startsWith('.'))||relative.endsWith('.local.json')||!(rootFiles.includes(relative)||/^(app|assets|docs|preview|templates|prompts|examples)\//.test(relative)))throw new AppError('NOT_FOUND',404);
+      const rootFiles=['index.html','README.md','AGENTS.md','LICENSE'];
+      if(relative.includes('\\')||relative.split('/').some(p=>p==='..'||p.startsWith('.'))||relative.endsWith('.local.json')||!(rootFiles.includes(relative)||/^(app|assets|docs|preview)\//.test(relative)))throw new AppError('NOT_FOUND',404);
       const absolute=path.resolve(root,relative);if(!absolute.startsWith(path.resolve(root)+path.sep))throw new AppError('NOT_FOUND',404);
       const content=await fs.readFile(absolute);const mime=types[path.extname(absolute)]||'application/octet-stream';
       const headers={'Content-Type':mime,'X-Content-Type-Options':'nosniff','Cache-Control':'no-cache','Referrer-Policy':'no-referrer'};

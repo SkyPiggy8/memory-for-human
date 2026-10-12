@@ -5,7 +5,8 @@ async function setup(t, fetchImpl){const app=createApp({fetchImpl});await new Pr
 test('local server serves the actual app but blocks foreign origins and secret/config paths',async t=>{
   const s=await setup(t,()=>{throw new Error('Should not call a provider');});
   const home=await fetch(s.base);assert.equal(home.status,200);assert((await home.text()).includes('app/app.js'));assert(home.headers.get('content-security-policy').includes("frame-ancestors 'none'"));
-  for(const p of ['/user-config.local.json','/.env','/.git/config','/server.mjs','/app/%2e%2e/user-config.local.json'])assert.equal((await fetch(s.base+p)).status,404);
+  for(const p of ['/docs/guide.md','/docs/technical.md','/docs/templates.md','/docs/ai-handoff.md','/docs/translations/README.en.md','/docs/translations/README.es.md','/preview/guide.html','/preview/guide.en.html','/preview/guide.es.html'])assert.equal((await fetch(s.base+p)).status,200,p);
+  for(const p of ['/user-config.local.json','/docs/user-config.local.json','/docs/translations/user-config.local.json','/.env','/.git/config','/server.mjs','/app/%2e%2e/user-config.local.json'])assert.equal((await fetch(s.base+p)).status,404);
   assert.equal((await fetch(s.base+'/api/session',{headers:{Origin:'https://foreign.example'}})).status,403);
   assert.equal((await s.post('/api/disconnect',{}, {'X-MFH-Session':'wrong'})).status,403);
   assert.equal((await s.post('/api/disconnect',{}, {Origin:'https://foreign.example'})).status,403);

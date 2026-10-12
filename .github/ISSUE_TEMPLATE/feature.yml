@@ -4,7 +4,7 @@ title: "[建议] "
 body:
   - type: markdown
     attributes:
-      value: "先看看 docs/roadmap.md，再说你希望怎样用。描述事情就好，不用附私人原件。"
+      value: "先看看 docs/development.md#roadmap，再说你希望怎样用。描述事情就好，不用附私人原件。"
   - type: textarea
     id: scenario
     attributes:

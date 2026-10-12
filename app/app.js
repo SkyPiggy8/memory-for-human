@@ -29,7 +29,7 @@
     $('projects').setAttribute('aria-label', t('books')); $('chapters').setAttribute('aria-label', t('chapters')); $('handoffText').setAttribute('aria-label', t('handoff'));$('language').setAttribute('aria-label',t('language'));document.querySelector('.steps').setAttribute('aria-label',t('myBook'));
     $('checklist').replaceChildren(...t('checklist').map(s => node('li', s)));
     $('readmeLink').href = `preview/README${lang === 'zh' ? '' : '.' + lang}.html`;
-    $('productionLink').href = lang === 'zh' ? 'preview/docs/production-checklist.html' : `preview/docs/guide.${lang}.html`;
+    $('productionLink').href = lang === 'zh' ? 'preview/guide.html#production' : `preview/guide.${lang}.html#usage`;
   }
   function renderProjects() {
     const selected = project.id;
