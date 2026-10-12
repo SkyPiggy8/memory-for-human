@@ -99,9 +99,11 @@
   async function inspectExportChapter(id) {
     if (busy) { toast(t('busy')); return; }
     if (!project.chapters.some(c => c.id === id)) return;
-    project.activeChapter = id; await save(); renderChapters(); $('reviewPanel').hidden = true;
+    project.activeChapter = id; renderChapters(); $('reviewPanel').hidden = true;
     exportReviewProject = project.id; showStep(2);
     $('chapterEditor').focus({preventScroll:true}); $('chapterEditor').scrollIntoView({behavior:'auto',block:'start'});
+    // Finish navigation before saving, so completion cannot override a later user action.
+    await save();
   }
   function renderConnection() {
     $('connectionStatus').textContent = connection ? `${t('connected')} · ${C.providers[connection.provider]?.name || ''}` : t('offline'); $('connectionDot').classList.toggle('on', !!connection); $('connectionButton').textContent = t('connect');
