@@ -557,3 +557,28 @@ window.MFH_QUESTIONS = {
     ]
   }
 };
+
+Object.assign(window.MFH_LOCALES.zh, {
+  exportOverview:'稿件概览',exportCounts:'正文 {total} 章 · 已审阅 {reviewed} · 草稿 {drafts}',
+  exportEmptyNote:'还没有章节。完整文字备份仍可保存已有回答、材料和未完成的文字。',
+  exportDraftNote:'草稿也可以直接导出。若准备交给读者，可以先逐章核对。',
+  exportReviewedNote:'所有章节均已标为本人审阅。修改正文或标题后，需要重新确认。',
+  exportCheckNext:'检查下一章草稿',exportDirectory:'查看章节与审阅状态',exportInspect:'检查正文',exportReturn:'← 返回导出概览',
+  exportScope:'正文导出与打印包含全部章节；完整文字备份还包含回答、材料和未完成的文字。'
+});
+Object.assign(window.MFH_LOCALES.en, {
+  exportOverview:'Manuscript overview',exportCounts:'Chapters: {total} · Reviewed: {reviewed} · Drafts: {drafts}',
+  exportEmptyNote:'There are no chapters yet. A full text backup can still keep your answers, materials, and unfinished writing.',
+  exportDraftNote:'You can export drafts too. Before sharing with readers, you may want to check each chapter.',
+  exportReviewedNote:'All chapters are marked as reviewed by the narrator. Editing their text or title will require a fresh review.',
+  exportCheckNext:'Check the next draft',exportDirectory:'View chapters and review status',exportInspect:'Check chapter',exportReturn:'← Back to export overview',
+  exportScope:'Text exports and printing include every chapter. A full text backup also keeps answers, materials, and unfinished writing.'
+});
+Object.assign(window.MFH_LOCALES.es, {
+  exportOverview:'Vista del manuscrito',exportCounts:'Capítulos: {total} · Revisados: {reviewed} · Borradores: {drafts}',
+  exportEmptyNote:'Todavía no hay capítulos. La copia completa puede guardar las respuestas, los materiales y los textos sin terminar.',
+  exportDraftNote:'También puedes exportar borradores. Antes de compartirlos, puedes comprobar cada capítulo.',
+  exportReviewedNote:'Todos los capítulos están marcados como revisados por quien cuenta la historia. Si cambias el texto o el título, habrá que revisarlos de nuevo.',
+  exportCheckNext:'Comprobar el siguiente borrador',exportDirectory:'Ver capítulos y estado de revisión',exportInspect:'Comprobar texto',exportReturn:'← Volver a la vista de exportación',
+  exportScope:'La exportación de texto y la impresión incluyen todos los capítulos. La copia completa también conserva respuestas, materiales y textos sin terminar.'
+});

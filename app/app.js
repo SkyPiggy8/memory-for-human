@@ -63,11 +63,45 @@
   function renderChapters() {
     const c = activeChapter(); $('chapters').replaceChildren(...project.chapters.map(c => { const o = node('option', c.title || t('chapter')); o.value = c.id; return o; }));
     $('chapters').value = project.activeChapter; $('chapters').disabled = !project.chapters.length; $('noChapter').hidden = !!c; $('chapterEditor').hidden = !c;
-    if (c) { $('editChapterTitle').value = c.title; $('chapterText').value = c.content; updateChapterBadge(); }
+    if (c) { $('editChapterTitle').value = c.title; $('chapterText').value = c.content; }
+    updateChapterBadge();
   }
   function updateChapterBadge() {
+    renderExportOverview();
     const c = activeChapter(); if (!c) return;
     $('chapterStatus').textContent = t(c.approved ? 'reviewed' : 'draftStatus'); $('approvalButton').textContent = t(c.approved ? 'unapprove' : 'approve'); $('chapterOrigin').textContent = t({ai:'originAI',source:'originSource',manual:'originManual'}[c.origin]);
+  }
+  let exportReviewProject = '', exportOverviewProject = '';
+  function renderExportOverview() {
+    const chapters = project.chapters, drafts = chapters.filter(c => !c.approved);
+    if (exportOverviewProject !== project.id) { exportOverviewProject = project.id; $('exportDirectory').open = false; }
+    $('exportBookTitle').textContent = project.title || t('untitled');
+    $('exportCounts').textContent = t('exportCounts').replace('{total}', chapters.length).replace('{reviewed}', chapters.length - drafts.length).replace('{drafts}', drafts.length);
+    $('exportOverview').dataset.state = !chapters.length ? 'empty' : drafts.length ? 'draft' : 'reviewed';
+    $('exportReviewNote').textContent = t(!chapters.length ? 'exportEmptyNote' : drafts.length ? 'exportDraftNote' : 'exportReviewedNote');
+    $('checkNextDraft').hidden = !drafts.length; $('checkNextDraft').dataset.id = drafts[0]?.id || '';
+    $('exportDirectory').hidden = !chapters.length;
+    // The hidden overview needs current counts, but not a rebuilt directory on every keystroke.
+    if (step !== 3) return;
+    $('exportChapterList').replaceChildren(...chapters.map((chapter, index) => {
+      const row = node('li', undefined, 'manuscript-chapter'), number = node('span', String(index + 1).padStart(2, '0'), 'manuscript-number');
+      number.setAttribute('aria-hidden', 'true');
+      const text = node('div', undefined, 'manuscript-chapter-text');
+      text.append(node('span', chapter.title || t('chapter'), 'manuscript-chapter-title'), node('span', t(chapter.approved ? 'reviewed' : 'draftStatus'), 'manuscript-chapter-state'));
+      row.dataset.reviewed = String(chapter.approved); row.append(number, text);
+      if (!chapter.approved) {
+        const button = node('button', t('exportInspect'), 'quiet small'); button.dataset.action = 'inspectExportChapter'; button.dataset.id = chapter.id;
+        button.setAttribute('aria-label', `${t('exportInspect')}: ${chapter.title || t('chapter')}`); row.append(button);
+      }
+      return row;
+    }));
+  }
+  async function inspectExportChapter(id) {
+    if (busy) { toast(t('busy')); return; }
+    if (!project.chapters.some(c => c.id === id)) return;
+    project.activeChapter = id; await save(); renderChapters(); $('reviewPanel').hidden = true;
+    exportReviewProject = project.id; showStep(2);
+    $('chapterEditor').focus({preventScroll:true}); $('chapterEditor').scrollIntoView({behavior:'auto',block:'start'});
   }
   function renderConnection() {
     $('connectionStatus').textContent = connection ? `${t('connected')} · ${C.providers[connection.provider]?.name || ''}` : t('offline'); $('connectionDot').classList.toggle('on', !!connection); $('connectionButton').textContent = t('connect');
@@ -93,6 +127,9 @@
   }
   function showStep(value, scroll = true) {
     step = Math.max(0, Math.min(3, value)); showMode('workspace');
+    if (step !== 2) exportReviewProject = '';
+    $('returnToExport').hidden = step !== 2 || exportReviewProject !== project.id;
+    if (step === 3) renderExportOverview();
     document.querySelectorAll('[data-panel]').forEach(e => e.hidden = Number(e.dataset.panel) !== step);
     document.querySelectorAll('[data-step]').forEach(e => { e.classList.toggle('active', Number(e.dataset.step) === step); e.setAttribute('aria-current', Number(e.dataset.step) === step ? 'step' : 'false'); });
     $('welcome').hidden = step !== 0 || !!project.title || !!project.answers.length; $('backButton').hidden = step === 0; $('nextButton').hidden = step === 3;
@@ -146,6 +183,8 @@
     project.chapters.forEach(c => { const s = node('section', undefined, 'print-chapter'); s.append(node('h2', c.title || t('chapter')), node('p', t(c.approved?'reviewed':'draftStatus'),'hint')); for (const paragraph of c.content.split(/\n\s*\n/)) s.append(node('p', paragraph)); children.push(s); }); $('printView').replaceChildren(...children); window.print();
   }
   const actions = {
+    inspectExportChapter,
+    returnToExport: () => { showStep(3); $('exportOverview').focus({preventScroll:true}); $('exportOverview').scrollIntoView({behavior:'auto',block:'start'}); },
     workspace: () => showMode('workspace'), help: () => showMode('help'), handoff: () => showMode('handoff'), start: () => { $('welcome').hidden = true; $('bookTitle').focus(); },
     next: () => showStep(step + 1), back: () => showStep(step - 1),
     new: async () => { if(busy)return; await save(); project=C.newProject(lang); remember('mfh-active',project.id); step=0; await save(); render(); },

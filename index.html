@@ -72,7 +72,8 @@
           <p class="notice" data-i18n="sendNotice"></p>
           <div class="chapter-toolbar"><select id="chapters" aria-label="Chapter"></select><button class="small" data-action="newChapter" data-i18n="newChapter"></button></div>
           <p id="noChapter" class="empty" data-i18n="noChapters"></p>
-          <div id="chapterEditor" hidden>
+          <div id="chapterEditor" tabindex="-1" hidden>
+            <button id="returnToExport" class="quiet small manuscript-return" data-action="returnToExport" data-i18n="exportReturn" hidden></button>
             <div class="row"><span class="badge" id="chapterStatus"></span><span class="hint" id="chapterOrigin"></span></div>
             <div class="field"><label for="editChapterTitle" data-i18n="chapterTitle"></label><input id="editChapterTitle" maxlength="300"></div>
             <div class="field"><label for="chapterText" data-i18n="draftLabel"></label><textarea id="chapterText" class="chapter-text"></textarea></div>
@@ -82,6 +83,18 @@
         </section>
         <section class="card" data-panel="3" hidden>
           <div class="section-head"><h2 data-i18n="exportTitle"></h2><p class="hint" data-i18n="exportHint"></p></div>
+          <section id="exportOverview" class="manuscript-overview" tabindex="-1" aria-labelledby="exportOverviewHeading">
+            <h3 id="exportOverviewHeading" class="manuscript-eyebrow" data-i18n="exportOverview"></h3>
+            <p id="exportBookTitle" class="manuscript-title"></p>
+            <p id="exportCounts" class="manuscript-counts" role="status" aria-live="polite" aria-atomic="true"></p>
+            <p id="exportReviewNote" class="manuscript-note"></p>
+            <button id="checkNextDraft" class="manuscript-check" data-action="inspectExportChapter" data-i18n="exportCheckNext" hidden></button>
+            <details id="exportDirectory" class="manuscript-directory" hidden>
+              <summary><span id="exportDirectoryLabel" data-i18n="exportDirectory"></span><span class="manuscript-chevron" aria-hidden="true">›</span></summary>
+              <ol id="exportChapterList" class="manuscript-chapters" tabindex="0" aria-labelledby="exportDirectoryLabel"></ol>
+            </details>
+            <p class="manuscript-scope" data-i18n="exportScope"></p>
+          </section>
           <div class="export-option"><div><h3 data-i18n="backup"></h3><p class="hint" data-i18n="backupHint"></p></div><button class="primary" data-action="backup" data-i18n="backup"></button></div>
           <div class="export-option"><div><h3 data-i18n="restore"></h3><p class="hint" data-i18n="restoreHint"></p></div><button data-action="restore" data-i18n="restore"></button></div>
           <div class="export-option"><div><h3 data-i18n="exportMD"></h3><p class="hint" data-i18n="exportMDHint"></p></div><button data-action="exportMD" data-i18n="exportMD"></button></div>
