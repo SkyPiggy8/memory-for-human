@@ -61,7 +61,13 @@
           <div class="field"><label for="answer" data-i18n="answerLabel"></label><textarea id="answer" class="answer-text" data-placeholder="answerPlaceholder"></textarea></div>
           <div class="row spaced"><button class="primary" data-action="saveAnswer" data-i18n="saveAnswer"></button><button data-action="skip" data-i18n="skip"></button><button data-action="askAI" data-ai data-i18n="askAI"></button><button class="quiet" id="voiceButton" data-action="voice" data-i18n="voice"></button></div>
           <p class="hint" data-i18n="voiceNote"></p>
-          <div class="subsection"><h3 data-i18n="memories"></h3><div id="answers"></div></div>
+          <div class="subsection" id="sourceLibrary">
+            <label for="sourceSearch" class="source-search-label" data-i18n="findSources"></label>
+            <div class="source-search-row"><input id="sourceSearch" type="search" autocomplete="off" data-placeholder="sourceSearchPlaceholder" aria-controls="answers materials" aria-describedby="sourceSearchHint sourceSearchStatus"><button id="clearSourceSearch" data-i18n="clearSourceSearch" disabled></button></div>
+            <p class="hint" id="sourceSearchHint" data-i18n="sourceSearchHint"></p>
+            <p class="source-search-status" id="sourceSearchStatus" role="status" aria-live="polite" aria-atomic="true"></p>
+            <h3 class="source-group-title" data-i18n="memories"></h3><div id="answers"></div>
+          </div>
           <div class="subsection"><h3 data-i18n="materials"></h3><p class="hint" data-i18n="materialHint"></p><div class="row"><button data-action="addText" data-i18n="addText"></button><button data-action="importText" data-i18n="importText"></button></div><p class="hint" data-i18n="fileHint"></p><div id="materials"></div></div>
           <p class="notice" data-i18n="sendNotice"></p>
         </section>
