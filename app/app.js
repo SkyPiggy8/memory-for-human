@@ -63,12 +63,48 @@
   function renderChapters() {
     const c = activeChapter(); $('chapters').replaceChildren(...project.chapters.map(c => { const o = node('option', c.title || t('chapter')); o.value = c.id; return o; }));
     $('chapters').value = project.activeChapter; $('chapters').disabled = !project.chapters.length; $('noChapter').hidden = !!c; $('chapterEditor').hidden = !c;
+    $('chapterFinderButton').disabled = busy || !project.chapters.length;
     if (c) { $('editChapterTitle').value = c.title; $('chapterText').value = c.content; updateChapterBadge(); }
   }
   function updateChapterBadge() {
     const c = activeChapter(); if (!c) return;
     $('chapterStatus').textContent = t(c.approved ? 'reviewed' : 'draftStatus'); $('approvalButton').textContent = t(c.approved ? 'unapprove' : 'approve'); $('chapterOrigin').textContent = t({ai:'originAI',source:'originSource',manual:'originManual'}[c.origin]);
   }
+  const chapterSearchText = text => text.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+  function renderChapterFinder() {
+    const query = $('chapterQuery').value.trim(), needle = chapterSearchText(query);
+    const rows = project.chapters.flatMap((chapter, index) => {
+      if (needle && !chapterSearchText(chapter.title + '\n' + chapter.content).includes(needle)) return [];
+      const row = node('li'), button = node('button', undefined, 'finder-chapter');
+      button.dataset.action = 'chooseChapter'; button.dataset.id = chapter.id;
+      const current = chapter.id === project.activeChapter;
+      if (current) button.setAttribute('aria-current', 'true');
+      const number = node('span', String(index + 1).padStart(2, '0'), 'finder-number');
+      const text = node('span', undefined, 'finder-text');
+      text.append(node('span', chapter.title || t('chapter'), 'finder-title'));
+      const content = chapter.content.replace(/\s+/g, ' ').trim();
+      const match = query ? content.toLowerCase().indexOf(query.toLowerCase()) : -1, start = Math.max(0, match - 36);
+      const excerpt = (start ? '…' : '') + content.slice(start, start + 150) + (content.length > start + 150 ? '…' : '');
+      text.append(node('span', excerpt, 'finder-excerpt'), node('span', [current ? t('currentChapter') : '', t(chapter.approved ? 'reviewed' : 'draftStatus')].filter(Boolean).join(' · '), 'finder-state'));
+      button.append(number, text); row.append(button); return [row];
+    });
+    $('chapterMatchesList').replaceChildren(...rows); $('noChapterMatches').hidden = !!rows.length;
+    $('chapterMatches').textContent = t('chapterMatches').replace('{shown}', rows.length).replace('{total}', project.chapters.length);
+    $('clearChapterQuery').disabled = !$('chapterQuery').value;
+  }
+  function findChapter() {
+    if (busy || !project.chapters.length || $('chapterFinder').open) return;
+    $('chapterQuery').value = ''; renderChapterFinder(); $('chapterFinder').showModal(); $('chapterQuery').focus();
+  }
+  async function chooseChapter(id) {
+    if (busy || !$('chapterFinder').open || !project.chapters.some(c => c.id === id)) return;
+    project.activeChapter = id; $('chapterFinder').close(); renderChapters(); $('reviewPanel').hidden = true;
+    $('editChapterTitle').focus({preventScroll:true}); $('editChapterTitle').scrollIntoView({behavior:'auto',block:'center'});
+    // Selection is immediate; a late save must not restore an older view or focus.
+    await save();
+  }
+  $('chapterQuery').addEventListener('input', renderChapterFinder);
+  $('clearChapterQuery').addEventListener('click', () => { $('chapterQuery').value = ''; renderChapterFinder(); $('chapterQuery').focus(); });
   function renderConnection() {
     $('connectionStatus').textContent = connection ? `${t('connected')} · ${C.providers[connection.provider]?.name || ''}` : t('offline'); $('connectionDot').classList.toggle('on', !!connection); $('connectionButton').textContent = t('connect');
   }
@@ -115,11 +151,11 @@
   async function requestAI(kind, extra = '') {
     if (!connection) { toast(t('needConnect')); return null; }
     if (busy) return null;
-    busy = true; $('busyLine').hidden = false; document.querySelectorAll('[data-ai]').forEach(b => b.disabled = true);$('chapters').disabled=true;
+    busy = true; $('busyLine').hidden = false; document.querySelectorAll('[data-ai]').forEach(b => b.disabled = true);$('chapters').disabled=true;$('chapterFinderButton').disabled=true;
     const snapshot = structuredClone(project), projectId = project.id;
     try { const prompt = C.taskPrompt(kind, {...snapshot,language:lang}, extra); const result = await api('/api/generate', {...prompt,kind}); if (project.id !== projectId) return null; if(result.truncated){toast(t('outputTruncated'));return result.text+'\n\n['+t('outputTruncated')+']';}return result.text; }
     catch (e) { toast(errorText(e.message)); return null; }
-    finally { busy = false; $('busyLine').hidden = true; document.querySelectorAll('[data-ai]').forEach(b => b.disabled = false);$('chapters').disabled=!project.chapters.length; }
+    finally { busy = false; $('busyLine').hidden = true; document.querySelectorAll('[data-ai]').forEach(b => b.disabled = false);$('chapters').disabled=!project.chapters.length;$('chapterFinderButton').disabled=!project.chapters.length; }
   }
   async function addChapter(content, origin = 'manual', title = '') {
     if (!content.trim()) { toast(t('invalidResult')); return; }
@@ -146,6 +182,7 @@
     project.chapters.forEach(c => { const s = node('section', undefined, 'print-chapter'); s.append(node('h2', c.title || t('chapter')), node('p', t(c.approved?'reviewed':'draftStatus'),'hint')); for (const paragraph of c.content.split(/\n\s*\n/)) s.append(node('p', paragraph)); children.push(s); }); $('printView').replaceChildren(...children); window.print();
   }
   const actions = {
+    findChapter, chooseChapter,
     workspace: () => showMode('workspace'), help: () => showMode('help'), handoff: () => showMode('handoff'), start: () => { $('welcome').hidden = true; $('bookTitle').focus(); },
     next: () => showStep(step + 1), back: () => showStep(step - 1),
     new: async () => { if(busy)return; await save(); project=C.newProject(lang); remember('mfh-active',project.id); step=0; await save(); render(); },

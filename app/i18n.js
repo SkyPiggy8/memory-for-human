@@ -557,3 +557,16 @@ window.MFH_QUESTIONS = {
     ]
   }
 };
+
+Object.assign(window.MFH_LOCALES.zh, {
+  findChapter:'查找章节',chapterContents:'这本回忆录的目录',chapterFinderHint:'凭标题或记得的一句话查找正文。选择章节继续写作，原有文字与审阅状态不会改变。',
+  chapterQueryLabel:'搜索章节',chapterQueryPlaceholder:'输入标题或正文中的文字',clearChapterQuery:'清除',chapterMatches:'找到 {shown} / {total} 章',noChapterMatches:'没有找到章节。换几个字，或清除搜索查看全部目录。',currentChapter:'当前章节'
+});
+Object.assign(window.MFH_LOCALES.en, {
+  findChapter:'Find a chapter',chapterContents:'Contents of this memoir',chapterFinderHint:'Search by title or a phrase you remember. Choose a chapter to keep writing; its text and review status stay unchanged.',
+  chapterQueryLabel:'Search chapters',chapterQueryPlaceholder:'Type a title or words from the chapter',clearChapterQuery:'Clear',chapterMatches:'Found {shown} / {total} chapters',noChapterMatches:'No chapters found. Try different words or clear the search to see all chapters.',currentChapter:'Current chapter'
+});
+Object.assign(window.MFH_LOCALES.es, {
+  findChapter:'Buscar un capítulo',chapterContents:'Índice de estas memorias',chapterFinderHint:'Busca por título o por una frase que recuerdes. Elige un capítulo para seguir escribiendo; el texto y su estado de revisión no cambian.',
+  chapterQueryLabel:'Buscar capítulos',chapterQueryPlaceholder:'Escribe un título o palabras del capítulo',clearChapterQuery:'Borrar',chapterMatches:'Se encontraron {shown} / {total} capítulos',noChapterMatches:'No se encontraron capítulos. Prueba otras palabras o borra la búsqueda para verlos todos.',currentChapter:'Capítulo actual'
+});

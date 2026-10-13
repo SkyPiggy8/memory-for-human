@@ -6,6 +6,7 @@
   <meta name="description" content="Memory for Human — a local memoir workspace, guided by your own AI.">
   <title>Memory for Human</title>
   <link rel="stylesheet" href="app/styles.css">
+  <link rel="stylesheet" href="app/chapter-finder.css">
   <script src="app/core.js" defer></script>
   <script src="app/i18n.js" defer></script>
   <script src="app/app.js" defer></script>
@@ -70,7 +71,7 @@
           <div class="field"><label for="nextChapterTitle" data-i18n="chapterTitle"></label><input id="nextChapterTitle" maxlength="300" data-placeholder="chapterPlaceholder"></div>
           <div class="row spaced"><button class="primary" data-action="writeAI" data-ai data-i18n="writeAI"></button><button data-action="collect" data-i18n="collect"></button><button data-action="pasteDraft" data-i18n="pasteDraft"></button></div>
           <p class="notice" data-i18n="sendNotice"></p>
-          <div class="chapter-toolbar"><select id="chapters" aria-label="Chapter"></select><button class="small" data-action="newChapter" data-i18n="newChapter"></button></div>
+          <div class="chapter-toolbar"><select id="chapters" aria-label="Chapter"></select><button id="chapterFinderButton" class="small" data-action="findChapter" data-i18n="findChapter" disabled></button><button class="small" data-action="newChapter" data-i18n="newChapter"></button></div>
           <p id="noChapter" class="empty" data-i18n="noChapters"></p>
           <div id="chapterEditor" hidden>
             <div class="row"><span class="badge" id="chapterStatus"></span><span class="hint" id="chapterOrigin"></span></div>
@@ -125,6 +126,15 @@
   </dialog>
   <dialog id="materialDialog"><div class="dialog-head"><h2 data-i18n="addText"></h2><button class="quiet small" data-close="materialDialog" data-i18n="close"></button></div><form id="materialForm"><div class="field"><label for="materialName" data-i18n="materialName"></label><input id="materialName" maxlength="300" required></div><div class="field"><label for="materialContent" data-i18n="materialContent"></label><textarea id="materialContent" rows="10" required></textarea></div><button class="primary spaced" data-i18n="add"></button></form></dialog>
   <dialog id="editAnswerDialog"><div class="dialog-head"><h2 data-i18n="edit"></h2><button class="quiet small" data-close="editAnswerDialog" data-i18n="close"></button></div><form id="editAnswerForm"><div class="field"><label for="editQuestion" data-i18n="question"></label><textarea id="editQuestion" rows="2"></textarea></div><div class="field"><label for="editAnswer" data-i18n="answerLabel"></label><textarea id="editAnswer" rows="10"></textarea></div><button class="primary spaced" data-i18n="saveAnswer"></button></form></dialog>
+  <dialog id="chapterFinder" class="chapter-finder" aria-labelledby="chapterFinderTitle" aria-describedby="chapterFinderHint">
+    <div class="dialog-head"><div><p class="finder-eyebrow" data-i18n="chapterContents"></p><h2 id="chapterFinderTitle" data-i18n="findChapter"></h2></div><button class="quiet small" data-close="chapterFinder" data-i18n="close"></button></div>
+    <p id="chapterFinderHint" class="hint" data-i18n="chapterFinderHint"></p>
+    <label class="finder-label" for="chapterQuery" data-i18n="chapterQueryLabel"></label>
+    <div class="finder-search"><input id="chapterQuery" type="search" autocomplete="off" data-placeholder="chapterQueryPlaceholder"><button id="clearChapterQuery" class="quiet small" data-i18n="clearChapterQuery"></button></div>
+    <p id="chapterMatches" class="finder-count" role="status" aria-live="polite" aria-atomic="true"></p>
+    <ol id="chapterMatchesList" class="finder-list"></ol>
+    <p id="noChapterMatches" class="empty" data-i18n="noChapterMatches" hidden></p>
+  </dialog>
   <input type="file" id="textFile" accept=".txt,.md,.csv,.json" multiple hidden>
   <input type="file" id="backupFile" accept=".json" hidden>
   <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>

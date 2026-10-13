@@ -1,0 +1,17 @@
+/* Searchable contents, with the manuscript order kept intact. */
+dialog.chapter-finder{width:min(780px,calc(100vw - 28px));padding:28px;max-height:calc(100dvh - 32px)}
+.finder-eyebrow{font-size:12px;color:var(--muted);letter-spacing:.05em;margin:0 0 6px}
+.chapter-finder h2{font-family:Georgia,"Noto Serif CJK SC","Songti SC",SimSun,serif;font-size:28px}
+.finder-label{display:block;font-size:14px;font-weight:600;margin:22px 0 8px}
+.finder-search{display:flex;gap:8px;align-items:center}.finder-search input{min-width:0;flex:1}.finder-search button{flex-shrink:0;min-height:44px}
+.finder-count{font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums;margin:14px 0}
+.finder-list{list-style:none;margin:0;padding:0;max-height:48dvh;overflow:auto;overscroll-behavior:contain;border-top:1px solid var(--line)}
+.finder-chapter{width:100%;display:flex;gap:18px;text-align:left;border:0;border-bottom:1px solid var(--line);border-radius:0;padding:18px 12px;background:transparent;font-weight:400}
+.finder-chapter[aria-current]{background:var(--soft);box-shadow:inset 3px 0 var(--green)}
+.finder-chapter:focus-visible{outline-offset:-3px}
+.finder-number{font-family:Georgia,serif;color:var(--muted);font-size:20px;min-width:2.2ch;font-variant-numeric:tabular-nums}
+.finder-text{min-width:0;flex:1}.finder-title{display:block;font-size:17px;font-weight:600;line-height:1.6;overflow-wrap:anywhere}
+.finder-excerpt{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden;font-size:14px;color:var(--muted);line-height:1.8;margin:5px 0;overflow-wrap:anywhere}
+.finder-state{display:block;color:var(--green);font-size:12px;line-height:1.6}
+@media(max-width:700px){dialog.chapter-finder{padding:20px 16px}.chapter-finder h2{font-size:24px}.finder-chapter{gap:12px;padding:16px 10px}.finder-title{font-size:16px}.finder-list{max-height:44dvh}}
+/* No motion is needed for search results or chapter selection. */
