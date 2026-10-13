@@ -2,196 +2,45 @@
 <html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Memory for Human</title><style>
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;color:#1f2328;background:#f6f8fa;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Microsoft YaHei",sans-serif;font-size:16px;line-height:1.75}a{color:#0969da;text-decoration:none}a:hover{text-decoration:underline}a:focus-visible{outline:2px solid #0969da;outline-offset:3px}.repo{border-bottom:1px solid #d0d7de;background:white;padding:15px 28px;font-size:14px;display:flex;gap:12px;align-items:center;flex-wrap:wrap}.repo .name{font-weight:600;color:#1f2328}.repo .note{color:#656d76}.shell{max-width:1180px;margin:28px auto 60px;padding:0 24px}.document-label{border:1px solid #d0d7de;border-bottom:0;border-radius:7px 7px 0 0;background:white;padding:11px 28px;font-size:13px;color:#656d76;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}article{background:white;border:1px solid #d0d7de;border-radius:0 0 7px 7px;padding:32px 40px;overflow-wrap:anywhere}h1,h2,h3{line-height:1.4;font-weight:600;color:#1f2328;scroll-margin-top:24px}h1{font-size:32px;padding-bottom:12px;border-bottom:1px solid #d8dee4;margin:0 0 18px}h2{font-size:24px;border-bottom:1px solid #d8dee4;padding-bottom:8px;margin:34px 0 16px}h3{font-size:19px;margin:25px 0 12px}p{margin:0 0 16px}li{margin:4px 0}ul,ol{padding-left:27px;margin:0 0 18px}img{max-width:100%;height:auto;display:block;margin:20px auto;border:1px solid #d8dee4;border-radius:5px}code{background:#eff1f3;font-family:ui-monospace,"Cascadia Code",Consolas,monospace;font-size:.88em;padding:2px 5px;border-radius:4px}pre{background:#f6f8fa;border-radius:6px;padding:18px;overflow:auto;font-size:14px;line-height:1.6}pre code{padding:0;background:transparent;white-space:pre;font-size:inherit}blockquote{color:#656d76;border-left:4px solid #d0d7de;padding:0 18px;margin:18px 0}.table-wrap{overflow-x:auto;margin:16px 0 22px}table{border-collapse:collapse;width:100%;font-size:14px;line-height:1.65}td,th{border:1px solid #d0d7de;padding:10px 12px;vertical-align:top;text-align:left}th{font-weight:600;background:#f6f8fa}tr:nth-child(even){background:#fbfcfd}em{color:#656d76}input[type=checkbox]{margin-right:8px;accent-color:#0969da}footer{color:#656d76;font-size:13px;margin-top:18px}footer a{margin-right:18px}@media(max-width:680px){.repo{padding:12px 16px}.shell{padding:0 10px;margin:16px auto 32px}article{padding:22px 18px}.document-label{padding:10px 18px}h1{font-size:27px}h2{font-size:22px}body{font-size:15px}td,th{min-width:115px;padding:8px}table{font-size:13px}pre{font-size:12px;padding:12px}}@media print{body{background:white}.repo,.document-label,footer{display:none}.shell{max-width:none;padding:0;margin:0}article{border:0;padding:0}a{color:inherit}h2,h3{break-after:avoid}img,tr,blockquote{break-inside:avoid}.table-wrap{overflow:visible}}
 </style></head><body><nav class="repo"><a class="name" href="../index.html">Memory for Human</a><span class="note">本地说明文档 · v0.2</span></nav><main class="shell"><div class="document-label"><span>README.md</span><a href="../README.md">查看原文</a></div><article><h1 id="memory-for-human">Memory for Human</h1>
-<p><a href="README.html">简体中文</a> · <a href="README.en.html">English</a> · <a href="README.es.html">Español</a></p>
-<p>日常说明以中文版为准；其他语言保留现有版本。</p>
-<p><a href="https://github.com/SkyPiggy8/memory-for-human">GitHub 仓库</a> · <a href="https://github.com/SkyPiggy8/memory-for-human/archive/refs/heads/main.zip">下载 ZIP</a></p>
-<p><strong>把你记得的生活，留成一本能继续写、能交给家人的回忆录。</strong></p>
-<p>我想做这件事，是因为有些故事只有一个人记得。家里的老人讲过，却没人记下来；两个人走过很多年，照片还在，当时的小事已经说不清了。Memory for Human（MFH）让 AI 帮忙提问和整理，让这些经历有地方留下，也让家人以后还能接着补。</p>
-<p>MFH v0.2 已有<strong>可在本机使用的回忆录工具</strong>。界面、采访问题、入门解释和 AI 交接说明支持中文、英文、西班牙语。API Key 使用者自行提供；没有 Key，也可以整理材料并交给平时使用的 AI。</p>
-<p><img src="../assets/overview.svg" alt="Memory for Human：选择场景、收集材料、采访、逐章写作、本人审阅、制作保存"></p>
-<p>上图是整体方向；语音文件自动转写、照片识别与相册/NAS 自动集成仍是后续计划。<a href="../docs/overview.html">交互流程图</a> · <a href="guide.html#architecture">技术说明</a></p>
-<h2 id="没用过这类工具也能开始">没用过这类工具，也能开始</h2>
-<p>把它想成一个会帮忙整理的小本子。你写一段话、回答一个问题，或者把家人的话记下来。AI 只能依据这些内容，帮你写得连贯些。你检查后，留下文字，或者打印成书。</p>
-<p>你只需要会两件事中的一种：<strong>在页面里填自己的 API Key</strong>，或<strong>把“交给我的 AI”里的说明复制给平时使用的 AI</strong>。不会操作的老人可以只负责讲，家人负责填写与核对。</p>
-<p>页面里的「先看怎么用」会用日常语言解释用途、操作、Key、没有 Key 时的办法和资料去向。连接后，还可以让自己的 AI 再解释一次。</p>
-<h2 id="开始使用">开始使用</h2>
-<h3 id="windows双击一个文件">Windows：双击一个文件</h3>
+<p>用自己的电脑和 AI 写回忆录。可以自己写，也可以帮家人记录。</p>
+<h2 id="1-下载后怎么打开可操作的网页">1. 下载后，怎么打开可操作的网页？</h2>
+<p><strong>Windows：</strong></p>
 <ol>
-<li>下载仓库并解压。</li>
-<li>双击 <strong><code>start.cmd</code></strong>。第一次若没有合适的运行环境，它会从 Node.js 官方网站下载并校验 LTS 版本，只放在本项目目录，不需要管理员安装。</li>
-<li>浏览器打开本地页面。保持启动窗口运行；关闭窗口即可停止服务。</li>
-<li>右上角选语言。点击「开始我的回忆录」，或先试一个明确标为虚构的示例。</li>
+<li><a href="https://github.com/SkyPiggy8/memory-for-human/archive/refs/heads/main.zip">下载 ZIP</a>，解压。</li>
+<li>进入解压后的项目文件夹，双击 <strong><code>start.cmd</code></strong>。</li>
+<li>浏览器会打开网页。点击「开始我的回忆录」，就能填写故事、整理章节和保存。</li>
 </ol>
-<p>本机默认地址为 <code>http://127.0.0.1:4317</code>。首次准备运行环境需要联网；以后填写、整理与备份可以不联网。下载失败时，把 <a href="guide.html#handoff">AI 交接说明</a>交给能操作电脑的 AI，让它协助。</p>
-<h3 id="macos--linux">macOS / Linux</h3>
-<p>让自己的 AI 按 <a href="guide.html#handoff">AI 交接说明</a>准备 Node.js 22 或以上，再运行 <code>sh start.sh</code>。熟悉命令行的人也可直接运行：</p>
-<pre><code class="language-sh">node server.mjs
+<p>没有自动打开浏览器，就手动打开 <strong><a href="http://127.0.0.1:4317">http://127.0.0.1:4317</a></strong>。使用时留着启动窗口，用完再关闭。第一次启动可能需要联网下载运行程序，稍等一会儿。</p>
+<p><strong>macOS / Linux：</strong> 安装 Node.js 22 或以上，在项目文件夹中运行 <code>sh start.sh</code>。不会操作，就按下一节让自己的 AI 帮忙。</p>
+<p>只想先试填几段文字，也可以双击根目录的 <strong><code>index.html</code></strong>。它能填写和备份，但不能连接 API；需要连接时，用上面的启动方式。换入口前先下载备份，再导入。</p>
+<h2 id="2-怎么交给自己的-ai">2. 怎么交给自己的 AI？</h2>
+<p><strong>如果你的 AI 能读取文件、操作电脑：</strong> 在它里面打开解压后的项目文件夹，或允许它访问这个文件夹，再复制下面这段话：</p>
+<pre><code class="language-text">这是我下载好的 Memory for Human 项目。
+请先读 README.md、AGENTS.md 和 docs/ai-handoff.md，
+按我的操作系统启动项目，帮我打开可以填写的网页。
+我不懂编程，打开后请带我创建一本回忆录，先记录一段故事。
+不要读取或索取我的 API Key，也不要清空已有内容。
+如果你不能操作电脑，请告诉我下一步要打开哪个文件。
 </code></pre>
-<p>只想先看看或填写？也可双击 <code>index.html</code>。<strong>直接打开文件时不提供 API 连接</strong>，但可以填写、导入文字、编辑、导出和备份。文件模式与本地网页是不同的浏览器保存位置，切换前先下载备份，再导入。</p>
-<h2 id="先写好一章">先写好一章</h2>
+<p><strong>如果你的 AI 只能聊天：</strong> 先打开上面的网页，点击「交给我的 AI」，选择任务并复制说明，发到你平时使用的 AI 对话里。它写好后，把章节文字贴回网页保存。这种方式不需要 API Key。</p>
+<p>具体交接规则在 <a href="guide.html#handoff">docs/ai-handoff.md</a>，可以让 AI 读取，也可以把文件内容发给它。</p>
+<h2 id="网页打开后做什么">网页打开后做什么？</h2>
 <ol>
-<li><strong>选一种回忆录。</strong> 取名字，写明讲述者、读者，决定先写一章还是慢慢写长篇。</li>
-<li><strong>把故事讲出来。</strong> 一次一个问题。直接输入、使用支持的浏览器语音输入，或导入文字材料。答案可以修改。</li>
-<li><strong>整理成章节。</strong> 连接 AI 写一章；也可把已有文字放在一起，或贴入自己 AI 写好的章节。逐章修改、检查、标为本人已审阅。</li>
-<li><strong>保存与制作。</strong> 下载完整文字备份、Markdown 文稿，或打开打印窗口另存为 PDF。按制作清单打样、装订与保存。</li>
+<li>选一种故事：恋人、婚姻与家庭、老人一生、战友、同事或同学。</li>
+<li>回答一个问题，或放入已有文字。先记一件小事，不必一次讲完。</li>
+<li>整理成一章，自己检查和修改，再下载备份、导出文稿或打印。</li>
 </ol>
-<p>填写内容保存在这台设备的浏览器中。可以新建多本、切换、恢复备份。<strong>浏览器存储不是唯一备份</strong>，重要内容请下载项目文件并保留独立副本。</p>
-<h2 id="用自己的-ai">用自己的 AI</h2>
-<div class="table-wrap"><table>
-<thead>
-<tr>
-<th>方式</th>
-<th>你需要做什么</th>
-<th>能做什么</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>填 API Key</td>
-<td>选 Key 所属服务，在本地窗口填写</td>
-<td>连接测试、继续采访、逐章写作、检查稿件、解释用法</td>
-</tr>
-<tr>
-<td>平时使用的 AI</td>
-<td>复制交接说明，选择是否附上材料，再交给自己的 AI</td>
-<td>手动继续采访、写作与审阅，把结果贴回本项目</td>
-</tr>
-<tr>
-<td>能操作电脑的 AI</td>
-<td>交给它仓库与 <a href="guide.html#handoff">AI 交接说明</a></td>
-<td>按实际文件启动、配置，教你如何操作</td>
-</tr>
-<tr>
-<td>本地模型</td>
-<td>在其他选项中填本机兼容接口和模型名称</td>
-<td>通过本地接口处理文字；运行环境自行准备</td>
-</tr>
-</tbody></table></div>
-<p>界面提供 OpenAI、DeepSeek、Claude、豆包及其他兼容服务的配置。默认值可以改；<strong>Key 的权限、余额和模型可用性以你的账号为准</strong>。预设接口已按官方资料实现并用模拟响应测试，尚未用使用者的真实 Key 做服务商逐一实测。<a href="guide.html#api">接口依据与验证范围</a></p>
-<p>网页版聊天账号与 API 是两个入口。不会配置模型名称或服务地址，可以让自己的 AI 按交接说明协助；不要把真实 Key 写进聊天、作品、交接包或公共仓库。Key 默认只留在本机服务本次运行的内存里。</p>
-<h2 id="六类故事用不同的结构">六类故事，用不同的结构</h2>
-<p>以下为中文写作参考。英文、西班牙语根据实际材料调整，不强制对应字数，也不靠重复或虚构凑长度。</p>
-<div class="table-wrap"><table>
-<thead>
-<tr>
-<th>回忆录</th>
-<th>建议结构</th>
-<th>中文篇幅参考</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><a href="guide.html#lovers">恋人</a></td>
-<td>相遇 → 靠近 → 日常 → 转折 → 想对你说</td>
-<td>3,000–15,000 字</td>
-</tr>
-<tr>
-<td><a href="guide.html#marriage">婚姻与家庭</a></td>
-<td>相识 → 共同决定 → 婚礼 → 家庭 → 一起成长</td>
-<td>8,000–30,000 字</td>
-</tr>
-<tr>
-<td><a href="guide.html#life">老人一生</a></td>
-<td>童年 → 求学 → 工作 → 家庭 → 转折 → 晚年 → 后人</td>
-<td>30,000–80,000 字，逐章完成</td>
-</tr>
-<tr>
-<td><a href="guide.html#comrades">战友</a></td>
-<td>初见 → 共同生活 → 难忘经历 → 分别 → 后来的联系</td>
-<td>8,000–30,000 字</td>
-</tr>
-<tr>
-<td><a href="guide.html#colleagues">同事</a></td>
-<td>加入 → 合作 → 关键时刻 → 成长 → 告别</td>
-<td>5,000–20,000 字</td>
-</tr>
-<tr>
-<td><a href="guide.html#classmates">同学</a></td>
-<td>入学 → 日常 → 集体时刻 → 毕业 → 再相逢</td>
-<td>5,000–20,000 字</td>
-</tr>
-</tbody></table></div>
-<p>长篇可以分成约 10–16 章，每次只聊一个主题，累了就停。先写一章给本人读，再决定继续。篇幅是参考，材料少就短一点，不靠重复和编造凑字数。</p>
-<p>三种语言各有 <strong>156 个起始问题</strong>：恋人 24、婚姻 24、一生 48、战友 20、同事 20、同学 20。AI 追问会先接着已讲出的动作、人物、地点或旧物，场景清楚后再换主题。一次一个问题，可以跳过。<a href="guide.html#interview">怎样把故事聊出来</a></p>
-<h2 id="材料怎样交进来">材料怎样交进来</h2>
-<ul>
-<li><strong>直接填写：</strong> 在问题下面回答，家人可以代记录。</li>
-<li><strong>已有文字：</strong> 导入 UTF-8 <code>.txt</code>、<code>.md</code>、<code>.csv</code>、<code>.json</code>，每份不超过 1 MB。当前按文字读取，不承诺每个平台聊天格式自动适配。</li>
-<li><strong>录音：</strong> 先用自己的工具转写并校对，再导入文字。页面的语音输入依赖浏览器支持，可能联网；不是上传音频文件的 ASR。</li>
-<li><strong>照片：</strong> 把人物、时间、地点、故事写成说明。保留照片原件；当前不识别图片、PDF 或手写信。</li>
-<li><strong>完整备份：</strong> 从「下载完整文字备份」得到 <code>.mfh.json</code>，导入会创建一本新回忆录，不覆盖原来那本。</li>
-</ul>
-<p>新导入的材料默认<strong>不交给 AI</strong>，可以逐份勾选。答案也可按章取消或勾选。AI 处理时使用勾选的答案与材料，以及任务所需的章节。材料过多会提示拆分，不悄悄截掉整个人生。<a href="guide.html#materials">详细采集指南</a></p>
-<h2 id="写过以后还要本人核对">写过以后，还要本人核对</h2>
-<p>AI 整理已有经历、提问和润色，不能替人填造事实。工作稿保留 <code>[A1]</code>（采访答案）、<code>[M1]</code>（勾选材料）等来源标记；检查疑点后由本人决定最终版本。修改章节会将其重新标为草稿。</p>
-<p>本地页面不等于所有处理都离线。调用在线 AI 或把交接包粘贴给在线工具，所选文字就会交给该服务。采访、聊天和照片的采集与分享范围请先取得相关人同意。<a href="guide.html#privacy">隐私说明</a></p>
-<p>完整文字备份包含本项目的回答、导入文字、草稿与未提交的回答，不包含 API Key、原始照片和音频文件。原件请另行保存。</p>
-<h2 id="打印相册和长期保存">打印、相册和长期保存</h2>
-<div class="table-wrap"><table>
-<thead>
-<tr>
-<th>成品</th>
-<th>最简单的路径</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>纸质回忆录</td>
-<td>审阅 → 下载文稿 → 向图文店问规格 → 排版成 PDF → 打样一本 → 校对与装订</td>
-</tr>
-<tr>
-<td>照片书</td>
-<td>选原图 → 附真实说明 → 排版 → 检查裁切 → 打样</td>
-</tr>
-<tr>
-<td>数字相册 / 相框</td>
-<td>先在闲置平板上展示照片与故事卡，再决定是否买专用硬件</td>
-</tr>
-<tr>
-<td>家庭档案 / NAS</td>
-<td>本机资料 + 独立副本；有需要再用 NAS，并做恢复检查</td>
-</tr>
-</tbody></table></div>
-<p><a href="guide.html#production">制作清单</a>包括 BOM、询价话术、打印与装订步骤。<a href="guide.html#tools">延伸工具</a>链接语音转写、照片管理、硬件相框与文档归档项目，当前没有自动集成它们。</p>
-<h2 id="ai-怎么接手这个项目">AI 怎么接手这个项目</h2>
-<p>页面里的「交给我的 AI」会按任务与语言生成说明。默认不附私人材料；勾选后才加入已保存答案与选中材料。可以复制或下载 Markdown，再把 AI 的普通章节文字或约定 JSON 粘贴回来。</p>
-<p>仓库同时提供 <a href="guide.html#handoff">中文</a>、<a href="guide.en.html#doc-handoff-en">英文</a>、<a href="guide.es.html#doc-handoff-es">西班牙语</a>交接文档，供能读取文件或操作电脑的 AI 使用。<a href="../AGENTS.md">AGENTS.md</a>说明真实文件、启动方式、验证要求与能力边界。</p>
-<h2 id="mfh-的技术工作">MFH 的技术工作</h2>
-<p>项目的工作集中在四件事：<strong>来源可追溯、模型解耦、人工审阅、进度可恢复</strong>。答案和材料各有稳定编号，写作只使用选中的部分；自己的聊天 AI 和 API 共用任务规则，结果回到同一本作品；章节修改后重新审阅；恢复备份新增一本，避免覆盖。</p>
-<p>前端是无需构建的原生网页，本机服务使用 Node.js 内置模块，密钥与作品分开。六类关系、三语操作、家人代记录和制作清单，组成从采访到成品的完整流程。<a href="guide.html#architecture">技术设计</a>解释数据结构、请求范围、确认状态和长篇限制。</p>
-<p>StorySage 重点研究多智能体采访与写作，memoir 采用工具调用和结构化时间线。MFH 把重点放在普通家庭怎样用自己的 AI 开始、怎样保留材料和带走作品。来源保留与本人审阅也见于其他项目，本项目的差异来自这些设计的组合。<a href="guide.html#related-work">参考项目与具体区别</a></p>
-<h2 id="已完成与接下来要做的部分">已完成与接下来要做的部分</h2>
-<p><strong>已实现：</strong> 三语界面与问题、低门槛解释、AI 交接、六类场景、文字材料、浏览器语音输入（需支持）、多本回忆录、本机保存、编辑章节、API 调用路径、备份恢复、Markdown 导出、浏览器打印。</p>
-<p><strong>待实现：</strong> 上传音频 ASR、图片/OCR、平台专属聊天适配、自动图文排版、自动 NAS/相册衔接、长篇检索与多人冲突审阅。<a href="guide.html#roadmap">开发计划</a></p>
-<p>无需安装前端依赖；本机服务仅使用 Node.js 内置能力。开发验证：<code>npm test</code>。<a href="guide.html#contributing">贡献说明</a> · <a href="guide.html#publishing">GitHub 发布配置</a></p>
-<h2 id="文件放在哪里">文件放在哪里</h2>
-<p>根目录保留说明、启动入口和许可。详细文档集中在 <code>docs/</code>：</p>
-<div class="table-wrap"><table>
-<thead>
-<tr>
-<th>文档</th>
-<th>内容</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><a href="guide.html#doc-guide">使用指南</a></td>
-<td>启动、采集、采访、隐私、打印与存档</td>
-</tr>
-<tr>
-<td><a href="guide.html#doc-templates">采访模板</a></td>
-<td>六类故事、原件登记和虚构示例</td>
-</tr>
-<tr>
-<td><a href="guide.html#doc-ai-handoff">AI 交接</a></td>
-<td>接手项目、采访与写作提示词</td>
-</tr>
-<tr>
-<td><a href="guide.html#doc-technical">技术说明</a></td>
-<td>实现、API 依据与参考项目比较</td>
-</tr>
-<tr>
-<td><a href="guide.html#doc-development">维护与开发</a></td>
-<td>贡献、计划与发布</td>
-</tr>
-</tbody></table></div>
-<p>现有英文、西班牙语文档放在 <code>docs/translations/</code>，以后默认不随中文 README 改写。<code>app/</code> 放界面，<code>assets/</code> 放图示，<code>scripts/</code> 放启动脚本，<code>tests/</code> 放测试。<code>preview/</code> 只保留界面会打开的六份页面。</p>
-<h2 id="使用许可">使用许可</h2>
-<p><a href="../LICENSE">PolyForm Noncommercial 1.0.0</a>：允许许可范围内的非商业使用、修改与分发，禁止未经另行授权的商业使用。你的私人材料与作品不因此被要求公开；第三方工具遵循各自条款。图示查看器等第三方内容见 <a href="guide.html#doc-notices">THIRD_PARTY_NOTICES.md</a>。</p>
+<p>想在网页里直接让 AI 提问、写作，就点「连接我的 AI」，选服务并填写自己的 API Key。Key 只在连接窗口填，不要发到聊天里。</p>
+<p>文字保存在当前浏览器里，重要内容请点「下载完整文字备份」。调用在线 AI 时，你选中的文字会发给对应服务。录音文件自动转写、照片识别和自动相册制作目前还没有。</p>
+<h2 id="需要时再看">需要时再看</h2>
+<p><a href="guide.html#doc-guide">使用指南：材料、采访、打印与保存</a> · <a href="guide.html#doc-templates">六类采访模板</a> · <a href="guide.html#doc-technical">技术说明与项目对比</a> · <a href="guide.html#roadmap">开发计划</a></p>
+<details>
+<summary>项目流程图</summary>
+
+<p><img src="../assets/overview.svg" alt="选择故事、整理材料、逐章写作、本人审阅、制作与保存"></p>
+<p>图中包含后续计划。<a href="../docs/overview.html">查看交互流程图</a></p>
+</details>
+
+<p>本项目采用 <a href="../LICENSE">PolyForm Noncommercial 1.0.0</a>，用于非商业用途。<a href="guide.html#doc-notices">第三方许可说明</a>。</p>
+<p>其他语言：<a href="README.en.html">English</a> · <a href="README.es.html">Español</a>（保留版本）。</p>
 </article><footer><a href="../index.html">打开应用</a></footer></main></body></html>
