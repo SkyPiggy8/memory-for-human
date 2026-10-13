@@ -71,6 +71,18 @@
     $('chapterStatus').textContent = t(c.approved ? 'reviewed' : 'draftStatus'); $('approvalButton').textContent = t(c.approved ? 'unapprove' : 'approve'); $('chapterOrigin').textContent = t({ai:'originAI',source:'originSource',manual:'originManual'}[c.origin]);
   }
   const chapterSearchText = text => text.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+  function chapterSearchOffset(text, needle) {
+    const match = chapterSearchText(text).indexOf(needle);
+    if (match < 0) return -1;
+    // Accent folding changes offsets; keep the excerpt anchored in the original text.
+    let original = 0, folded = 0;
+    for (const point of text) {
+      folded += chapterSearchText(point).length;
+      if (folded > match) return original;
+      original += point.length;
+    }
+    return -1;
+  }
   function renderChapterFinder() {
     const query = $('chapterQuery').value.trim(), needle = chapterSearchText(query);
     const rows = project.chapters.flatMap((chapter, index) => {
@@ -83,7 +95,7 @@
       const text = node('span', undefined, 'finder-text');
       text.append(node('span', chapter.title || t('chapter'), 'finder-title'));
       const content = chapter.content.replace(/\s+/g, ' ').trim();
-      const match = query ? content.toLowerCase().indexOf(query.toLowerCase()) : -1, start = Math.max(0, match - 36);
+      const match = needle ? chapterSearchOffset(content, needle) : -1, start = Math.max(0, match - 36);
       const excerpt = (start ? '…' : '') + content.slice(start, start + 150) + (content.length > start + 150 ? '…' : '');
       text.append(node('span', excerpt, 'finder-excerpt'), node('span', [current ? t('currentChapter') : '', t(chapter.approved ? 'reviewed' : 'draftStatus')].filter(Boolean).join(' · '), 'finder-state'));
       button.append(number, text); row.append(button); return [row];
