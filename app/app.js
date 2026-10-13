@@ -2,6 +2,7 @@
   'use strict';
   const C = window.MFHCore, locales = window.MFH_LOCALES, questions = window.MFH_QUESTIONS;
   const $ = id => document.getElementById(id);
+  new MutationObserver(() => { $('writingSaveStatus').textContent = $('saveStatus').textContent; }).observe($('saveStatus'), {childList:true, characterData:true, subtree:true});
   let lang = 'zh', project, db, projects = [], step = 0, mode = 'workspace', faq = 0, token = '', connection = null, connectionVersion = 0, busy = false, editingAnswer = '', recognition = null, toastTimer;
   try { lang = localStorage.getItem('mfh-language') || navigator.language.slice(0, 2); } catch (_) {}
   if (!locales[lang]) lang = 'zh';
@@ -60,7 +61,21 @@
     }); $('materials').replaceChildren(...(records.length ? records : [node('p', t('noMaterials'), 'empty')]));
   }
   const activeChapter = () => project.chapters.find(c => c.id === project.activeChapter);
+  function renderComposer() {
+    $('writingBookTitle').textContent = project.title || t('writingTitle');
+    const index = project.chapters.findIndex(c => c.id === project.activeChapter);
+    $('writingChapterPosition').textContent = index < 0 ? '' : `${t('chapter')} ${index + 1} / ${project.chapters.length}`;
+    $('writingChapterPosition').hidden = index < 0;
+    const composer = $('chapterComposer'), empty = !project.chapters.length;
+    if (composer.dataset.empty !== String(empty)) { composer.open = empty; composer.dataset.empty = String(empty); }
+    for (const action of ['writeAI','collect','pasteDraft']) {
+      const button = document.querySelector(`[data-action="${action}"]`);
+      const parent = $(button.classList.contains('primary') ? 'organizerPrimary' : 'organizerAlternatives');
+      if (button.parentElement !== parent) parent.append(button);
+    }
+  }
   function renderChapters() {
+    renderComposer();
     const c = activeChapter(); $('chapters').replaceChildren(...project.chapters.map(c => { const o = node('option', c.title || t('chapter')); o.value = c.id; return o; }));
     $('chapters').value = project.activeChapter; $('chapters').disabled = !project.chapters.length; $('noChapter').hidden = !!c; $('chapterEditor').hidden = !c;
     if (c) { $('editChapterTitle').value = c.title; $('chapterText').value = c.content; updateChapterBadge(); }
@@ -70,6 +85,7 @@
     $('chapterStatus').textContent = t(c.approved ? 'reviewed' : 'draftStatus'); $('approvalButton').textContent = t(c.approved ? 'unapprove' : 'approve'); $('chapterOrigin').textContent = t({ai:'originAI',source:'originSource',manual:'originManual'}[c.origin]);
   }
   function renderConnection() {
+    renderComposer();
     $('connectionStatus').textContent = connection ? `${t('connected')} · ${C.providers[connection.provider]?.name || ''}` : t('offline'); $('connectionDot').classList.toggle('on', !!connection); $('connectionButton').textContent = t('connect');
   }
   function renderHelp() {
@@ -93,6 +109,7 @@
   }
   function showStep(value, scroll = true) {
     step = Math.max(0, Math.min(3, value)); showMode('workspace');
+    if (step === 2) renderComposer();
     document.querySelectorAll('[data-panel]').forEach(e => e.hidden = Number(e.dataset.panel) !== step);
     document.querySelectorAll('[data-step]').forEach(e => { e.classList.toggle('active', Number(e.dataset.step) === step); e.setAttribute('aria-current', Number(e.dataset.step) === step ? 'step' : 'false'); });
     $('welcome').hidden = step !== 0 || !!project.title || !!project.answers.length; $('backButton').hidden = step === 0; $('nextButton').hidden = step === 3;

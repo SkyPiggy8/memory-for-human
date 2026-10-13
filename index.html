@@ -6,6 +6,7 @@
   <meta name="description" content="Memory for Human — a local memoir workspace, guided by your own AI.">
   <title>Memory for Human</title>
   <link rel="stylesheet" href="app/styles.css">
+  <link rel="stylesheet" href="app/editorial.css">
   <script src="app/core.js" defer></script>
   <script src="app/i18n.js" defer></script>
   <script src="app/app.js" defer></script>
@@ -65,12 +66,9 @@
           <div class="subsection"><h3 data-i18n="materials"></h3><p class="hint" data-i18n="materialHint"></p><div class="row"><button data-action="addText" data-i18n="addText"></button><button data-action="importText" data-i18n="importText"></button></div><p class="hint" data-i18n="fileHint"></p><div id="materials"></div></div>
           <p class="notice" data-i18n="sendNotice"></p>
         </section>
-        <section class="card" data-panel="2" hidden>
-          <div class="section-head"><h2 data-i18n="writingTitle"></h2></div>
-          <div class="field"><label for="nextChapterTitle" data-i18n="chapterTitle"></label><input id="nextChapterTitle" maxlength="300" data-placeholder="chapterPlaceholder"></div>
-          <div class="row spaced"><button class="primary" data-action="writeAI" data-ai data-i18n="writeAI"></button><button data-action="collect" data-i18n="collect"></button><button data-action="pasteDraft" data-i18n="pasteDraft"></button></div>
-          <p class="notice" data-i18n="sendNotice"></p>
-          <div class="chapter-toolbar"><select id="chapters" aria-label="Chapter"></select><button class="small" data-action="newChapter" data-i18n="newChapter"></button></div>
+        <section class="card editorial-writing" data-panel="2" hidden>
+          <div class="section-head"><p class="eyebrow" data-i18n="step3"></p><h2 id="writingBookTitle"></h2></div>
+          <div class="chapter-toolbar"><span id="writingChapterPosition" class="chapter-position"></span><select id="chapters" aria-label="Chapter"></select><button class="small" data-action="newChapter" data-i18n="newChapter"></button><span id="writingSaveStatus" class="writing-save-state" aria-hidden="true"></span></div>
           <p id="noChapter" class="empty" data-i18n="noChapters"></p>
           <div id="chapterEditor" hidden>
             <div class="row"><span class="badge" id="chapterStatus"></span><span class="hint" id="chapterOrigin"></span></div>
@@ -79,6 +77,16 @@
             <div class="row spaced"><button data-action="reviewAI" data-ai data-i18n="reviewAI"></button><button class="primary" id="approvalButton" data-action="approve"></button><button class="quiet danger small" data-action="deleteChapter" data-i18n="remove"></button></div>
             <section id="reviewPanel" class="subsection" hidden><h3 data-i18n="reviewResult"></h3><div id="reviewOutput" class="review-output"></div></section>
           </div>
+          <details id="chapterComposer" class="chapter-composer" open>
+            <summary data-i18n="organizeChapter"></summary>
+            <div class="composer-content">
+              <div class="field"><label for="nextChapterTitle" data-i18n="chapterTitle"></label><input id="nextChapterTitle" maxlength="300" data-placeholder="chapterPlaceholder"></div>
+              <div id="organizerPrimary" class="row spaced"></div>
+              <details class="other-methods"><summary data-i18n="otherMethods"></summary><div id="organizerAlternatives" class="row spaced"><button class="primary" data-action="writeAI" data-ai data-i18n="writeAI"></button><button data-action="collect" data-i18n="collect"></button><button data-action="pasteDraft" data-i18n="pasteDraft"></button></div></details>
+
+          <p class="notice" data-i18n="sendNotice"></p>
+            </div>
+          </details>
         </section>
         <section class="card" data-panel="3" hidden>
           <div class="section-head"><h2 data-i18n="exportTitle"></h2><p class="hint" data-i18n="exportHint"></p></div>
