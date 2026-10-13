@@ -124,7 +124,7 @@
   async function addChapter(content, origin = 'manual', title = '') {
     if (!content.trim()) { toast(t('invalidResult')); return; }
     const c = {id:C.uuid(), title:title || $('nextChapterTitle').value.trim() || `${t('chapter')} ${project.chapters.length + 1}`, content, origin, approved:false, updatedAt:new Date().toISOString()};
-    project.chapters.push(c); project.activeChapter = c.id; $('nextChapterTitle').value = ''; $('reviewPanel').hidden = true; await save(); renderChapters(); showStep(2); toast(t('chapterAdded'));
+    project.chapters.push(c); project.activeChapter = c.id; $('nextChapterTitle').value = ''; $('reviewPanel').hidden = true; renderChapters(); showStep(2); await save(); toast(t('chapterAdded'));
   }
   async function importAIResult() {
     let content = $('returnedAI').value.trim(), title = '';
@@ -172,7 +172,7 @@
     newChapter: () => { $('nextChapterTitle').value='';$('nextChapterTitle').focus(); },
     reviewAI: async () => { if(!activeChapter()?.content.trim()){toast(t('needChapter'));return;} const result=await requestAI('review');if(result){$('reviewOutput').textContent=result;$('reviewPanel').hidden=false;} },
     approve: async () => { const c=activeChapter();if(!c)return;c.approved=!c.approved;await save();updateChapterBadge(); },
-    deleteChapter: async () => { if(!activeChapter()||!confirm(t('deleteConfirm')))return;project.chapters=project.chapters.filter(c=>c.id!==project.activeChapter);project.activeChapter=project.chapters[0]?.id||'';await save();$('reviewPanel').hidden=true;renderChapters(); },
+    deleteChapter: async () => { if(!activeChapter()||!confirm(t('deleteConfirm')))return;project.chapters=project.chapters.filter(c=>c.id!==project.activeChapter);project.activeChapter=project.chapters[0]?.id||'';$('reviewPanel').hidden=true;renderChapters();await save(); },
     backup: () => { download(filename()+'.mfh.json',JSON.stringify(C.publicProject(project),null,2),'application/json');toast(t('backupDone')); }, restore: () => $('backupFile').click(),
     exportMD: () => download(filename()+'.md',C.markdown(project,locales[lang]),'text/markdown;charset=utf-8'), print: printMemoir,
     explainAI: async () => { const result=await requestAI('explain',$('explainQuestion').value||t('faqLabels')[faq]);if(result){$('explainOutput').textContent=result;$('explainOutput').hidden=false;} },
@@ -195,7 +195,12 @@
   $('materials').addEventListener('change',async e=>{const m=project.materials.find(m=>m.id===e.target.dataset.material);if(m){m.include=e.target.checked;await save();}});
   $('answers').addEventListener('change',async e=>{const a=project.answers.find(a=>a.id===e.target.dataset.answerSource);if(a){a.include=e.target.checked;await save();}});
   for(const [id,key] of [['editChapterTitle','title'],['chapterText','content']])$(id).addEventListener('input',()=>{const c=activeChapter();if(!c)return;c[key]=$(id).value;c.approved=false;c.updatedAt=new Date().toISOString();updateChapterBadge();void save();});
-  $('chapters').addEventListener('change',async()=>{project.activeChapter=$('chapters').value;await save();$('reviewPanel').hidden=true;renderChapters();});
+  $('chapters').addEventListener('change',async()=>{
+    project.activeChapter=$('chapters').value;
+    // Bind the visible editor to this chapter before another input event can run.
+    $('reviewPanel').hidden=true;renderChapters();
+    await save();
+  });
   for(const id of ['handoffTask','handoffInclude'])$(id).addEventListener('change',renderHandoff);
   $('provider').addEventListener('change',()=>{const p=C.providers[$('provider').value];$('model').value=p.model;$('baseURL').value=p.baseURL;if($('provider').value==='custom')$('advanced').open=true;});
   $('connectionForm').addEventListener('submit',async e=>{
