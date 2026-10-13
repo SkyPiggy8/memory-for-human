@@ -45,6 +45,9 @@ Object.assign(window.MFH_LOCALES.es, {outputTruncated:'La IA ha alcanzado su lí
 Object.assign(window.MFH_LOCALES.zh, {invalidConfig:'请核对所选的 AI 服务和地址。在线服务需要 HTTPS 地址；不清楚时请让自己的 AI 帮你配置。'});
 Object.assign(window.MFH_LOCALES.en, {invalidConfig:'Check the selected AI service and address. Online services need an HTTPS address. Your own AI can help configure this.'});
 Object.assign(window.MFH_LOCALES.es, {invalidConfig:'Comprueba el servicio y la dirección. Los servicios en línea necesitan una dirección HTTPS. Tu propia IA puede ayudarte a configurarlo.'});
+Object.assign(window.MFH_LOCALES.zh, {retrySave:'重试保存',saveRecoveryHint:'最新内容还没保存成功，先别关闭页面。可以重试保存，或下载包含当前文字的备份；保存成功后再切换回忆录。'});
+Object.assign(window.MFH_LOCALES.en, {retrySave:'Retry saving',saveRecoveryHint:'Your latest work has not been saved. Keep this page open. Retry saving or download a backup of the current text; save successfully before changing memoirs.'});
+Object.assign(window.MFH_LOCALES.es, {retrySave:'Reintentar guardar',saveRecoveryHint:'Los últimos cambios no se han guardado. Mantén esta página abierta. Reintenta guardar o descarga una copia del texto actual; guarda antes de cambiar de memorias.'});
 window.MFH_QUESTIONS = {
   "zh": {
     "lovers": [
