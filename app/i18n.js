@@ -45,6 +45,9 @@ Object.assign(window.MFH_LOCALES.es, {outputTruncated:'La IA ha alcanzado su lí
 Object.assign(window.MFH_LOCALES.zh, {invalidConfig:'请核对所选的 AI 服务和地址。在线服务需要 HTTPS 地址；不清楚时请让自己的 AI 帮你配置。'});
 Object.assign(window.MFH_LOCALES.en, {invalidConfig:'Check the selected AI service and address. Online services need an HTTPS address. Your own AI can help configure this.'});
 Object.assign(window.MFH_LOCALES.es, {invalidConfig:'Comprueba el servicio y la dirección. Los servicios en línea necesitan una dirección HTTPS. Tu propia IA puede ayudarte a configurarlo.'});
+Object.assign(window.MFH_LOCALES.zh, {organizeChapter:'把已有材料整理成新一章',otherMethods:'其他整理方式'});
+Object.assign(window.MFH_LOCALES.en, {organizeChapter:'Organize material into a new chapter',otherMethods:'Other ways to organize'});
+Object.assign(window.MFH_LOCALES.es, {organizeChapter:'Reunir materiales en un nuevo capítulo',otherMethods:'Otras formas de organizar'});
 window.MFH_QUESTIONS = {
   "zh": {
     "lovers": [

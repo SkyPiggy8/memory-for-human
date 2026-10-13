@@ -1,0 +1,175 @@
+/* The ordinary writing workspace. Focus-mode dialogs keep their own design. */
+@media screen {
+  body:has(#workspacePanel:not([hidden]) > .editorial-writing:not([hidden])) {
+    background:#f3f1eb;
+  }
+  body:has(#workspacePanel:not([hidden]) > .editorial-writing:not([hidden])) .header {
+    background:#faf8f2;border-color:#d7d3c7;
+  }
+  body:has(#workspacePanel:not([hidden]) > .editorial-writing:not([hidden])) .brand {
+    font-family:Georgia,"Noto Serif CJK SC","Songti SC",SimSun,serif;
+    font-size:21px;font-weight:600;letter-spacing:-.03em;
+  }
+  body:has(#workspacePanel:not([hidden]) > .editorial-writing:not([hidden])) .brand small {
+    font-family:"Segoe UI","Microsoft YaHei",Arial,sans-serif;letter-spacing:.04em;
+  }
+  body:has(#workspacePanel:not([hidden]) > .editorial-writing:not([hidden])) .layout {
+    max-width:1320px;grid-template-columns:224px minmax(0,1fr);gap:52px;margin-top:36px;
+  }
+  body:has(#workspacePanel:not([hidden]) > .editorial-writing:not([hidden])) .sidebar {
+    padding-right:24px;border-right:1px solid #d7d3c7;
+  }
+  body:has(#workspacePanel:not([hidden]) > .editorial-writing:not([hidden])) .sidebar button,
+  body:has(#workspacePanel:not([hidden]) > .editorial-writing:not([hidden])) .header button {
+    font-size:14px;font-weight:500;border-radius:4px;min-height:44px;
+  }
+  body:has(#workspacePanel:not([hidden]) > .editorial-writing:not([hidden])) .sidebar select {
+    background:transparent;border:0;border-bottom:1px solid #b8b9ae;border-radius:0;padding-left:0;
+  }
+  body:has(#workspacePanel:not([hidden]) > .editorial-writing:not([hidden])) .steps {gap:8px;margin:32px 0}
+  body:has(#workspacePanel:not([hidden]) > .editorial-writing:not([hidden])) .step {border-radius:0;padding-left:0}
+  body:has(#workspacePanel:not([hidden]) > .editorial-writing:not([hidden])) .step b {
+    font-family:Georgia,serif;border:0;border-radius:0;font-size:17px;color:#616658;background:transparent;
+  }
+  body:has(#workspacePanel:not([hidden]) > .editorial-writing:not([hidden])) .step.active {
+    background:transparent;color:#223d31;box-shadow:inset -2px 0 #375342;font-weight:650;
+  }
+  body:has(#workspacePanel:not([hidden]) > .editorial-writing:not([hidden])) .step.active b {color:#223d31}
+  body:has(#workspacePanel:not([hidden]) > .editorial-writing:not([hidden])) .save-state {color:#435448;font-size:13px}
+  .editorial-writing {
+    --ink:#262b25;--muted:#62695f;--green:#2e5846;--soft:#eceee6;--line:#d9d9cc;
+    background:transparent;border:0;border-radius:0;padding:0;color:var(--ink);
+  }
+  .editorial-writing .section-head {margin:0 0 28px}
+  .editorial-writing .section-head h2 {
+    font-family:Georgia,"Noto Serif CJK SC","Songti SC",SimSun,serif;
+    font-size:clamp(28px,2.5vw,36px);font-weight:500;line-height:1.5;letter-spacing:.01em;
+  }
+  .editorial-writing button {min-height:44px;border-radius:4px;font-size:14px;font-weight:500}
+  .editorial-writing .chapter-toolbar {
+    justify-content:flex-start;gap:8px;margin:0 0 24px;padding:12px 0;
+    border-block:1px solid #c7ccbd;position:sticky;top:0;z-index:2;background:#f3f1eb;
+  }
+  .editorial-writing .chapter-toolbar select {
+    flex:1 1 240px;max-width:none;width:auto;min-height:44px;background:transparent;
+    border:0;border-radius:0;font-size:15px;padding:8px 28px 8px 0;
+  }
+  .editorial-writing .chapter-toolbar button {background:transparent;border-color:transparent;padding:8px 10px}
+  .editorial-writing .chapter-toolbar button:hover {background:#e6e8df;border-color:#c1c8b9}
+  .editorial-writing #chapterEditor {
+    padding:32px clamp(24px,4.3vw,64px) 28px;background:#fffefa;max-width:820px;margin-inline:auto;
+    border-top:2px solid #5c6854;box-shadow:0 2px 8px #302f2506;
+  }
+  .editorial-writing #chapterEditor>.row:first-child {gap:12px;padding-bottom:20px;border-bottom:1px solid #e2e2d7}
+  .editorial-writing .badge {border-radius:2px;font-size:12px;background:#e9eee3;color:#354c3a;padding:4px 8px}
+  .editorial-writing #chapterOrigin {font-size:12px}
+  .editorial-writing #chapterEditor .field {margin-top:24px;gap:8px}
+  .editorial-writing #chapterEditor .field label {font-size:12px;font-weight:500;color:#62695f;letter-spacing:.04em}
+  .editorial-writing #editChapterTitle {
+    font-family:Georgia,"Noto Serif CJK SC","Songti SC",SimSun,serif;
+    font-size:clamp(24px,2.7vw,34px);line-height:1.6;font-weight:500;
+    background:transparent;border:0;border-bottom:1px solid #d5d9ca;border-radius:0;padding:0 0 12px;
+  }
+  .editorial-writing #chapterText {
+    font-family:Georgia,"Noto Serif CJK SC","Songti SC",SimSun,serif;
+    background:transparent;border:1px solid transparent;border-radius:0;padding:4px 0;
+    font-size:19px;line-height:1.85;min-height:460px;
+  }
+  .editorial-writing #chapterEditor>.row.spaced {margin-top:28px;padding-top:20px;border-top:1px solid #e2e2d7;gap:8px}
+  .editorial-writing input:focus,.editorial-writing textarea:focus,.editorial-writing select:focus {
+    outline:2px solid #486745;outline-offset:4px;
+  }
+  .editorial-writing button:focus-visible,.chapter-composer>summary:focus-visible {
+    outline:3px solid #486745;outline-offset:3px;
+  }
+  .chapter-composer {margin-top:28px;border-block:1px solid #c7ccbd}
+  .chapter-composer>summary {
+    cursor:pointer;padding:18px 4px;min-height:56px;font-size:15px;font-weight:500;color:#2e5846;
+  }
+  .composer-content {padding:0 4px 24px}
+  .composer-content .field {margin-top:4px}
+  .composer-content .field label {font-size:14px;font-weight:500}
+  .composer-content input {background:#fffefa;border-radius:4px}
+  .composer-content .notice {background:transparent;padding:0;font-size:13px;max-width:65ch;line-height:1.8}
+  .editorial-writing .empty {font-family:Georgia,"Noto Serif CJK SC","Songti SC",SimSun,serif;font-size:19px;line-height:1.9;padding:24px 0;max-width:40ch}
+  body:has(#workspacePanel:not([hidden]) > .editorial-writing:not([hidden])) .bottom-nav {padding-top:4px}
+  body:has(#workspacePanel:not([hidden]) > .editorial-writing:not([hidden])) .bottom-nav button {font-size:14px;border-radius:4px;min-height:44px}
+}
+@media screen and (max-width:1000px) and (min-width:901px) {
+  body:has(#workspacePanel:not([hidden]) > .editorial-writing:not([hidden])) .layout {grid-template-columns:180px minmax(0,1fr);gap:26px}
+  body:has(#workspacePanel:not([hidden]) > .editorial-writing:not([hidden])) .sidebar {padding-right:16px}
+  .editorial-writing #chapterEditor {padding-inline:28px}
+}
+@media screen and (max-width:900px) {
+  body:has(#workspacePanel:not([hidden]) > .editorial-writing:not([hidden])) .header-inner {padding:16px 20px}
+  body:has(#workspacePanel:not([hidden]) > .editorial-writing:not([hidden])) .brand {font-size:17px}
+  body:has(#workspacePanel:not([hidden]) > .editorial-writing:not([hidden])) .layout {display:block;padding:0 20px;margin-top:20px}
+  body:has(#workspacePanel:not([hidden]) > .editorial-writing:not([hidden])) .sidebar {border:0;padding:0}
+  body:has(#workspacePanel:not([hidden]) > .editorial-writing:not([hidden])) .steps {gap:0;margin:18px 0;border-bottom:1px solid #c7ccbd}
+  body:has(#workspacePanel:not([hidden]) > .editorial-writing:not([hidden])) .step {font-size:11px;padding:8px 2px 12px;gap:2px}
+  body:has(#workspacePanel:not([hidden]) > .editorial-writing:not([hidden])) .step.active {box-shadow:inset 0 -2px #375342}
+  body:has(#workspacePanel:not([hidden]) > .editorial-writing:not([hidden])) .sidebar-footer {gap:4px;margin-bottom:28px}
+  body:has(#workspacePanel:not([hidden]) > .editorial-writing:not([hidden])) .sidebar-footer>button {font-size:12px;padding-inline:6px}
+  body:has(#workspacePanel:not([hidden]) > .editorial-writing:not([hidden])) .save-state {font-size:12px;padding-top:4px}
+  .editorial-writing .section-head {margin-bottom:20px}
+  .editorial-writing .section-head h2 {font-size:28px;line-height:1.4}
+  .editorial-writing .chapter-toolbar {gap:0 4px;margin-bottom:20px;padding:6px 0}
+  .editorial-writing .chapter-toolbar select {flex-basis:100%;font-size:15px}
+  .editorial-writing .chapter-toolbar button {font-size:12px;padding-inline:8px;flex:0 1 auto}
+  .editorial-writing #chapterEditor {padding:22px 20px;margin-inline:-4px}
+  .editorial-writing #chapterEditor>.row:first-child {gap:6px 10px;padding-bottom:14px}
+  .editorial-writing #chapterEditor .field {margin-top:20px}
+  .editorial-writing #editChapterTitle {font-size:25px;padding-bottom:10px}
+  .editorial-writing #chapterText {font-size:18px;line-height:1.85;min-height:440px}
+  .editorial-writing #chapterEditor>.row.spaced {gap:8px;align-items:stretch}
+  .editorial-writing #chapterEditor>.row.spaced button {font-size:13px;flex:1 1 auto}
+  .composer-content .row button {flex:1 1 100%;font-size:14px}
+  .chapter-composer {margin-top:24px}
+  .chapter-composer>summary {font-size:14px;padding-block:16px}
+}
+
+@media screen {
+  .editorial-writing .writing-save-state {flex-basis:100%;font-size:12px;line-height:1.6;color:#435448;padding:2px 0 0}
+  body:has(#workspacePanel:not([hidden]) > .editorial-writing:not([hidden])) .header select {min-height:44px}
+}
+
+@media screen {
+  .editorial-writing #chapterEditor .field {max-width:680px;margin-inline:auto}
+  .editorial-writing .other-methods {margin-top:10px}
+  .editorial-writing .other-methods>summary {cursor:pointer;min-height:44px;padding:10px 0;font-size:14px;color:#2e5846}
+  .editorial-writing .other-methods .row {margin-top:6px}
+  .editorial-writing:has(#noChapter:not([hidden])) .chapter-toolbar select,
+  .editorial-writing:has(#noChapter:not([hidden])) #chapterFinderButton {display:none}
+  body:has(#workspacePanel:not([hidden]) > .editorial-writing:not([hidden])) .bottom-nav .primary {background:transparent;border-color:transparent;color:#2e5846}
+  html:lang(en) .editorial-writing #chapterText,html:lang(es) .editorial-writing #chapterText {line-height:1.7}
+  .editorial-writing .other-methods>summary:focus-visible {outline:3px solid #486745;outline-offset:3px}
+}
+@media screen and (max-width:900px) {
+  body:has(#workspacePanel:not([hidden]) > .editorial-writing:not([hidden])) .sidebar {position:static}
+  body:has(#workspacePanel:not([hidden]) > .editorial-writing:not([hidden])) .header-nav {display:none}
+  body:has(#workspacePanel:not([hidden]) > .editorial-writing:not([hidden])) .project-row {display:flex;gap:12px;align-items:center}
+  body:has(#workspacePanel:not([hidden]) > .editorial-writing:not([hidden])) .project-row select {flex:1;width:0}
+  body:has(#workspacePanel:not([hidden]) > .editorial-writing:not([hidden])) .sidebar label {display:none}
+  body:has(#workspacePanel:not([hidden]) > .editorial-writing:not([hidden])) .steps {grid-template-columns:repeat(4,minmax(0,1fr))}
+  body:has(#workspacePanel:not([hidden]) > .editorial-writing:not([hidden])) .step {flex-direction:column;text-align:center;font-size:13px}
+  body:has(#workspacePanel:not([hidden]) > .editorial-writing:not([hidden])) .sidebar-footer {display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;border:0;padding:0}
+  body:has(#workspacePanel:not([hidden]) > .editorial-writing:not([hidden])) .sidebar-footer .connection {margin:0}
+  body:has(#workspacePanel:not([hidden]) > .editorial-writing:not([hidden])) .save-state {flex-basis:100%}
+  .editorial-writing #chapterEditor {padding:20px 4px;margin:0;background:transparent;box-shadow:none}
+  .editorial-writing .chapter-toolbar button {font-size:14px}
+}
+
+@media screen {
+  .editorial-writing .section-head h2 {overflow-wrap:anywhere}
+  .editorial-writing .section-head .eyebrow {margin:0 0 10px;font-size:12px;letter-spacing:.08em;color:#62695f}
+}
+
+@media screen {
+  .editorial-writing :is(input,textarea,button,summary) {scroll-margin-top:160px}
+}
+
+@media screen {
+  .editorial-writing .chapter-position {font-size:12px;font-variant-numeric:tabular-nums;color:#62695f;flex-shrink:0;margin-right:8px}
+  .editorial-writing #editChapterTitle:not(:focus) {text-overflow:ellipsis}
+  .editorial-writing #editChapterTitle:focus {text-overflow:clip}
+}
