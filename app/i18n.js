@@ -557,3 +557,10 @@ window.MFH_QUESTIONS = {
     ]
   }
 };
+
+Object.assign(window.MFH_LOCALES.zh, {saveConflict:'另一页已保存，本页尚未保存',saveConflictHint:'另一个标签页已保存这本书的新版本。为避免覆盖，本页已停止保存，文字仍留在本页。请先下载本页文本备份，并保留其他页面需要的内容；然后关闭其他标签页、刷新读取新版本，再手动整理差异。'});
+Object.assign(window.MFH_LOCALES.en, {saveConflict:'Another tab saved; this page is not saved',saveConflictHint:'Another tab saved a newer version of this book. Saving on this page has stopped to avoid replacing it. Your words remain on this page. Download this page’s text backup first and preserve any needed content from other pages; then close the other tabs, reload the latest version, and reconcile the differences manually.'});
+Object.assign(window.MFH_LOCALES.es, {saveConflict:'Otra pestaña guardó; esta página no está guardada',saveConflictHint:'Otra pestaña guardó una versión más reciente de este libro. Esta página dejó de guardar para evitar reemplazarla. Tus palabras siguen en esta página. Descarga primero la copia de texto de esta página y conserva lo que necesites de las demás; después cierra las otras pestañas, recarga la última versión y combina las diferencias manualmente.'});
+Object.assign(window.MFH_LOCALES.zh,{retrySave:'重试保存',saveRecoveryHint:'保存没有成功，文字仍留在本页。请先下载文本备份，再重试。'});
+Object.assign(window.MFH_LOCALES.en,{retrySave:'Retry saving',saveRecoveryHint:'Saving did not finish. Your words remain on this page. Download a text backup first, then retry.'});
+Object.assign(window.MFH_LOCALES.es,{retrySave:'Reintentar guardar',saveRecoveryHint:'No se pudo guardar. Tus palabras siguen en esta página. Descarga primero una copia de texto y vuelve a intentarlo.'});
