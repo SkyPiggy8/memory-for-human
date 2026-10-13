@@ -18,9 +18,9 @@ Prefiere la configuración temporal en memoria de la página. Si hace falta una 
 
 ## Capacidades reales
 
-Tres idiomas, seis temas, preguntas fijas y preguntas de API, importación de texto, dictado opcional del navegador, varios proyectos guardados localmente, edición, borradores y revisión mediante API, entrega manual a otra IA, copias completas de texto JSON, Markdown e impresión del navegador.
+Tres idiomas, seis temas, textos, dictado si el navegador lo admite, varios proyectos locales, entrevistas, escritura, ampliación y revisión por API, entrega manual, fotos subidas con contenido y significado, posiciones sugeridas por IA que debe confirmar una persona, copia JSON con fotos y reescrituras conservadas, ZIP de Markdown/fotos e impresión con imágenes.
 
-No están implementados la transcripción de audios subidos, OCR/imágenes, leer cuentas de chat, configurar NAS/álbumes automáticamente ni imprimir libros por encargo. No afirmes que existen. Las peticiones a una IA en línea envían el material seleccionado.
+No hay transcripción de audios subidos, reconocimiento de imágenes/OCR, lectura de cuentas de chat, maquetación profesional, configuración automática de NAS/álbumes ni pedidos de libros. La IA en línea recibe solo textos seleccionados, incluidas las descripciones autorizadas, nunca las imágenes originales.
 
 ## Escritura y resultados
 
@@ -37,7 +37,11 @@ Es más fácil devolver el capítulo como texto, o este formato:
 }
 ```
 
-No incluyas la Key. La importación añade un capítulo nuevo como borrador, sin aprobar los hechos. La recuperación usa `.mfh.json` exportado por MFH, no cualquier JSON. La copia contiene textos; los archivos originales se guardan aparte.
+No incluyas la Key. Importar texto normal añade un borrador nuevo. La tarea de ampliación actualiza el capítulo y conserva el anterior, sin aprobar los hechos. Mejora el relato con detalles aportados; pregunta una cosa concreta por lo que falta en vez de inventar hechos o sentimientos. La recuperación usa `.mfh.json` exportado por MFH. Incluye fotos subidas y reescrituras; guarda grabaciones y archivos no subidos aparte.
+
+## Posiciones de las fotos
+
+Usa solo las descripciones, significados y capítulos seleccionados. No has visto las imágenes. Devuelve JSON `placements` con `photo` (identificador P), `chapterId` (copiado exactamente), `afterParagraph` (0 para el inicio o número de párrafo aportado), `caption` y `reason`. Cada foto aparece una vez como máximo; omite las que no encajen. Ejemplo: `{"placements":[{"photo":"P1","chapterId":"COPIAR_IDENTIDAD","afterParagraph":1,"caption":"Pie basado en la descripción","reason":"Por qué encaja"}]}`. Una persona confirma cada sugerencia. Cambiar el capítulo o la descripción anula la confirmación.
 
 ## Continuar el desarrollo
 

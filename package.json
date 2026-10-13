@@ -1,6 +1,6 @@
 {
   "name": "memory-for-human",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "private": true,
   "type": "module",
   "description": "A local memoir workspace, guided by your own AI.",

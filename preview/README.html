@@ -1,10 +1,10 @@
 <!doctype html>
 <html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Memory for Human</title><style>
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;color:#1f2328;background:#f6f8fa;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Microsoft YaHei",sans-serif;font-size:16px;line-height:1.75}a{color:#0969da;text-decoration:none}a:hover{text-decoration:underline}a:focus-visible{outline:2px solid #0969da;outline-offset:3px}.repo{border-bottom:1px solid #d0d7de;background:white;padding:15px 28px;font-size:14px;display:flex;gap:12px;align-items:center;flex-wrap:wrap}.repo .name{font-weight:600;color:#1f2328}.repo .note{color:#656d76}.shell{max-width:1180px;margin:28px auto 60px;padding:0 24px}.document-label{border:1px solid #d0d7de;border-bottom:0;border-radius:7px 7px 0 0;background:white;padding:11px 28px;font-size:13px;color:#656d76;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}article{background:white;border:1px solid #d0d7de;border-radius:0 0 7px 7px;padding:32px 40px;overflow-wrap:anywhere}h1,h2,h3{line-height:1.4;font-weight:600;color:#1f2328;scroll-margin-top:24px}h1{font-size:32px;padding-bottom:12px;border-bottom:1px solid #d8dee4;margin:0 0 18px}h2{font-size:24px;border-bottom:1px solid #d8dee4;padding-bottom:8px;margin:34px 0 16px}h3{font-size:19px;margin:25px 0 12px}p{margin:0 0 16px}li{margin:4px 0}ul,ol{padding-left:27px;margin:0 0 18px}img{max-width:100%;height:auto;display:block;margin:20px auto;border:1px solid #d8dee4;border-radius:5px}code{background:#eff1f3;font-family:ui-monospace,"Cascadia Code",Consolas,monospace;font-size:.88em;padding:2px 5px;border-radius:4px}pre{background:#f6f8fa;border-radius:6px;padding:18px;overflow:auto;font-size:14px;line-height:1.6}pre code{padding:0;background:transparent;white-space:pre;font-size:inherit}blockquote{color:#656d76;border-left:4px solid #d0d7de;padding:0 18px;margin:18px 0}.table-wrap{overflow-x:auto;margin:16px 0 22px}table{border-collapse:collapse;width:100%;font-size:14px;line-height:1.65}td,th{border:1px solid #d0d7de;padding:10px 12px;vertical-align:top;text-align:left}th{font-weight:600;background:#f6f8fa}tr:nth-child(even){background:#fbfcfd}em{color:#656d76}input[type=checkbox]{margin-right:8px;accent-color:#0969da}footer{color:#656d76;font-size:13px;margin-top:18px}footer a{margin-right:18px}@media(max-width:680px){.repo{padding:12px 16px}.shell{padding:0 10px;margin:16px auto 32px}article{padding:22px 18px}.document-label{padding:10px 18px}h1{font-size:27px}h2{font-size:22px}body{font-size:15px}td,th{min-width:115px;padding:8px}table{font-size:13px}pre{font-size:12px;padding:12px}}@media print{body{background:white}.repo,.document-label,footer{display:none}.shell{max-width:none;padding:0;margin:0}article{border:0;padding:0}a{color:inherit}h2,h3{break-after:avoid}img,tr,blockquote{break-inside:avoid}.table-wrap{overflow:visible}}
-</style></head><body><nav class="repo"><a class="name" href="../index.html">Memory for Human</a><span class="note">本地说明文档 · v0.2</span></nav><main class="shell"><div class="document-label"><span>README.md</span><a href="../README.md">查看原文</a></div><article><h1 id="memory-for-human">Memory for Human</h1>
+</style></head><body><nav class="repo"><a class="name" href="../index.html">Memory for Human</a><span class="note">本地说明文档 · v0.3</span></nav><main class="shell"><div class="document-label"><span>README.md</span><a href="../README.md">查看原文</a></div><article><h1 id="memory-for-human">Memory for Human</h1>
 <p>用自己的电脑和 AI 写回忆录。可以自己写，也可以帮家人记录。</p>
-<p><img src="../assets/overview.svg" alt="记下故事，交给自己的 AI 整理，本人检查修改，再保存或打印"></p>
-<p>先回答问题，或放入已有文字。AI 根据这些材料继续问、整理成一章，你或讲述者读一遍、改好，再保存或打印。一次写一点，之后还能接着写。</p>
+<p><img src="../assets/overview.svg" alt="Memory for Human：从原始材料、持续采访到章节审阅与成册保存"></p>
+<p>这张图从左往右看：先留下故事和照片说明，再让自己的 AI 接着问，把零散内容整理、扩写和润色成章节；本人核对文字和照片位置，最后保存、打印成册。图里也列出了后续方向，当前能用的入口见下文。</p>
 <p>AI 可以在网页里连接，也可以复制说明给你平时用的 AI。没有 API Key，也能开始记录。比如给奶奶写回忆录，可以先从“小时候家里是什么样子”聊起，不用一次讲完一生。</p>
 <h2 id="1-下载后怎么打开可操作的网页">1. 下载后，怎么打开可操作的网页？</h2>
 <p><strong>Windows：</strong></p>
@@ -27,14 +27,28 @@
 </code></pre>
 <p><strong>如果你的 AI 只能聊天：</strong> 先打开上面的网页，点击「交给我的 AI」，选择任务并复制说明，发到你平时使用的 AI 对话里。它写好后，把章节文字贴回网页保存。这种方式不需要 API Key。</p>
 <p>具体交接规则在 <a href="guide.html#handoff">docs/ai-handoff.md</a>，可以让 AI 读取，也可以把文件内容发给它。</p>
+<h2 id="我为什么做这个项目">我为什么做这个项目</h2>
+<p>我想做 Memory for Human，是希望科技平权、AI 普惠这些话，最后能落到一件普通人用得上的事情里。不会编程，不熟悉软件，也应该能借助 AI 做点对自己有意义的事。老人不会操作，可以由子女、孙辈帮忙；会用 AI 的人，也可以直接让自己的 AI 接手这个项目。</p>
+<p>人的一辈子，一头是过往的回忆，一头是未知的未来。未来还没有答案，过去却已经留下了许多值得记住的人和事。我想让这些回忆有机会被认真记录：恋人之间的日常，老人讲起的一生，战友、同事和同学共同走过的那段日子。</p>
+<p>很多人有故事，却不知道从哪里写起。这个项目要做的，就是让用户自己的 AI 陪着他不断交谈：接着一个细节问下去，补上故事里缺的一段，再把口头表达和零散文字加工成读得下去的章节。内容需要整理、扩写和美化，故事也需要经过和前后联系；但没有讲过的经历，得继续问，不能靠编造凑出来。原话留着，旧稿留着，最后怎么写、给谁看，仍由讲述者决定。</p>
 <h2 id="网页打开后做什么">网页打开后做什么？</h2>
 <ol>
 <li>选一种故事：恋人、婚姻与家庭、老人一生、战友、同事或同学。</li>
 <li>回答一个问题，或放入已有文字。先记一件小事，不必一次讲完。</li>
-<li>整理成一章，自己检查和修改，再下载备份、导出文稿或打印。</li>
+<li>整理成一章，让 AI 扩写和润色；发现缺了经过，就继续回答问题，再改这一章。改写前的稿子可以回看和恢复。</li>
+<li>加上照片，核对文字和位置，再下载备份、导出图文稿或打印。</li>
 </ol>
 <p>想在网页里直接让 AI 提问、写作，就点「连接我的 AI」，选服务并填写自己的 API Key。Key 只在连接窗口填，不要发到聊天里。</p>
-<p>文字保存在当前浏览器里，重要内容请点「下载完整文字备份」。调用在线 AI 时，你选中的文字会发给对应服务。录音文件自动转写、照片识别和自动相册制作目前还没有。</p>
+<h2 id="照片怎么放进书里">照片怎么放进书里？</h2>
+<ol>
+<li>在「把故事讲出来」点击「上传照片」，选 JPG、PNG 或 WebP。</li>
+<li>写两件事：<strong>照片里有什么</strong>，以及<strong>这张照片对你有什么意义</strong>。谁、哪里、大约哪一年，不清楚就写不清楚；也说说为什么想把它留下。</li>
+<li>到「整理成章节」，勾选允许 AI 阅读的章节，点击「让 AI 安排照片」。没有 API Key，就点「交给自己的 AI 安排」，复制说明，把它返回的结果贴回网页。</li>
+<li>逐张查看 AI 建议的章节、段落、配文和安排原因，确认后进入图文稿。位置和配文都能自己改；章节改写后要重新核对位置。</li>
+<li>点「打印 / 保存为 PDF」，或下载「图文成册包」，把文稿和照片一起交给排版人员。正式装订前先印一本样书，<a href="guide.html#production">制作清单</a>里有准备步骤。</li>
+</ol>
+<p>每张照片最多 5 MB，每本合计 30 MB、最多 100 张。原图保存在当前浏览器里，AI 按你写的说明安排位置，不自动识图，也不接收原图。更大的原件请另存，选尺寸合适的副本上传。</p>
+<p>重要内容请点「下载完整备份（含照片）」，把原始文字、照片、章节和改写前的稿子一起留好。调用在线 AI 时，选中的文字会发给对应服务；也可以连接自己已运行的本地模型。录音文件自动转写、照片识别/OCR、专业印刷排版和自动相册/NAS 部署目前还没有。</p>
 <h2 id="需要时再看">需要时再看</h2>
 <p><a href="guide.html#doc-guide">使用指南：材料、采访、打印与保存</a> · <a href="guide.html#doc-templates">六类采访模板</a> · <a href="guide.html#doc-technical">技术说明与项目对比</a> · <a href="guide.html#roadmap">开发计划</a></p>
 <p>本项目采用 <a href="../LICENSE-APACHE">Apache-2.0</a> / <a href="../LICENSE-MIT">MIT</a> 双许可，任选一种，可用于个人或商业项目；使用和分发时遵守所选许可。<a href="../LICENSE">许可说明</a> · <a href="guide.html#doc-notices">第三方许可</a>。</p>

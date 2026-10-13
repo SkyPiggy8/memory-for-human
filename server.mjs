@@ -60,7 +60,7 @@ export function createApp({root=ROOT, fetchImpl=fetch, initialConfig=null, timeo
       if(req.headers.origin&&!allowedHosts.map(h=>'http://'+h).includes(req.headers.origin))throw new AppError('FORBIDDEN',403);
       if(req.headers['sec-fetch-site']==='cross-site')throw new AppError('FORBIDDEN',403);
       const pathname=new URL(req.url,'http://127.0.0.1').pathname;
-      if(pathname==='/api/session'&&req.method==='GET'){json(res,200,{token,connection:safeConnection(config),version:'0.2.0'});return;}
+      if(pathname==='/api/session'&&req.method==='GET'){json(res,200,{token,connection:safeConnection(config),version:'0.3.0'});return;}
       if(pathname.startsWith('/api/')){
         const presented=String(req.headers['x-mfh-session']||'');
         if(!/^[a-f0-9]{64}$/.test(presented)||!timingSafeEqual(Buffer.from(presented),Buffer.from(token)))throw new AppError('FORBIDDEN',403);
@@ -80,9 +80,9 @@ export function createApp({root=ROOT, fetchImpl=fetch, initialConfig=null, timeo
         }
         if(pathname==='/api/generate'){
           if(!config)throw new AppError('NO_CONNECTION',409);
-          if(!['interview','draft','review','explain'].includes(body.kind)||typeof body.system!=='string'||typeof body.user!=='string')throw new AppError('INVALID_REQUEST');
+          if(!['interview','draft','rewrite','photos','review','explain'].includes(body.kind)||typeof body.system!=='string'||typeof body.user!=='string')throw new AppError('INVALID_REQUEST');
           if(body.system.length+body.user.length>105000)throw new AppError('CONTEXT_TOO_LARGE',413);
-          requestInFlight=true;try{const result=await modelCall(config,body.system,body.user,body.kind==='draft'?8000:body.kind==='review'?3000:1000);json(res,200,result);}finally{requestInFlight=false;}return;
+          requestInFlight=true;try{const result=await modelCall(config,body.system,body.user,['draft','rewrite'].includes(body.kind)?8000:body.kind==='photos'?4000:body.kind==='review'?3000:1000);json(res,200,result);}finally{requestInFlight=false;}return;
         }
         throw new AppError('NOT_FOUND',404);
       }

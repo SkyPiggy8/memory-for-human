@@ -18,6 +18,12 @@ test('OpenAI transport connects and writes a chapter without exposing the Key in
   assert.equal(calls[1].url,'https://api.openai.com/v1/chat/completions');assert.equal(calls[1].options.headers.Authorization,'Bearer '+key);assert.equal(JSON.parse(calls[1].options.body).max_completion_tokens,8000);
   assert(!JSON.stringify(await(await fetch(s.base+'/api/session')).json()).includes(key));await s.post('/api/disconnect',{});assert.equal((await s.post('/api/generate',{kind:'draft',system:'x',user:'x'})).status,409);
 });
+test('rewrite and photo layout tasks use the same authenticated adapter with appropriate output limits',async t=>{
+  const calls=[];const s=await setup(t,async(url,options)=>{calls.push(JSON.parse(options.body));return Response.json({choices:[{message:{content:'Mock result'},finish_reason:'stop'}]});});
+  await s.post('/api/connect',{provider:'custom',baseURL:'http://127.0.0.1:11434/v1',model:'mock-local'});
+  for(const [kind,limit] of [['rewrite',8000],['photos',4000]]){const result=await s.post('/api/generate',{kind,system:'Only supplied sources',user:'Written descriptions, no image pixels'});assert.equal(result.status,200);assert.equal(calls.at(-1).max_tokens,limit);}
+  assert.equal((await s.post('/api/generate',{kind:'unsupported',system:'x',user:'x'})).status,400);
+});
 test('Claude uses the Messages protocol and preserves truncated-output status',async t=>{
   const calls=[];const s=await setup(t,async(url,options)=>{calls.push({url,options});return new Response(JSON.stringify({content:[{type:'thinking',thinking:'Not user output'},{type:'text',text:'A chapter'}],stop_reason:'max_tokens'}),{status:200});});
   assert.equal((await s.post('/api/connect',{provider:'anthropic',apiKey:'DUMMY-CLAUDE'})).status,200);

@@ -4,6 +4,48 @@ import fs from 'node:fs/promises';
 import vm from 'node:vm';
 import '../app/core.js';
 const C=globalThis.MFHCore;
+const png='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAusB9Wl6z2kAAAAASUVORK5CYII=';
+function photoProject(){
+  const p=C.newProject();p.chapters=[{id:C.uuid(),title:'First job',content:'The workshop. [A1]\n\nWhy it mattered.',approved:true,origin:'manual',updatedAt:''}];p.activeChapter=p.chapters[0].id;p.photoChapterIds=[p.activeChapter];
+  p.photos=[{id:C.uuid(),sourceId:'P7',name:'workshop.png',data:png,description:'A workshop with my father.',meaning:'He taught me to repair things.',include:true,placement:null,placementApproved:false}];p.nextPhoto=8;return p;
+}
+test('legacy v2 and photo backups restore additively, preserving original bytes, source IDs and remapped positions',()=>{
+  const legacy=C.newProject();delete legacy.photos;delete legacy.photoChapterIds;delete legacy.nextPhoto;
+  assert.deepEqual(C.validateProject(legacy).photos,[]);
+  const p=photoProject();p.photos[0].placement={chapterId:p.activeChapter,afterParagraph:1,caption:'My first workshop',reason:'The first job scene',order:0};p.photos[0].placementApproved=true;p.photos[0].apiKey='DUMMY-PHOTO-SECRET';
+  C.replaceChapter(p,p.activeChapter,'The workshop, in my words. [A1]\n\nWhat father taught me.');p.photos[0].placementApproved=true;
+  const backup=C.publicProject(p);assert(!JSON.stringify(backup).includes('DUMMY-PHOTO-SECRET'));
+  const restored=C.validateProject(backup);assert.notEqual(restored.id,p.id);assert.notEqual(restored.activeChapter,p.activeChapter);assert.equal(restored.photos[0].data,png);assert.equal(restored.photos[0].sourceId,'P7');assert.equal(restored.nextPhoto,8);assert.equal(restored.photos[0].placement.chapterId,restored.activeChapter);assert.deepEqual(restored.photoChapterIds,[restored.activeChapter]);assert.equal(restored.chapters[0].revisions[0].content,'The workshop. [A1]\n\nWhy it mattered.');
+});
+test('AI photo context omits pixels and unselected chapters, sources and photos',()=>{
+  const p=photoProject();p.chapters.push({id:'private-chapter',title:'Private',content:'PRIVATE-CHAPTER'});p.photos.push({...p.photos[0],id:'private-photo',sourceId:'P8',description:'PRIVATE-PHOTO',include:false});p.answers=[{sourceId:'A1',question:'Q',answer:'UNNEEDED-ANSWER',include:true}];
+  const prompt=C.taskPrompt('photos',p);assert(prompt.system.includes('cannot see the image pixels'));assert(!prompt.user.includes('base64'));assert(!prompt.user.includes(png));assert(!prompt.user.includes('PRIVATE'));assert(!prompt.user.includes('UNNEEDED'));assert(prompt.user.includes('He taught me'));assert(C.taskPrompt('rewrite',p).user.includes('The workshop'));
+  assert(!JSON.stringify(C.context(p)).includes('base64'));
+});
+test('photo proposals reject duplicate, unknown, unselected and out-of-range positions before mutation',()=>{
+  const p=photoProject(),item={photo:'P7',chapterId:p.activeChapter,afterParagraph:1,caption:'The workshop',reason:'Same scene'};
+  assert.equal(C.validatePhotoPlan(p,{placements:[item]})[0].photoId,p.photos[0].id);
+  for(const placements of [[item,item],[{...item,photo:'P999'}],[{...item,chapterId:'unknown'}],[{...item,afterParagraph:3}],[{...item,afterParagraph:-1}],[{...item,afterParagraph:1.5}],[{...item,caption:[]}]] )assert.throws(()=>C.validatePhotoPlan(p,{placements}),/INVALID_PLACEMENT/);
+  p.photoChapterIds=[];assert.throws(()=>C.validatePhotoPlan(p,{placements:[item]}),/INVALID_PLACEMENT/);assert.equal(p.photos[0].placement,null);
+  for(const data of ['https://example.com/p.png','data:image/svg+xml;base64,PHN2Zz4=','data:image/png;base64,AAAA','data:image/jpeg;base64,PGh0bWw+'])assert.throws(()=>C.photoInfo(data),/INVALID_PHOTO/);
+  assert.throws(()=>C.photoInfo('x'.repeat(8*1024*1024)),/PHOTO_SIZE/);
+});
+test('only confirmed photos enter book output; rewriting retains prior text and invalidates positions',()=>{
+  const p=photoProject(),c=p.chapters[0];p.photos[0].placement={chapterId:c.id,afterParagraph:1,caption:'My workshop',reason:'',order:0};
+  assert.deepEqual(C.chapterBlocks(p,c).map(b=>b.type),['text','text']);p.photos[0].placementApproved=true;
+  assert.deepEqual(C.chapterBlocks(p,c).map(b=>b.type),['text','photo','text']);assert.equal(C.bookFiles(p,{bookPackageReadme:'Instructions'}).length,3);
+  C.replaceChapter(p,c.id,'A shorter draft.');assert.equal(c.approved,false);assert.equal(p.photos[0].placementApproved,false);assert.equal(c.revisions.length,1);assert.equal(C.bookFiles(p,{bookPackageReadme:'Instructions'}).length,2);
+  // Positions awaiting review can survive a chapter becoming shorter.
+  p.photos[0].placement.afterParagraph=2;assert.equal(C.validateProject(C.publicProject(p)).photos[0].placement.afterParagraph,2);
+  C.restoreRevision(p,c.id);assert.equal(c.content,'The workshop. [A1]\n\nWhy it mattered.');assert.equal(c.revisions.at(-1).content,'A shorter draft.');assert.equal(p.photos[0].placementApproved,false);
+});
+test('book ZIP uses valid signatures, known CRC32 and unchanged photo bytes',()=>{
+  const bytes=new TextEncoder().encode('123456789'),zip=C.zipFiles([{name:'memoir.md',bytes}]),v=new DataView(zip.buffer);
+  assert.equal(v.getUint32(0,true),0x04034b50);assert.equal(v.getUint32(14,true),0xcbf43926);assert.equal(v.getUint32(zip.length-22,true),0x06054b50);assert.equal(v.getUint16(zip.length-14,true),1);
+  const p=photoProject();p.photos[0].placement={chapterId:p.activeChapter,afterParagraph:0,caption:'My workshop',reason:'',order:0};p.photos[0].placementApproved=true;
+  const files=C.bookFiles(p,{bookPackageReadme:'Instructions'});assert.equal(files[2].name,'photos/P7.png');assert.equal(Buffer.from(files[2].bytes).toString('base64'),png.split(',')[1]);assert(new TextDecoder().decode(files[0].bytes).includes('](photos/P7.png)'));
+  p.photos[0].placement.caption='<script>alert(1)</script> [a](javascript:bad)';const md=C.markdown(p,{});assert(!md.includes('<script>'));assert(md.includes('&lt;script&gt;'));assert(md.includes('\\[a\\]'));
+});
 test('backup round trip keeps long source text, unfinished answers, chapter selection, and stable citations without credentials',()=>{
   const p=C.newProject('es');p.title='La vida';p.workingAnswer='An unfinished thought';p.apiKey='DUMMY-SECRET';p.nextAnswer=9;
   p.answers=[{id:C.uuid(),sourceId:'A7',include:true,question:'When?',answer:'Approximate date only.',date:''}];

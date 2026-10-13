@@ -10,7 +10,8 @@
 - Core data format: `memory-for-human`, version 2. Import is additive. Do not silently overwrite existing memoirs or lose source material. Preserve uncertainty and narrator approval rules.
 - Never read, print, commit, or export real API keys. `user-config.local.json` and `.mfh-runtime/` are private local files. Use dummy keys in tests.
 - The proxy authenticates same-origin local requests. Keep secret files out of static serving and sanitize provider errors.
-- Implemented: text workflows, browser dictation where supported, local persistence, API adapters, manual AI handoff, JSON text backup, Markdown, browser printing.
-- Not implemented: audio-file ASR, images/OCR, platform-specific account import, automatic layout/NAS integrations. Keep status claims accurate.
+- Implemented: text workflows, browser dictation where supported, local persistence, API adapters, manual AI handoff, AI rewrites retaining previous drafts, local JPG/PNG/WebP photos with descriptions and significance, text-based AI placement suggestions requiring human confirmation, JSON backup including photos, Markdown/photo ZIP, browser printing.
+- Never include original image data in model context or manual AI handoff. Send only selected photo descriptions and task-scoped chapter text. Reconfirm photo positions after chapter or metadata changes. Keep original uploaded bytes in backup and book packages.
+- Not implemented: audio-file ASR, image recognition/OCR, platform-specific account import, professional print layout, automatic album/NAS integrations. Keep status claims accurate.
 - Run `npm test` for relevant core/server changes, and real browser checks for changed flows. Test API transport with mocks unless the human explicitly provides authorization and credentials for a live call. Never claim simulated tests verify live provider access.
 - Keep only the six app help previews in preview/: README.html, README.en.html, README.es.html, guide.html, guide.en.html, guide.es.html. Do not generate a separate HTML copy of every source document. Never replace the interactive root index.html with a README preview.

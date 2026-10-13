@@ -1,8 +1,8 @@
 <!doctype html>
 <html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Memory for Human · 使用资料</title><style>
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;color:#1f2328;background:#f6f8fa;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Microsoft YaHei",sans-serif;font-size:16px;line-height:1.75}a{color:#0969da;text-decoration:none}a:hover{text-decoration:underline}a:focus-visible{outline:2px solid #0969da;outline-offset:3px}.repo{border-bottom:1px solid #d0d7de;background:white;padding:15px 28px;font-size:14px;display:flex;gap:12px;align-items:center;flex-wrap:wrap}.repo .name{font-weight:600;color:#1f2328}.repo .note{color:#656d76}.shell{max-width:1180px;margin:28px auto 60px;padding:0 24px}.document-label{border:1px solid #d0d7de;border-bottom:0;border-radius:7px 7px 0 0;background:white;padding:11px 28px;font-size:13px;color:#656d76;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}article{background:white;border:1px solid #d0d7de;border-radius:0 0 7px 7px;padding:32px 40px;overflow-wrap:anywhere}h1,h2,h3{line-height:1.4;font-weight:600;color:#1f2328;scroll-margin-top:24px}h1{font-size:32px;padding-bottom:12px;border-bottom:1px solid #d8dee4;margin:0 0 18px}h2{font-size:24px;border-bottom:1px solid #d8dee4;padding-bottom:8px;margin:34px 0 16px}h3{font-size:19px;margin:25px 0 12px}p{margin:0 0 16px}li{margin:4px 0}ul,ol{padding-left:27px;margin:0 0 18px}img{max-width:100%;height:auto;display:block;margin:20px auto;border:1px solid #d8dee4;border-radius:5px}code{background:#eff1f3;font-family:ui-monospace,"Cascadia Code",Consolas,monospace;font-size:.88em;padding:2px 5px;border-radius:4px}pre{background:#f6f8fa;border-radius:6px;padding:18px;overflow:auto;font-size:14px;line-height:1.6}pre code{padding:0;background:transparent;white-space:pre;font-size:inherit}blockquote{color:#656d76;border-left:4px solid #d0d7de;padding:0 18px;margin:18px 0}.table-wrap{overflow-x:auto;margin:16px 0 22px}table{border-collapse:collapse;width:100%;font-size:14px;line-height:1.65}td,th{border:1px solid #d0d7de;padding:10px 12px;vertical-align:top;text-align:left}th{font-weight:600;background:#f6f8fa}tr:nth-child(even){background:#fbfcfd}em{color:#656d76}input[type=checkbox]{margin-right:8px;accent-color:#0969da}footer{color:#656d76;font-size:13px;margin-top:18px}footer a{margin-right:18px}@media(max-width:680px){.repo{padding:12px 16px}.shell{padding:0 10px;margin:16px auto 32px}article{padding:22px 18px}.document-label{padding:10px 18px}h1{font-size:27px}h2{font-size:22px}body{font-size:15px}td,th{min-width:115px;padding:8px}table{font-size:13px}pre{font-size:12px;padding:12px}}@media print{body{background:white}.repo,.document-label,footer{display:none}.shell{max-width:none;padding:0;margin:0}article{border:0;padding:0}a{color:inherit}h2,h3{break-after:avoid}img,tr,blockquote{break-inside:avoid}.table-wrap{overflow:visible}}
-</style></head><body><nav class="repo"><a class="name" href="../index.html">Memory for Human</a><span class="note">本地说明文档 · v0.2</span></nav><main class="shell"><div class="document-label"><span>docs/guide.md</span><a href="../docs/guide.md">查看原文</a></div><article><section id="doc-guide"><h1 id="使用指南">使用指南</h1>
-<p><a href="#start">开始使用</a> · <a href="#materials">整理原始材料</a> · <a href="#interview">把故事聊出来</a> · <a href="#privacy">保存、隐私与本人审阅</a> · <a href="#production">打印、相册和长期保存</a> · <a href="#tools">可选的独立工具</a></p>
+</style></head><body><nav class="repo"><a class="name" href="../index.html">Memory for Human</a><span class="note">本地说明文档 · v0.3</span></nav><main class="shell"><div class="document-label"><span>docs/guide.md</span><a href="../docs/guide.md">查看原文</a></div><article><section id="doc-guide"><h1 id="使用指南">使用指南</h1>
+<p><a href="#start">开始使用</a> · <a href="#materials">整理原始材料</a> · <a href="#photos">照片进书</a> · <a href="#interview">把故事聊出来</a> · <a href="#privacy">保存、隐私与本人审阅</a> · <a href="#production">打印、相册和长期保存</a> · <a href="#tools">可选的独立工具</a></p>
 <p><a id="start"></a></p>
 <h2 id="开始使用">开始使用</h2>
 <p>Windows 下载解压后双击 <code>start.cmd</code>。macOS / Linux 需要 Node.js 22 或以上，再运行 <code>sh start.sh</code>；也可以运行 <code>node server.mjs</code>。Windows 启动器缺少运行环境时会下载并校验官方 LTS，放在项目目录里。</p>
@@ -46,12 +46,17 @@ Key 由我在本机窗口填写，不放进这段聊天。
 <td>需要浏览器支持，可能联网；识别后请核对</td>
 </tr>
 <tr>
+<td>上传照片</td>
+<td>JPG、PNG、WebP，每张最多 5 MB，每本合计 30 MB、最多 100 张</td>
+<td>保留上传文件，分配 <code>P…</code> 编号；填写内容和意义后可勾选文字说明给 AI</td>
+</tr>
+<tr>
 <td>导入以前的备份</td>
 <td>MFH 导出的 <code>.mfh.json</code></td>
 <td>恢复成新的一本，原来的作品保留</td>
 </tr>
 </tbody></table></div>
-<p><code>.csv</code> 或 <code>.json</code> 文件能读作文字，不代表能自动解析各平台聊天记录。音频、图片、PDF 和手写信目前不能直接识别。录音先转写，照片先写说明，再把文字放进来。</p>
+<p><code>.csv</code> 或 <code>.json</code> 文件能读作文字，不代表能自动解析各平台聊天记录。音频、图片、PDF 和手写信目前不能直接识别。录音先转写；照片可以上传，由人写说明，AI 按说明帮助安排位置。</p>
 <h3 id="录音怎么整理">录音怎么整理</h3>
 <p>先问本人愿不愿意录、给谁看、是否允许外部 AI 处理。试录几十秒，回放听清楚以后再开始。一次聊一个主题，疲倦时停下。</p>
 <p>保留 <code>.m4a</code>、<code>.mp3</code> 或 <code>.wav</code> 原件。用自己选的转写工具生成文字，工具是否支持某种编码要看它的说明。<a href="https://github.com/SYSTRAN/faster-whisper">faster-whisper</a>可作为独立工具参考，MFH 尚未集成。</p>
@@ -69,7 +74,14 @@ Key 由我在本机窗口填写，不放进这段聊天。
 说明：与本章无关的私密对话已省略。
 </code></pre>
 <p>采访日期和事件日期分开写。不知道日期就留空或写“大约”。账号密码、会话令牌和整个平台数据库不属于写作材料。</p>
-<h3 id="照片信件和扫描件">照片、信件和扫描件</h3>
+<p><a id="photos"></a></p>
+<h3 id="照片怎么放进书里">照片怎么放进书里</h3>
+<p>在「把故事讲出来」点击「上传照片」。每张填两栏：照片里有什么，以及这张照片对你有什么意义。上传多张时先打开第一张，其余可以点各自的「编辑」补上。没有写完说明，就先留在本机，不交给 AI。</p>
+<p>例如：“约 1978 年毕业合影，旧校舍门口，左起第三人是我，月份记不清。”再写：“这是我离开家乡前和同学最后一次合照，后来大家去了不同城市。”第一栏帮助 AI 对上章节，第二栏告诉它为什么这张照片值得留在书里。照片也能带出下一轮问题，比如毕业后第一次离家发生了什么。</p>
+<p>有章节后，在「整理成章节」勾选允许 AI 阅读的章节，点击「让 AI 安排照片」。它会建议放在哪一章、哪个段落之后，写配文并说明原因。先看建议，再逐张确认。没有 Key 就点「交给自己的 AI 安排」：复制说明，AI 返回约定 JSON 后贴回页面，仍需逐张确认。</p>
+<p>想自己放，就编辑照片，展开「自己选择位置」，选择章节、段落和配文，勾选已经核对，再保存。没有位置或尚未确认的照片保留在完整备份里，不进入打印稿和图文成册包。照片说明或章节改了，原位置会变为待核对；重新确认后才能出稿。</p>
+<p>当前 AI 只读勾选的说明和章节文字，不接收原图，也不判断人物身份、表情或年代。照片在本机保留上传时的字节，不自动压缩。手机原图超过限制时，请另留大原件，准备尺寸较小的副本上传。没有上传的照片仍要独立保存。</p>
+<h3 id="信件和扫描件">信件和扫描件</h3>
 <p>原图与扫描件另存。附上人物、时间、地点、发生的事，以及哪些信息还不确定。OCR 得到的文字仍要校对；照片不能证明某人的内心，也不能单靠画面猜年代。</p>
 <pre><code class="language-text">照片编号：PHOTO-002
 原件：PHOTO-002_毕业合影.jpg
@@ -186,21 +198,23 @@ Key 由我在本机窗口填写，不放进这段聊天。
 <h2 id="保存隐私与本人审阅">保存、隐私与本人审阅</h2>
 <p>先和讲述者说清楚：是否录音，哪些材料可以给 AI，作品给谁看。家人版和公开版可以不同。对方可以跳过问题、删减内容，也可以决定不成书。</p>
 <h3 id="本机保存和在线处理">本机保存和在线处理</h3>
-<p>项目文字保存在当前设备、当前浏览器地址的 IndexedDB 中。本机服务只监听 <code>127.0.0.1</code>，没有公开账号系统、统计或广告。</p>
-<p>固定问题、填写、原文整理、手动编辑和导出不调用模型。点击 API 按钮时，勾选的答案和材料经本机服务发送给配置的 AI；审阅会附上当前章节。导入材料默认不勾选，答案也能取消选择。</p>
+<p>项目文字、上传的照片和照片位置保存在当前设备、当前浏览器地址的 IndexedDB 中。本机服务只监听 <code>127.0.0.1</code>，没有公开账号系统、统计或广告。</p>
+<p>固定问题、填写、原文整理、手动编辑和导出不调用模型。采访、写作会发送勾选的回答、材料和照片说明；扩写、审阅另附当前章节。安排照片只发送勾选的照片说明和章节文字。导入材料和新照片默认不勾选，答案也能取消选择。</p>
 <p>“交给我的 AI”默认不附私人材料，选择附上后才加入选中内容。复制到在线聊天工具，就是把其中的文字交给那家服务。对方怎样保存记录，按其服务规则执行；MFH 无法代替你删除上游记录。</p>
 <h3 id="key-不属于作品">Key 不属于作品</h3>
 <p>页面填写的 Key 默认只保存在本机服务本次运行的内存中，不进入浏览器项目、备份、文稿或交接包，关闭服务后需要重填。</p>
 <p>可选的 <code>user-config.local.json</code> 是本机明文配置，由使用者另行准备。它被 Git 忽略，静态服务也不会提供这个文件。需要持久配置时，请自己保护它，别把它放进分享包。</p>
 <h3 id="备份和换设备">备份和换设备</h3>
-<p>浏览器数据没有加密。隐私浏览、清除数据、更换浏览器、地址、端口或设备，都可能看不到原来的作品。先下载完整文字备份，再到新的位置导入；恢复会新增一本。</p>
-<p>备份包含回答、文字材料、章节和未提交的回答，不包含原始照片和录音。原件与成品需要另存，并留独立副本。</p>
+<p>浏览器数据没有加密。隐私浏览、清除数据、更换浏览器、地址、端口或设备，都可能看不到原来的作品。先下载「完整备份（含照片）」，再到新的位置导入；恢复会新增一本。</p>
+<p>备份包含回答、文字材料、未提交的回答、上传照片及说明、照片位置、章节和 AI 改写前的稿子。录音和没有上传的原件不在其中，需要另存。照片加入后备份会变大，导入文件上限为 100 MB。</p>
+<p>章节写好后，可以继续回答问题，再点「让 AI 扩写和润色」。AI 会利用新材料改善经过、衔接和措辞，旧稿保留在「改写前的稿子」中。恢复旧稿时也保留当前稿。每章最多保留 100 份改写稿，达到上限后先备份，再用新章节继续。手动编辑不会每次按键都生成历史版本，重要修改前请另存备份。</p>
 <h3 id="本人审阅">本人审阅</h3>
 <p>来源编号方便核对，但模型可能漏标或引用错误。检查姓名、时间、经过、原话和他人隐私。模糊的时间保持模糊，家人补充注明是谁说的。章节修改后会重新标为草稿。</p>
 <p>同事和战友只讲可分享的经历，不导入保密内容。真实采访、作品和私人材料放在仓库外或 <code>private/</code> 中。Git 忽略规则只是减少误提交，不是加密；公开发布前仍要检查。</p>
 <p><a id="production"></a></p>
 <h2 id="打印相册和长期保存">打印、相册和长期保存</h2>
-<p>先做一个样品。看得清、翻得舒服、本人愿意留下，再决定印多少本或买什么设备。MFH 可以导出文字、打开打印窗口另存 PDF；图文排版、下单和相册部署目前需要自己完成。</p>
+<p>先做一个样品。看得清、翻得舒服、本人愿意留下，再决定印多少本或买什么设备。MFH 可以按确认的位置导出图文稿、打印或另存 PDF；正式印刷的规格、封面、下单和相册设备部署仍需自己完成。</p>
+<p>简单成册：先在「整理成章节」展开图文预览，再到「保存与制作」点打印，选择「保存为 PDF」。检查每张照片和配文有没有跨页、文字是否好读。给排版人员：下载「图文成册包」，解压后一起交出 <code>memoir.md</code> 与 <code>photos/</code>，文稿中的相对路径指向对应原图。只下载 Markdown 不会附带照片文件。这个 ZIP 是出稿材料，不代替含原始回答、未采用照片和旧稿的完整备份。</p>
 <h3 id="出稿前">出稿前</h3>
 <ul>
 <li><input disabled="" type="checkbox"> 本人读过稿件，姓名、时间、原话与不确定项已核对。</li>
@@ -700,6 +714,21 @@ Key 由我在本机窗口填写，不放进这段聊天。
 <li>哪些不能交给外部 AI 或放进公开稿：</li>
 <li>后来改过什么，谁确认的：</li>
 </ul>
+<h4 id="每张照片的内容和意义">每张照片的内容和意义</h4>
+<p>页面上传照片后会分配 <code>P…</code> 编号。可以照着下面填写；已经在来源登记表里编过号，就在说明里写清对应关系。</p>
+<pre><code class="language-text">页面照片编号：P1（以页面实际编号为准）
+独立原件编号、位置：
+照片里的人、地点、约略时间：
+画面中正在发生什么：
+哪些内容已确认，哪些记不清：
+这张照片为什么值得留下：
+它让我想到的一件事：
+允许 AI 使用文字说明：是 / 否
+允许放进哪一版书：家庭版 / 公开版 / 暂不采用
+建议章节、段落与配文：由 AI 提议或自己选择
+本人是否核对了位置和配文：
+</code></pre>
+<p>内容和意义写好后，可以请 AI 安排位置，也可以先拿照片问一个小问题。比如“照片里这间铺子，第一次进去时在做什么？”回答留在采访记录里，整理章节时再用。不能从照片推断出的事情不要替本人填。</p>
 <p><a id="example"></a></p>
 <h3 id="虚构采访与工作稿示例">虚构采访与工作稿示例</h3>
 <p>以下人物、经历和材料编号全部虚构，用来说明怎样从采访写成工作稿。它不是应用运行记录，也不能用来证明模型效果。</p>
@@ -777,10 +806,29 @@ Key 由我在本机窗口填写，不放进这段聊天。
   &quot;uncertainties&quot;: [&quot;需要本人核对的细节&quot;]
 }
 </code></pre>
-<p>结果导入新增一章，默认草稿。本人核对后确认，不能由 AI 代确认。项目恢复使用 MFH 导出的 <code>.mfh.json</code>，不是任意 JSON；备份只含文字，照片和录音另存。</p>
+<p>普通章节结果导入新增一章，默认草稿。选择“扩写和润色当前章节”时，结果更新当前章并保留改写前的稿子。本人核对后确认，不能由 AI 代确认。项目恢复使用 MFH 导出的 <code>.mfh.json</code>，不是任意 JSON；完整备份包含上传照片，录音和未上传的原件另存。</p>
+<h4 id="写出故事再继续补故事">写出故事，再继续补故事</h4>
+<p>使用者的回答可能很短，也可能是口语、重复或想到哪儿说到哪儿。请整理先后，利用已经提供的动作、人物、物件和结果，把一章的开头、经过、衔接和结尾写顺。可以扩写已有事实的解释、删去重复、润色措辞，保留说话人的口吻。不要为“有文学性”添加没有依据的天气、对白、心理和转折。</p>
+<p>缺少重要经过时，指出缺的那一处，再问一个具体问题。使用者补答后继续改当前章，而不是每次都重开一段泛泛的介绍。事实仍不清楚就保留待确认，故事完整不等于必须编出完整答案。</p>
+<h4 id="把照片安排进章节">把照片安排进章节</h4>
+<p>页面会给你允许使用的 <code>P…</code> 照片说明与意义，以及勾选章节的标题、身份和编号段落。你没有收到原图，不要声称看过照片。按人写的内容选位置，写简短配文，解释它与该段故事的关系。不合适的照片可以暂不放入。</p>
+<p>返回格式如下，身份和编号必须从这次材料原样复制：</p>
+<pre><code class="language-json">{
+  &quot;placements&quot;: [
+    {
+      &quot;photo&quot;: &quot;P1&quot;,
+      &quot;chapterId&quot;: &quot;复制所提供章节的 chapterId&quot;,
+      &quot;afterParagraph&quot;: 1,
+      &quot;caption&quot;: &quot;只依据照片说明写配文&quot;,
+      &quot;reason&quot;: &quot;为什么适合放在这个段落之后&quot;
+    }
+  ]
+}
+</code></pre>
+<p><code>afterParagraph: 0</code> 表示章节开头，其他数值表示所给编号段落之后。每张照片最多安排一次。页面检查照片、章节和段落编号，导入后只是建议，使用者逐张确认才能进入打印稿。改写章节或修改说明后位置需要重新确认。本人也能直接在照片编辑窗口选章节和位置。</p>
 <h4 id="当前能力">当前能力</h4>
-<p>三语界面、文字问答与导入、可选浏览器语音输入、多本项目保存、章节编辑、API 采访/写作/审阅、手动 AI 交接、文字 JSON 备份、Markdown 和浏览器打印都已实现。</p>
-<p>音频文件 ASR、图片/OCR、读取聊天账号、自动 NAS/相册部署和自动印书尚未实现。在线 AI 使用会发送所选文字，不能称为全程离线。参见<a href="guide.html#architecture">技术设计</a>和<a href="guide.html#related-work">参考项目</a>。</p>
+<p>三语界面、文字问答与导入、可选浏览器语音输入、多本项目保存、章节编辑、API 采访/写作/扩写/审阅、手动 AI 交接、照片说明与 AI 位置建议、带照片的 JSON 备份、Markdown/照片 ZIP 和浏览器图文打印都已实现。AI 改写前的稿子可以回看和恢复。</p>
+<p>音频文件 ASR、图片识别/OCR、读取聊天账号、专业印刷排版、自动 NAS/相册部署和自动下单印书尚未实现。在线 AI 使用会发送所选文字，不发送照片原图，不能称为全程离线。参见<a href="guide.html#architecture">技术设计</a>和<a href="guide.html#related-work">参考项目</a>。</p>
 <p>接手开发时保持三语一致，按根目录 AGENTS.md 运行相关测试和真实浏览器检查。模拟传输测试不证明真实账号能连接，也不证明模型问得好。</p>
 <p><a id="writing-prompts"></a></p>
 <h3 id="手动采访写作和审阅提示词">手动采访、写作和审阅提示词</h3>
@@ -866,41 +914,48 @@ Key 由我在本机窗口填写，不放进这段聊天。
 <p><a id="architecture"></a></p>
 <h3 id="技术设计">技术设计</h3>
 <p>MFH 要解决的是：怎样把一次聊天变成能长期继续的写作过程。人说过的话留在材料里，模型处理这次选中的内容，写出的章节再交回本人修改、确认。更换 AI、暂停采访或换一台电脑，故事也能继续写。</p>
-<p>当前实现采用原生浏览器界面和 Node.js 本机服务。以下按 v0.2 实际代码说明。<a href="guide.html#related-work">参考项目与设计取舍</a>另有介绍。</p>
+<p>当前实现采用原生浏览器界面和 Node.js 本机服务。以下按 v0.3 实际代码说明。<a href="guide.html#related-work">参考项目与设计取舍</a>另有介绍。</p>
 <h4 id="可以走完的写作流程">可以走完的写作流程</h4>
-<pre><code class="language-text">回答问题 / 导入文字
+<pre><code class="language-text">回答问题 / 导入文字 / 上传照片并写说明
         ↓
-保留原文，分配来源编号 A… / M…
+保留原文与照片，分配来源编号 A… / M… / P…
         ↓
-使用者勾选本次需要的答案和材料
+使用者勾选本次需要的答案、材料、照片说明
         ↓
 准备任务与材料
    ├─ 复制给平时使用的 AI → 把结果贴回
    └─ 本机服务 → 自己配置的 API / 本地模型
         ↓
-章节草稿：保留不确定说法，请模型附来源编号
+章节草稿：继续追问、扩写与润色，保留旧稿和不确定说法
         ↓
-本人修改、核对 → 标为已审阅
+AI 建议照片位置 → 本人核对文字和图文位置
         ↓
-文字备份 / Markdown / 浏览器打印
+完整备份（含照片） / Markdown 与照片 ZIP / 浏览器图文打印
 </code></pre>
 <p>六类故事使用不同的问题库。每种语言共 156 个起始问题，其中一生回忆有 48 个；接入 AI 后，再围绕已讲出的细节追问。问题库与提示词共同工作，尚未自动计算采访覆盖率，也没有把记忆抽成知识图谱。</p>
 <h4 id="来源可追溯材料与章节分开保存">来源可追溯：材料与章节分开保存</h4>
-<p><code>app/core.js</code> 定义 <code>memory-for-human</code> v2 项目格式。采访答案、导入材料、章节分别存储。答案用 <code>A1</code>、<code>A2</code> 等编号，材料用 <code>M1</code>、<code>M2</code> 等编号。删除中间一项后，其他编号保持原样；备份和恢复也保留编号。</p>
-<p>章节改了很多遍，仍能按编号回到当时的回答。导入材料默认不送给 AI，答案可以取消勾选。<code>context()</code> 只组装选中的内容，审阅时再附上当前章节。</p>
+<p><code>app/core.js</code> 定义 <code>memory-for-human</code> v2 项目格式。采访答案、导入材料、照片、章节分别存储。答案用 <code>A1</code>、<code>A2</code> 等编号，材料用 <code>M1</code>、<code>M2</code>，照片说明用 <code>P1</code>、<code>P2</code>。删除中间一项后，其他编号保持原样；备份和恢复也保留编号。没有照片字段的旧 v2 备份仍能导入。</p>
+<p>章节改了很多遍，仍能按编号回到当时的回答。导入材料和照片默认不送给 AI，答案可以取消勾选。<code>context()</code> 只组装选中的文字和照片说明，扩写和审阅时再附上当前章节；历史稿不自动送给模型。</p>
 <p>写作提示要求关键事实带 <code>[A1]</code>、<code>[M1]</code> 等来源。程序保存编号和原文，但目前不会逐句验证模型是否引用正确。编号是核对入口，不能充当真实性证明。</p>
 <h4 id="模型解耦同一份材料能交给不同的-ai">模型解耦：同一份材料能交给不同的 AI</h4>
-<p><code>taskPrompt()</code> 将任务分为采访、单章写作、审阅和用法解释。本机 API 调用使用这些约定；手动交接也带上相应规则、语言和选中的材料。使用者可以继续用熟悉的聊天工具，不必先申请开发者账号。</p>
+<p><code>taskPrompt()</code> 将任务分为采访、单章写作、扩写润色、照片安排、审阅和用法解释。本机 API 调用使用这些约定；手动交接也带上相应规则、语言和选中的材料。使用者可以继续用熟悉的聊天工具，不必先申请开发者账号。</p>
 <p>API 路径由 <code>server.mjs</code> 转发。OpenAI 兼容协议与 Anthropic Messages 分别适配，服务商、模型和地址可以配置。本地模型需要使用者先运行兼容接口。MFH 使用现有模型，没有训练自己的基础模型。</p>
 <p>两条路径的共同结果是可编辑章节。手动带回的普通文字或约定 JSON 会新增一章，默认草稿。换模型时，材料和旧章节仍在本地工作区中。</p>
+<h4 id="持续写作采访和改写之间留下可回看的版本">持续写作：采访和改写之间留下可回看的版本</h4>
+<p>写作提示要求把零散口语变成有开头、经过和收尾的叙述，允许基于已知事实扩写解释、润色措辞和调整衔接。缺少事件、原话或心理依据时，转回采访，每轮补问一处。这里使用现有模型的生成能力与任务约定，没有另外训练“文学模型”，也没有自动证明叙述真实。</p>
+<p><code>replaceChapter()</code> 在应用 AI 改写前保存当前章的标题、内容、来源、审阅状态和时间，再写入新稿。<code>restoreRevision()</code> 恢复上一稿时保留当前稿，每章最多 100 份，达到上限明确报错。改写结果默认未审阅；请求期间用户修改当前章，返回结果不会覆盖修改。手动编辑不会为每次按键建立版本，重要修改前需另存完整备份。</p>
+<h4 id="照片安排让模型提建议由程序检查位置本人决定采用">照片安排：让模型提建议，由程序检查位置、本人决定采用</h4>
+<p>照片存为本机数据，保留上传字节；只接受 JPG、PNG、WebP，限制文件类型、签名与大小。说明记录画面内容和个人意义，位置记录章节身份、段落编号、配文、原因与确认状态。</p>
+<p><code>photoContext()</code> 只给出勾选的说明和勾选章节的编号段落，不带图片数据、原文件名、其他章节或采访全文。模型依据主题关联和叙述顺序返回 <code>placements</code> JSON。<code>validatePhotoPlan()</code> 检查选中照片、允许章节、段落范围、重复安排与文字长度；一项不合格就不采用整份建议。模型不会看图，这不是视觉识别或自动事实核验。</p>
+<p>建议先显示，本人逐张确认后才参与 <code>chapterBlocks()</code> 的图文顺序。改写章节或修改照片说明会取消位置确认；删除章节只解除照片位置，原图仍留在项目中。打印使用安全 DOM 节点，配文按文字展示。成册包用内置 ZIP 写入原图和带相对路径的 Markdown，不引入前端依赖。浏览器处理分页；封面、目录、出血和印店规格仍需正式排版。</p>
 <h4 id="人工审阅确认状态跟着章节走">人工审阅：确认状态跟着章节走</h4>
 <p>每章保存来源类型、内容、更新时间和 <code>approved</code> 状态。AI 生成、手动贴入或原文整理出的章节，初始都是草稿。本人核对后可以标为已审阅；再次修改，状态回到草稿。</p>
 <p>AI 审阅任务会找无依据的细节、时间冲突和隐私问题，返回需要检查的句子。它没有批准章节的权限。当前确认状态针对整章，还没有逐条事实的确认表。</p>
 <p>材料中的命令按素材处理，不能改变写作规则，也不能获得读取其他项目或密钥的权限。这一约定写入提示词；尚未做完整的提示注入对抗评测。</p>
 <h4 id="可恢复的数据保存进度留出搬迁入口">可恢复的数据：保存进度，留出搬迁入口</h4>
-<p><code>app/app.js</code> 用 IndexedDB 保存多本回忆录，包括回答、导入文字、草稿、当前章节和未提交的回答。<code>publicProject()</code> 按字段导出，API Key 不属于项目格式。</p>
+<p><code>app/app.js</code> 用 IndexedDB 保存多本回忆录，包括回答、导入文字、照片与位置、草稿与 AI 改写前的稿子、当前章节和未提交的回答。<code>publicProject()</code> 按字段导出，API Key 不属于项目格式。</p>
 <p>恢复时，<code>validateProject()</code> 检查格式、版本和大小，为恢复的项目生成新身份，原项目保留。过大的材料明确报错，不在后台截短。稳定来源编号保留引用，新项目身份避免覆盖；两者各有用途。</p>
-<p>这是文字项目备份。照片、录音和扫描件没有装进 JSON，必须另存。IndexedDB 没有加密；不同浏览器、端口和文件模式分别保存数据，迁移前需要下载备份。</p>
+<p>完整备份包括上传照片，恢复时把位置中的章节身份映射到新项目，来源编号与照片字节不变。录音、未上传照片和其他扫描件另存。照片每张最多 5 MB，每本共 30 MB、最多 100 张；JSON 导入文件最多 100 MB。IndexedDB 没有加密；不同浏览器、端口和文件模式分别保存数据，迁移前需要下载备份。</p>
 <h4 id="本机运行减少依赖分开作品与密钥">本机运行：减少依赖，分开作品与密钥</h4>
 <p>前端是 <code>index.html</code> 和 <code>app/</code> 中的经典脚本，无需构建。双击 HTML 可以填写、整理和备份。API 使用 Node.js 22+ 本机服务，只依赖内置模块，监听 <code>127.0.0.1</code>。</p>
 <p>Windows 启动器优先使用现有 Node.js，缺少时下载官方 LTS，核对 SHA-256 后解压。运行环境留在项目的私有目录中。</p>
@@ -946,7 +1001,7 @@ Key 由我在本机窗口填写，不放进这段聊天。
 </tbody></table></div>
 <p>核心与服务测试覆盖备份、选材、大小限制、本机访问控制和模拟 API 传输。真实浏览器检查覆盖填写、三语切换、交接、恢复、编辑与打印。真实模型的追问质量、长篇效果和各账号的连通性需要分别验证。</p>
 <h4 id="后续技术工作">后续技术工作</h4>
-<p>音频转写要保存原音位置并提供校对入口；OCR 要保留原图与识别文本；多人讲述要记录各自版本和确认人。成品排版需要实际打印样本。这些都是后续开发，现有文字导入和打印按钮还不能完成它们。</p>
+<p>音频转写要保存原音位置并提供校对入口；OCR 要在现有照片原件旁保留识别文字；多人讲述要记录各自版本和确认人。专业印刷排版需要实际样书验证，现有图文打印尚未提供封面、目录或印厂规格预检。</p>
 <p><a id="api"></a></p>
 <h3 id="接口依据和验证范围">接口依据和验证范围</h3>
 <p>接口资料查阅于 2026-10-12。页面预设方便开始，模型名称可以修改。是否开通、是否有额度、当地能否连接，要看使用者自己的账号和服务。</p>
@@ -987,7 +1042,7 @@ Key 由我在本机窗口填写，不放进这段聊天。
 <p>项目选择 Chat Completions 以复用兼容服务，Claude 使用独立 Messages 适配；不把所有服务都当成同一种协议。</p>
 <h4 id="模拟服务和浏览器检查">模拟服务和浏览器检查</h4>
 <p>本机静态服务、会话认证、来源限制、配置验证、OpenAI 格式与 Claude 格式的请求和解析、密钥不进入对外配置响应、服务商错误内容不回显，以及断开连接。验证使用模拟响应，不向真实服务发送私人材料或真实 Key。</p>
-<p>浏览器验证覆盖三语切换、采集和编辑、AI 结果导入、文字备份恢复、Markdown、打印稿和解释/交接入口。语音输入依赖设备与浏览器，没有在每个设备上实测；Windows 首次下载路径需要实际联网下载条件。</p>
+<p>浏览器验证覆盖三语切换、采集和编辑、AI 结果导入、照片上传与说明、手动和模拟 API 位置建议、人工确认、图文备份恢复、Markdown/照片 ZIP、打印与 PDF、改写旧稿恢复和请求期间修改保护。API 上游全部模拟，不代表真实模型已验证。语音输入依赖设备与浏览器，没有在每个设备上实测；Windows 首次下载路径需要实际联网下载条件。</p>
 <h4 id="需要真实使用再确认的部分">需要真实使用再确认的部分</h4>
 <p>目前没有逐一实测使用者真实账号的余额、模型权限和地域连通性，也没有完成长时间、大规模真实采访。兼容服务的参数支持还需分别核对。</p>
 <p>服务仅监听 <code>127.0.0.1</code>。在线调用时所选内容会发给配置的服务；Key 默认保存在服务运行内存中，不保存在浏览器项目或导出包。可选本机配置文件由使用者另外提供。</p>
@@ -1075,10 +1130,12 @@ Key 由我在本机窗口填写，不放进这段聊天。
 <p>贡献需能按本项目的 <a href="../LICENSE">Apache-2.0 / MIT 双许可</a> 分发，并保留必要的<a href="guide.html#doc-notices">第三方声明</a>。</p>
 <p><a id="roadmap"></a></p>
 <h3 id="当前进度与后续工作">当前进度与后续工作</h3>
-<h4 id="v02-已经可以用的部分">v0.2 已经可以用的部分</h4>
+<h4 id="v03-已经可以用的部分">v0.3 已经可以用的部分</h4>
 <p>本机界面支持中文、英文、西班牙语，六类采访各有问题和模板。现在可以填写、导入文字、保存多本回忆录、逐章编辑、手动交给自己的 AI，或接入 API 采访和写作。章节有本人审阅状态，可以备份恢复、导出 Markdown 和浏览器打印。Windows 启动器可以准备官方 Node.js LTS。</p>
 <p>每种语言的问题库从 60 个扩为 156 个，一生回忆从 18 个扩为 48 个。AI 追问规则改为先补具体场景，再转到未聊的话题，一次只问一个问题。是否问得合适，还需要真实采访验证。</p>
 <p>API 传输测试使用模拟响应，没有逐一验证使用者真实账号。语音输入取决于浏览器，不是上传录音的自动转写。</p>
+<p>照片现在可以直接上传到本机工作区，填写内容和意义，交给自己的 AI 建议章节与段落位置。本人确认后进入图文预览、浏览器打印和包含原图的 ZIP。完整 JSON 备份带上照片和位置，恢复仍新增一本。模型读取的是人写的说明，没有识图和 OCR。</p>
+<p>写作规则也从“整理材料”扩为“持续采访后改写”：根据已讲的经过补足叙述、调整衔接和措辞，缺事实就继续问。当前章可让 AI 扩写和润色，改写前的稿子留在章内；位置确认会随着文字修改失效，出稿前重新核对。</p>
 <h4 id="先验证一章">先验证一章</h4>
 <p>找愿意试用的家庭，分别完成一段恋人故事和一章老人的经历。看他们能否打开工具、理解问题、找到自己的 AI、保存恢复，以及把稿子改成像本人说的话。记录卡住的步骤，再改界面和问法。这些使用验证尚未完成。</p>
 <h4 id="后续开发">后续开发</h4>
@@ -1096,8 +1153,8 @@ Key 由我在本机窗口填写，不放进这段聊天。
 <td>人名、方言、多发言人和时间位置</td>
 </tr>
 <tr>
-<td>图片与 OCR</td>
-<td>保存原图，识别文本单独核对</td>
+<td>图片识别与 OCR</td>
+<td>在现有照片保存和人工说明之上，增加可核对的识别文字</td>
 <td>误识别可修改，原件不丢</td>
 </tr>
 <tr>
@@ -1116,8 +1173,8 @@ Key 由我在本机窗口填写，不放进这段聊天。
 <td>不替多人决定哪个版本真实</td>
 </tr>
 <tr>
-<td>图文排版与存档</td>
-<td>稿件能制成实物、以后还能找回</td>
+<td>专业印刷排版与存档</td>
+<td>在已有图文稿上补封面、目录、印刷规格及长期存档</td>
 <td>实际打样、备份恢复与设备兼容</td>
 </tr>
 </tbody></table></div>
@@ -1145,7 +1202,7 @@ Key 由我在本机窗口填写，不放进这段聊天。
 <section id="doc-notices"><h2 id="third-party-notices">Third-party notices</h2>
 <p>Memory for Human&#39;s original code, documentation, and assets are available under Apache-2.0 OR MIT, at the recipient&#39;s choice. Third-party material retains its original terms.</p>
 <h3 id="archify-diagram-viewer">Archify diagram viewer</h3>
-<p><code>docs/overview.html</code> was generated with Archify 2.17 and includes its viewer runtime. The localized overview SVG files are exports derived from that diagram. The current Chinese README flowchart in assets/overview.svg is authored separately and follows the project&#39;s dual license. Archify&#39;s MIT notice is retained below; this does not change the license of Memory for Human&#39;s own application.</p>
+<p><code>docs/overview.html</code> was generated with Archify 2.17 and includes its viewer runtime. The overview SVG files, including the restored Chinese README diagram in <code>assets/overview.svg</code>, are exports derived from that diagram. Archify&#39;s MIT notice is retained below; this does not change the license of Memory for Human&#39;s own application.</p>
 <p>Source: <a href="https://github.com/tt-a1i/archify">https://github.com/tt-a1i/archify</a></p>
 <pre><code class="language-text">MIT License
 

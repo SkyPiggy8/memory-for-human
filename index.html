@@ -63,6 +63,7 @@
           <p class="hint" data-i18n="voiceNote"></p>
           <div class="subsection"><h3 data-i18n="memories"></h3><div id="answers"></div></div>
           <div class="subsection"><h3 data-i18n="materials"></h3><p class="hint" data-i18n="materialHint"></p><div class="row"><button data-action="addText" data-i18n="addText"></button><button data-action="importText" data-i18n="importText"></button></div><p class="hint" data-i18n="fileHint"></p><div id="materials"></div></div>
+          <div class="subsection"><h3 data-i18n="photos"></h3><p class="hint" data-i18n="photosHint"></p><button data-action="uploadPhotos" data-i18n="uploadPhotos"></button><div id="photos" class="photo-grid spaced"></div></div>
           <p class="notice" data-i18n="sendNotice"></p>
         </section>
         <section class="card" data-panel="2" hidden>
@@ -76,15 +77,18 @@
             <div class="row"><span class="badge" id="chapterStatus"></span><span class="hint" id="chapterOrigin"></span></div>
             <div class="field"><label for="editChapterTitle" data-i18n="chapterTitle"></label><input id="editChapterTitle" maxlength="300"></div>
             <div class="field"><label for="chapterText" data-i18n="draftLabel"></label><textarea id="chapterText" class="chapter-text"></textarea></div>
-            <div class="row spaced"><button data-action="reviewAI" data-ai data-i18n="reviewAI"></button><button class="primary" id="approvalButton" data-action="approve"></button><button class="quiet danger small" data-action="deleteChapter" data-i18n="remove"></button></div>
+            <div class="row spaced"><button data-action="rewriteAI" data-ai data-i18n="rewriteAI"></button><button data-action="reviewAI" data-ai data-i18n="reviewAI"></button><button class="primary" id="approvalButton" data-action="approve"></button><button class="quiet danger small" data-action="deleteChapter" data-i18n="remove"></button></div>
+            <details id="previousDraft" class="subsection" hidden><summary data-i18n="previousDraft"></summary><textarea id="previousText" class="chapter-text" readonly data-label="previousDraft"></textarea><button class="spaced" data-action="restoreDraft" data-i18n="restoreDraft"></button></details>
             <section id="reviewPanel" class="subsection" hidden><h3 data-i18n="reviewResult"></h3><div id="reviewOutput" class="review-output"></div></section>
           </div>
+          <section class="subsection"><h3 data-i18n="photoLayout"></h3><p class="hint" data-i18n="photoLayoutHint"></p><div id="photoChapters" class="photo-chapters"></div><div class="row spaced"><button data-action="arrangePhotos" data-ai data-i18n="arrangePhotos"></button><button data-action="handoffPhotos" data-i18n="handoffPhotos"></button></div><div id="photoProposals" class="photo-grid spaced"></div><div id="placedPhotos" class="photo-grid spaced"></div><details class="subsection"><summary data-i18n="bookPreview"></summary><div id="bookPreview" class="book-preview"></div></details></section>
         </section>
         <section class="card" data-panel="3" hidden>
           <div class="section-head"><h2 data-i18n="exportTitle"></h2><p class="hint" data-i18n="exportHint"></p></div>
           <div class="export-option"><div><h3 data-i18n="backup"></h3><p class="hint" data-i18n="backupHint"></p></div><button class="primary" data-action="backup" data-i18n="backup"></button></div>
           <div class="export-option"><div><h3 data-i18n="restore"></h3><p class="hint" data-i18n="restoreHint"></p></div><button data-action="restore" data-i18n="restore"></button></div>
           <div class="export-option"><div><h3 data-i18n="exportMD"></h3><p class="hint" data-i18n="exportMDHint"></p></div><button data-action="exportMD" data-i18n="exportMD"></button></div>
+          <div class="export-option"><div><h3 data-i18n="exportBook"></h3><p class="hint" data-i18n="exportBookHint"></p></div><button data-action="exportBook" data-i18n="exportBook"></button></div>
           <div class="export-option"><div><h3 data-i18n="print"></h3><p class="hint" data-i18n="printHint"></p></div><button data-action="print" data-i18n="print"></button></div>
           <p class="hint" data-i18n="printing"></p>
           <div class="subsection"><h3 data-i18n="bom"></h3><ol id="checklist" class="checklist"></ol><a id="productionLink" class="help-link" href="preview/guide.html#production" target="_blank" data-i18n="productionDoc"></a></div>
@@ -99,7 +103,7 @@
       </section>
       <section class="card" id="handoffPanel" hidden>
         <div class="section-head"><h1 data-i18n="handoffTitle"></h1><p class="hint" data-i18n="handoffIntro"></p></div>
-        <div class="field"><label for="handoffTask" data-i18n="handoffTask"></label><select id="handoffTask"><option value="interview" data-i18n="tasks.interview"></option><option value="draft" data-i18n="tasks.draft"></option><option value="review" data-i18n="tasks.review"></option><option value="setup" data-i18n="tasks.setup"></option></select></div>
+        <div class="field"><label for="handoffTask" data-i18n="handoffTask"></label><select id="handoffTask"><option value="interview" data-i18n="tasks.interview"></option><option value="draft" data-i18n="tasks.draft"></option><option value="rewrite" data-i18n="tasks.rewrite"></option><option value="photos" data-i18n="tasks.photos"></option><option value="review" data-i18n="tasks.review"></option><option value="setup" data-i18n="tasks.setup"></option></select></div>
         <label class="material-choice"><input id="handoffInclude" type="checkbox"><span data-i18n="includeMemories"></span></label>
         <p class="hint" data-i18n="handoffPrivacy"></p><textarea id="handoffText" class="handoff-text" readonly aria-label="AI instructions"></textarea>
         <div class="row spaced"><button class="primary" data-action="copyHandoff" data-i18n="copyInstructions"></button><button data-action="downloadHandoff" data-i18n="downloadInstructions"></button></div>
@@ -125,7 +129,9 @@
   </dialog>
   <dialog id="materialDialog"><div class="dialog-head"><h2 data-i18n="addText"></h2><button class="quiet small" data-close="materialDialog" data-i18n="close"></button></div><form id="materialForm"><div class="field"><label for="materialName" data-i18n="materialName"></label><input id="materialName" maxlength="300" required></div><div class="field"><label for="materialContent" data-i18n="materialContent"></label><textarea id="materialContent" rows="10" required></textarea></div><button class="primary spaced" data-i18n="add"></button></form></dialog>
   <dialog id="editAnswerDialog"><div class="dialog-head"><h2 data-i18n="edit"></h2><button class="quiet small" data-close="editAnswerDialog" data-i18n="close"></button></div><form id="editAnswerForm"><div class="field"><label for="editQuestion" data-i18n="question"></label><textarea id="editQuestion" rows="2"></textarea></div><div class="field"><label for="editAnswer" data-i18n="answerLabel"></label><textarea id="editAnswer" rows="10"></textarea></div><button class="primary spaced" data-i18n="saveAnswer"></button></form></dialog>
+  <dialog id="photoDialog"><div class="dialog-head"><h2 data-i18n="photoDetails"></h2><button class="quiet small" data-close="photoDialog" data-i18n="close"></button></div><form id="photoForm"><img id="photoImage" class="photo-edit-image" alt=""><div class="field"><label for="photoDescription" data-i18n="photoDescription"></label><textarea id="photoDescription" rows="3" maxlength="5000" required data-placeholder="photoDescriptionHint"></textarea></div><div class="field"><label for="photoMeaning" data-i18n="photoMeaning"></label><textarea id="photoMeaning" rows="3" maxlength="5000" required data-placeholder="photoMeaningHint"></textarea></div><label class="material-choice"><input id="photoInclude" type="checkbox"><span data-i18n="photoInclude"></span></label><details class="subsection"><summary data-i18n="manualPlacement"></summary><div class="field"><label for="photoChapter" data-i18n="photoChapter"></label><select id="photoChapter"></select></div><div class="field"><label for="photoPosition" data-i18n="photoPosition"></label><select id="photoPosition"></select></div><div class="field"><label for="photoCaption" data-i18n="photoCaption"></label><textarea id="photoCaption" maxlength="2000" rows="2"></textarea></div><label class="material-choice"><input id="photoConfirm" type="checkbox"><span data-i18n="photoConfirm"></span></label></details><button class="primary spaced" data-i18n="savePhoto"></button></form></dialog>
   <input type="file" id="textFile" accept=".txt,.md,.csv,.json" multiple hidden>
+  <input type="file" id="photoFile" accept="image/jpeg,image/png,image/webp" multiple hidden>
   <input type="file" id="backupFile" accept=".json" hidden>
   <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
   <section id="printView" class="print-view"></section>

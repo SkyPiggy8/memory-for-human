@@ -18,9 +18,9 @@ Prefer the page’s temporary in-memory configuration. If persistent local confi
 
 ## Actual capabilities
 
-Three languages, six themes, template questions and API follow-ups, text imports, optional browser dictation, multiple locally saved browser projects, editable chapters, API drafting and checking, manual AI handoff, full text JSON backups, Markdown, and browser printing.
+Three languages, six themes, text workflows, browser dictation where supported, multiple local projects, API interviewing, drafting, rewriting and review, manual handoff, uploaded photos with descriptions and significance, AI position suggestions requiring human confirmation, complete JSON backup with photos and retained rewrites, Markdown/photo ZIP and illustrated browser printing.
 
-Uploaded-audio transcription, image/OCR, reading chat accounts, automatic NAS/album setup, and automatic book printing are not implemented. Do not claim them. Online AI requests send selected material; the app lets the user select additional sources.
+Uploaded-audio transcription, image recognition/OCR, reading chat accounts, professional print layout, automatic NAS/album setup and book ordering are not implemented. Online AI receives selected text only, including permitted photo descriptions, never original image pixels.
 
 ## Writing and returning results
 
@@ -37,7 +37,11 @@ Ordinary chapter text is easiest, or return:
 }
 ```
 
-No Key belongs in the result. Import adds a new draft chapter; it does not perform narrator review. Restoring a project needs MFH’s `.mfh.json`, not arbitrary JSON. Backups contain project text; original media is saved separately.
+No Key belongs in the result. Ordinary import adds a new draft. A selected rewrite task updates the current chapter and retains its previous version, without narrator approval. Improve narrative flow and expand supported explanations; ask ONE question about a missing scene instead of inventing events or feelings. Restoring needs MFH’s `.mfh.json`. Backups include uploaded photos and retained rewrites; keep recordings and media not uploaded separately.
+
+## Photo positions
+
+Use the selected written descriptions and significance, and only supplied chapters. You have not seen the image pixels. Return JSON with `placements`, each containing `photo` (the supplied P ID), `chapterId` (copied exactly), `afterParagraph` (0 for the opening or a supplied paragraph number), `caption` and `reason`. Include each photo at most once; omit photos that do not fit. Example: `{"placements":[{"photo":"P1","chapterId":"COPY_SUPPLIED_ID","afterParagraph":1,"caption":"Supported caption","reason":"Why it fits here"}]}`. Suggestions require human confirmation. Changing chapter text or descriptions invalidates photo approval.
 
 ## Continuing development
 

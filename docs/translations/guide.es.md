@@ -14,7 +14,13 @@ La aplicación lee texto `.txt`, `.md`, `.csv` y `.json`, hasta 1 MB por archivo
 
 Los chats escritos no necesitan reconocimiento de voz. Exporta o copia fragmentos relevantes con los métodos permitidos por la herramienta original. No se importan automáticamente todos los chats. Conserva las grabaciones, transcríbelas con tu herramienta y corrige nombres y hechos. El dictado del navegador no equivale a transcribir un archivo subido.
 
-Las fotos necesitan descripciones: quién, cuándo, dónde y qué se sabe. Conserva las dudas. La aplicación no lee imágenes, PDF ni cartas manuscritas. Los originales se guardan en tu carpeta y no dentro de la copia de textos.
+Sube fotos JPG, PNG o WebP en “Cuenta tu historia” y explica qué aparece y qué significado tienen para ti. Conserva las dudas. Hasta 5 MB por foto, 30 MB y 100 fotos por libro. Se conservan los archivos subidos en este ordenador; no hay reconocimiento de imágenes, PDF ni cartas manuscritas. Guarda aparte originales mayores y grabaciones.
+
+### Colocar fotos y seguir escribiendo
+
+Selecciona las descripciones y los capítulos que puede leer la IA. En “Crear un capítulo”, pide posiciones o entrega la tarea a tu propia IA. Devuelve capítulo, párrafo, pie de foto y motivo. Revisa y confirma cada propuesta; solo las posiciones confirmadas entran en la vista previa, la impresión y el ZIP. Edita la foto para elegir tú la posición. Si cambia el capítulo o la descripción, confirma de nuevo. Nunca se incluyen las imágenes originales en peticiones de API ni instrucciones de entrega.
+
+Tras añadir respuestas, pide a la IA ampliar y mejorar el capítulo actual. Debe unir los detalles aportados y preguntar por lo que falta sin inventar hechos. Se conserva el borrador anterior; recuperarlo también conserva el actual. Hasta 100 reescrituras por capítulo. Las pulsaciones manuales no crean versiones separadas: haz una copia antes de cambios importantes.
 
 ### IA y revisión
 
@@ -26,7 +32,7 @@ Las peticiones y entregas a una IA en línea envían los textos incluidos a ese 
 
 ### Guardar y recuperar
 
-Descarga regularmente la copia completa de los textos: contiene respuestas, fuentes de texto, capítulos y una respuesta sin terminar; no contiene Keys ni archivos originales. Recuperar crea unas memorias nuevas y mantiene lo anterior. Markdown sirve para editar y compartir, no para recuperar todo el proyecto.
+Descarga la copia completa: contiene respuestas, textos, respuestas sin terminar, fotos subidas, descripciones, posiciones, capítulos y reescrituras conservadas; nunca la API Key. Recuperar crea un libro nuevo y mantiene lo anterior. La importación admite hasta 100 MB. Guarda aparte grabaciones y archivos no subidos. El ZIP del libro contiene memoir.md y las fotos confirmadas en photos/; entrégalos juntos para maquetar. Markdown solo no incluye archivos de imagen ni recupera el proyecto.
 
 El almacenamiento depende del navegador y de la dirección. Abrir el archivo, cambiar de puerto o usar otro navegador puede mostrar otro almacenamiento. Haz una copia antes de cambiar. La navegación privada y el borrado de datos pueden eliminar el trabajo local.
 
@@ -106,7 +112,7 @@ Con personas mayores, empieza con una sesión breve y un tema. Respeta el silenc
 
 ## Diseño técnico
 
-MFH convierte una entrevista en un proyecto que se puede continuar. Las respuestas originales se guardan aparte de los borradores. La persona elige qué recibe el modelo, modifica el resultado y lo revisa. Esta página describe v0.2; los [proyectos de referencia](guide.es.md#related-work) explican su posición.
+MFH convierte una entrevista en un proyecto que se puede continuar. Las respuestas originales se guardan aparte de los borradores. La persona elige qué recibe el modelo, modifica el resultado y lo revisa. El flujo de textos explicado abajo se amplía en v0.3 con descripciones de fotos, posiciones confirmadas y reescrituras conservadas, descritas arriba; los [proyectos de referencia](guide.es.md#related-work) explican su posición.
 
 ### Proceso de trabajo
 
@@ -140,7 +146,7 @@ Las instrucciones dentro de una fuente se tratan como datos. La regla está en l
 
 `app/app.js` guarda varios proyectos en IndexedDB, incluida la respuesta sin enviar y el capítulo activo. `publicProject()` exporta campos permitidos sin credenciales. `validateProject()` comprueba formato, versión y tamaño. Recuperar crea una identidad nueva, conserva los identificadores de fuente y mantiene la obra anterior. Los datos demasiado grandes se rechazan, no se recortan en silencio.
 
-La copia contiene textos, no fotos, escaneos ni grabaciones originales. El navegador no cifra estos datos. Otro navegador, dirección, puerto o modo de archivo puede tener otro espacio de guardado; descarga una copia antes de cambiar.
+La copia v0.3 también incluye fotos subidas, posiciones confirmadas o pendientes y reescrituras conservadas. Al recuperar, las posiciones se asocian a las nuevas identidades de los capítulos. Las grabaciones y archivos no subidos se guardan aparte. El navegador no cifra estos datos: haz una copia antes de cambiar navegador, dirección o puerto.
 
 ### Ejecución local y Key
 
@@ -152,7 +158,7 @@ El servidor comprueba Host, Origin y un token de sesión por ejecución. Solo si
 
 Se escribe por capítulos con fuentes elegidas. La extensión orienta; no justifica inventar. Un JSON de materiales de más de 100.000 caracteres exige reducir o dividir. Es un límite de caracteres, no un presupuesto automático de tokens por modelo. Los resultados cortados conservan el aviso de límite de salida.
 
-Fechas, nombres y repeticiones entre capítulos requieren coordinación humana. Resúmenes automáticos, búsqueda semántica y revisión de coherencia del libro siguen pendientes. Tampoco están implementados ASR de archivos, OCR, aprobación de hechos por varios narradores ni maquetación ilustrada.
+Fechas, nombres y repeticiones entre capítulos requieren coordinación humana. Resúmenes automáticos, búsqueda semántica y revisión de coherencia del libro siguen pendientes. No hay ASR de archivos, OCR, aprobación de hechos por varios narradores ni maquetación profesional para imprenta. En v0.3 sí hay posiciones de fotos, impresión básica con imágenes y ZIP de Markdown/fotos; confirma las especificaciones con la imprenta.
 
 ### Archivos principales
 

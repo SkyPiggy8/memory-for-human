@@ -14,7 +14,13 @@ The app reads text from `.txt`, `.md`, `.csv`, and `.json`, up to 1 MB per file.
 
 Chat text does not need speech recognition. Export or copy relevant excerpts through the original tool’s allowed methods. The app is not a universal chat importer. For recordings, preserve the original, transcribe with your own tool, and correct names and important facts. Browser dictation is separate from uploaded-audio transcription.
 
-Photos need captions describing who, when, where, and what is known. Preserve uncertainty. The current app does not read images, PDFs, or handwritten letters. Original media stays in your own folder, outside the text backup.
+Upload JPG, PNG or WebP photos in “Tell your story”, then describe what is shown and why the photo matters. Preserve uncertainty. Each photo can be up to 5 MB, with 30 MB and 100 photos per memoir. The app preserves uploaded bytes locally; it does not recognize images, PDFs or handwritten letters. Keep larger originals and recordings separately.
+
+### Place photos and continue writing
+
+Select photo descriptions AI may use and chapters it may read. In “Make a chapter”, ask AI to arrange photos or hand the task to your own AI. It returns a chapter, paragraph position, caption and reason. Review and confirm each suggestion; only confirmed positions enter the preview, print copy and book ZIP. Edit a photo to choose its position yourself. Changing a chapter or photo description requires confirmation again. Original image pixels are never included in API requests or handoff instructions.
+
+Ask AI to expand and polish the current chapter after adding answers. It should improve narrative flow using supplied details and ask about gaps, without inventing facts. The previous draft is retained; restoring it also keeps the current draft. Up to 100 rewrites are retained per chapter. Manual keystrokes are not separate history versions, so back up before important edits.
 
 ### AI and review
 
@@ -26,7 +32,7 @@ Online requests and online handoffs send their included text to that service. Lo
 
 ### Save and recover
 
-Download a complete text backup regularly. It includes answers, text sources, chapters, and an unfinished answer; not API Keys or original media. Restore creates a new memoir and keeps existing work. Markdown is for editing and sharing, not a complete project restore file.
+Download a complete backup regularly. It includes answers, text sources, unfinished answers, uploaded photos and descriptions, positions, chapters and retained rewrites; never API Keys. Restore creates a new memoir and keeps existing work. Import accepts up to 100 MB. Recordings and media not uploaded remain separate. The book ZIP contains memoir.md and confirmed original images in photos/. Keep both together for layout work. Markdown alone does not include image files or restore the project.
 
 Browser storage belongs to a particular browser and address. Direct file mode, another port, and another browser may have different storage. Back up before moving. A browser’s private session or deleted data can remove local work.
 
@@ -106,7 +112,7 @@ For an older narrator, begin with a brief session and one subject. Allow silence
 
 ## Technical design
 
-MFH turns an interview into a writing project that can be continued later. Original answers remain separate from drafts. The user chooses what the model receives, edits the result, and reviews it. This page describes the v0.2 implementation; [related work](guide.en.md#related-work) explains its position.
+MFH turns an interview into a writing project that can be continued later. Original answers remain separate from drafts. The user chooses what the model receives, edits the result, and reviews it. The text workflow below is extended in v0.3 by photo descriptions, confirmed placement and retained rewrites, described above; [related work](guide.en.md#related-work) explains its position.
 
 ### The working process
 
@@ -140,7 +146,7 @@ Source instructions are treated as data, not work rules. This constraint is incl
 
 `app/app.js` stores multiple projects in IndexedDB, including unfinished answers and the active chapter. `publicProject()` exports allowed fields without credentials. `validateProject()` checks format, version, and size; restore creates a new project identity while retaining source IDs and existing work. Oversized data is rejected rather than silently shortened.
 
-Backups contain text, not original photos, scans, or recordings. Browser storage is not encrypted. Different browsers, origins, ports, and direct-file mode can have separate storage: back up before moving.
+The v0.3 backup also contains uploaded photos, their confirmed or pending positions, and retained rewrites. Restored chapter identities are remapped for photo positions. Recordings and media not uploaded remain separate. Browser storage is not encrypted. Back up before changing browsers, addresses or ports.
 
 ### Local runtime and credentials
 
@@ -152,7 +158,7 @@ The server checks Host, Origin, and a per-run session token. Static serving uses
 
 Work chapter by chapter with selected sources. A requested length is guidance, not permission to invent. Source JSON over 100,000 characters triggers a request to reduce or split material. This is a character limit, not automatic model-specific token budgeting. An output-limit notice remains in truncated results.
 
-Cross-chapter dates, names, and repetition still need human coordination. Automatic summaries, semantic retrieval, and whole-book consistency checks are future work. Audio-file ASR, OCR, multiple-narrator fact review, and illustrated layout also remain unimplemented.
+Cross-chapter dates, names, and repetition still need human coordination. Automatic summaries, semantic retrieval, and whole-book consistency checks are future work. Audio-file ASR, OCR, multiple-narrator fact review and professional print layout remain unimplemented. Photo placement, basic illustrated printing and a Markdown/photo ZIP are available in v0.3; confirm shop specifications separately.
 
 ### Where the work lives
 
