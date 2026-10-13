@@ -557,3 +557,7 @@ window.MFH_QUESTIONS = {
     ]
   }
 };
+
+Object.assign(window.MFH_LOCALES.zh, {draftBeforeQuestion:'这段回答还没保存',draftBeforeQuestionHint:'先把这段文字留在原来的问题下，再继续。也可以留下来慢慢写。',keepInterviewDraft:'继续写这段',saveInterviewDraft:'保存回答并继续',draftSaveFailed:'保存没有成功，问题和文字都还在。请重试，或返回继续写。'});
+Object.assign(window.MFH_LOCALES.en, {draftBeforeQuestion:'This answer has not been saved yet',draftBeforeQuestionHint:'Keep these words with the original question before continuing. You can also stay and keep writing.',keepInterviewDraft:'Keep writing',saveInterviewDraft:'Save answer and continue',draftSaveFailed:'Saving failed. Your question and words are still here. Try again or return to writing.'});
+Object.assign(window.MFH_LOCALES.es, {draftBeforeQuestion:'Esta respuesta aún no está guardada',draftBeforeQuestionHint:'Guarda estas palabras con la pregunta original antes de continuar. También puedes quedarte y seguir escribiendo.',keepInterviewDraft:'Seguir escribiendo',saveInterviewDraft:'Guardar respuesta y continuar',draftSaveFailed:'No se pudo guardar. La pregunta y el texto siguen aquí. Vuelve a intentarlo o sigue escribiendo.'});
