@@ -9,27 +9,33 @@ dialog.chapter-focus{inset:0;margin:0;width:100%;max-width:none;height:100dvh;ma
 .focus-header h2{font-size:18px;font-weight:600;letter-spacing:.02em}
 .focus-header h2:focus{outline:none}
 .focus-header .save-state{margin:4px 0 0;font-size:13px}
+.focus-tools{position:relative;display:flex;align-items:center;gap:8px;flex-shrink:0}
+.focus-help{margin:0}
+.focus-help>summary{min-height:44px;padding:11px 8px;font-size:13px;line-height:22px;cursor:pointer;color:var(--green);white-space:nowrap}
+.focus-help>summary:focus-visible{outline:3px solid #86ab94;outline-offset:2px;border-radius:4px}
+.focus-help p{position:absolute;right:0;top:calc(100% + 8px);width:min(280px,calc(100vw - 32px));margin:0;padding:12px 16px;border:1px solid var(--line);border-radius:8px;background:var(--paper);box-shadow:0 4px 16px #22322c12;font-size:14px;line-height:1.7;color:var(--muted);overflow-wrap:anywhere}
 .focus-return{flex-shrink:0;background:transparent;font-size:14px;border-color:#b5bdb2}
 .focus-return span[aria-hidden]{margin-right:6px}
-.focus-page{width:min(920px,calc(100% - 64px));margin:36px auto 56px;padding:48px 72px 36px;background:#fffefa;border:1px solid #e1dfd5;border-radius:3px;box-shadow:0 8px 32px #353c3010;animation:focus-page-in 180ms ease-out}
-.focus-hint{font-size:14px;line-height:1.7;color:var(--muted);margin:0 0 32px;padding-bottom:24px;border-bottom:1px solid #e6e5dc}
+.focus-page{width:min(920px,calc(100% - 64px));margin:24px auto 56px;padding:32px 72px 36px;background:#fffefa;border:1px solid #e1dfd5;border-radius:3px;box-shadow:0 8px 32px #353c3010;animation:focus-page-in 180ms ease-out}
 .chapter-focus .badge{background:#f0f2e9;border-radius:3px}
 .chapter-focus #chapterOrigin{font-size:13px}
-.chapter-focus .field{margin-top:26px;gap:10px}
-.chapter-focus .field label{font-size:13px;color:var(--muted);font-weight:500}
-.chapter-focus #editChapterTitle{font-family:Georgia,"Noto Serif CJK SC","Songti SC",SimSun,serif;font-size:clamp(24px,2.6vw,32px);font-weight:600;line-height:1.45;border:1px solid transparent;border-bottom-color:#dcded2;border-radius:0;background:transparent;padding:8px 0 14px}
+.chapter-focus .field{margin-top:16px;gap:6px}
+.chapter-focus .field label{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+.chapter-focus #editChapterTitle{font-family:Georgia,"Noto Serif CJK SC","Songti SC",SimSun,serif;font-size:clamp(24px,2.6vw,32px);font-weight:600;line-height:1.45;border:1px solid transparent;border-bottom-color:#dcded2;border-radius:0;background:transparent;padding:4px 0 10px;text-overflow:ellipsis}
 .chapter-focus #chapterText{font-family:Georgia,"Noto Serif CJK SC","Songti SC",SimSun,serif;font-size:19px;line-height:1.95;letter-spacing:.01em;min-height:440px;border:1px solid transparent;border-radius:3px;background:transparent;padding:12px 6px;resize:none;overflow:hidden}
+.chapter-focus #editChapterTitle:focus{text-overflow:clip}
 .chapter-focus #editChapterTitle:focus,.chapter-focus #chapterText:focus{outline:2px solid #c9d9c8;outline-offset:5px}
 .chapter-focus #chapterEditor>.row.spaced,.chapter-focus #reviewPanel{display:none!important}
 .focus-end{border-top:1px solid #e6e5dc;padding-top:24px;margin:32px 0 0;font-size:14px;color:var(--muted);line-height:1.7}
 @keyframes focus-page-in{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
 @media(max-width:700px){
-  .focus-header{padding:16px;gap:14px;align-items:flex-start}
-  .focus-header h2{font-size:16px;line-height:1.45}
-  .focus-header .save-state{font-size:12px;line-height:1.5}
-  .focus-return{max-width:45%;flex-shrink:1;font-size:13px;padding:10px 12px;min-height:44px}
-  .focus-page{width:100%;margin:0;padding:26px 24px 36px;border:0;box-shadow:none;border-radius:0;min-height:calc(100dvh - 100px)}
-  .focus-hint{font-size:13px;margin-bottom:24px;padding-bottom:20px}
+  .focus-header{padding:12px 16px;gap:10px;align-items:center}
+  .focus-header>div:first-child{min-width:0;flex:1}
+  .focus-header h2{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+  .focus-header .save-state{margin:0;font-size:12px;line-height:1.5;overflow-wrap:anywhere}
+  .focus-tools{gap:6px}
+  .focus-return{max-width:116px;flex-shrink:0;font-size:13px;padding:10px 12px;min-height:44px}
+  .focus-page{width:100%;margin:0;padding:18px 24px 36px;border:0;box-shadow:none;border-radius:0;min-height:calc(100dvh - 100px)}
   .chapter-focus #chapterText{font-size:18px;line-height:1.9;min-height:50dvh;padding:10px 2px}
   .focus-end{font-size:13px}
 }

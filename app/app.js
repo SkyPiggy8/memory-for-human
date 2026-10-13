@@ -80,6 +80,7 @@
   }
   function focusChapter() {
     if (busy || !activeChapter() || $('chapterFocusDialog').open) return;
+    $('focusHelp').open = false;
     chapterEditorHeight = $('chapterText').style.height;
     $('focusEditorSlot').append($('chapterEditor'));
     document.body.classList.add('chapter-focus-open');

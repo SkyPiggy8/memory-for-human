@@ -112,13 +112,15 @@
       <footer class="footnote"><span data-i18n="localHint"></span> · <a id="readmeLink" href="preview/README.html" target="_blank" data-i18n="moreDoc"></a></footer>
     </main>
   </div>
-  <dialog id="chapterFocusDialog" class="chapter-focus" aria-labelledby="focusTitle" aria-describedby="focusHint">
+  <dialog id="chapterFocusDialog" class="chapter-focus" aria-labelledby="focusTitle">
     <header class="focus-header">
       <div><h2 id="focusTitle" tabindex="-1" data-i18n="focusChapter"></h2><p id="focusSaveStatus" class="save-state" role="status" aria-live="polite"></p></div>
-      <button data-close="chapterFocusDialog" class="focus-return"><span aria-hidden="true">←</span> <span data-i18n="returnToChapters"></span></button>
+      <div class="focus-tools">
+        <details id="focusHelp" class="focus-help"><summary data-i18n="focusHelp"></summary><p id="focusHint" data-i18n="focusHint"></p></details>
+        <button data-close="chapterFocusDialog" class="focus-return"><span aria-hidden="true">←</span> <span data-i18n="returnToChapters"></span></button>
+      </div>
     </header>
     <div class="focus-page">
-      <p id="focusHint" class="focus-hint" data-i18n="focusHint"></p>
       <div id="focusEditorSlot"></div>
       <p class="focus-end" data-i18n="focusReviewHint"></p>
     </div>
