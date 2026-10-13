@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "description": "A local memoir workspace, guided by your own AI.",
-  "license": "PolyForm-Noncommercial-1.0.0",
+  "license": "(Apache-2.0 OR MIT)",
   "engines": { "node": ">=22" },
   "scripts": { "start": "node server.mjs", "test": "node --test tests/*.test.mjs" }
 }

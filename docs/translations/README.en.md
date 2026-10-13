@@ -135,4 +135,4 @@ There are no frontend dependencies to install. The server uses Node.js built-ins
 
 ## License
 
-[PolyForm Noncommercial 1.0.0](../../LICENSE) permits use, modification, and distribution for purposes allowed by the license, and restricts unauthorized commercial use. Your private material and work are not required to become public. Third-party tools keep their own terms; see [THIRD_PARTY_NOTICES.md](../THIRD_PARTY_NOTICES.md) for the diagram viewer and other third-party content.
+The project is available under [Apache-2.0](../../LICENSE-APACHE) or [MIT](../../LICENSE-MIT), at your choice. Commercial use is permitted under the terms of the license you select. Your private material and work are not required to become public. Third-party tools keep their own terms; see [THIRD_PARTY_NOTICES.md](../THIRD_PARTY_NOTICES.md) for the diagram viewer and other third-party content.

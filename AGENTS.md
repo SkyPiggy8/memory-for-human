@@ -3,6 +3,7 @@
 - Read root README.md and docs/ai-handoff.md first. Existing English and Spanish documents are grouped under docs/translations/.
 - Maintain only the Chinese README by default. Do not rewrite or synchronize other-language READMEs unless the user asks. Relocation may require link-only repairs; preserve their prose.
 - This is a local-first memoir tool for nontechnical users. Use plain everyday wording. Keep Chinese, English, and Spanish UI behavior in sync; README translations are retained snapshots.
+- Project-owned code, documentation, and assets use Apache-2.0 OR MIT, at the recipient's choice. Preserve all third-party notices. License declarations in retained translations must match the current project license; otherwise keep their README prose unchanged.
 - Keep the repository compact. Chinese documentation is consolidated into docs/guide.md, docs/templates.md, docs/ai-handoff.md, docs/technical.md, and docs/development.md. Add sections to the relevant document instead of creating overlapping guides.
 - Frontend: buildless classic scripts in `app/`, root `index.html`. Classic scripts intentionally support direct file mode. No framework or frontend package install is required.
 - Server: `server.mjs`, Node.js 22+ built-ins, loopback only. Start with `node server.mjs`; Windows users have `start.cmd`; other systems have `sh start.sh`.

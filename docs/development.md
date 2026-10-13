@@ -14,7 +14,7 @@
 
 新功能先对照[开发计划](development.md#roadmap)。还没实现的能力保留在计划中，引用第三方项目注明出处，独立工具不能写成已集成。技术比较说明资料范围，不把他人文档的遗漏当成功能缺失。
 
-贡献需能按本项目的 [PolyForm Noncommercial 1.0.0](../LICENSE) 分发，并保留必要的[第三方声明](THIRD_PARTY_NOTICES.md)。
+贡献需能按本项目的 [Apache-2.0 / MIT 双许可](../LICENSE) 分发，并保留必要的[第三方声明](THIRD_PARTY_NOTICES.md)。
 
 <a id="roadmap"></a>
 
@@ -54,9 +54,9 @@ API 传输测试使用模拟响应，没有逐一验证使用者真实账号。�
 ### 仓库资料
 
 - 名称：`memory-for-human`
-- 简介：Local-first memoirs, guided by your own AI. 中文 / English / Español. Personal, noncommercial use.
+- 简介：Local-first memoirs, guided by your own AI. 中文 / English / Español. Apache-2.0 OR MIT.
 - Topics：`memoir`、`oral-history`、`family-history`、`ai-writing`、`local-first`、`personal-archive`
-- 许可：[PolyForm Noncommercial 1.0.0](../LICENSE)，非商业使用；第三方内容保留自己的许可。
+- 许可：[Apache-2.0 / MIT 双许可](../LICENSE)，任选一种，允许商业使用；第三方内容保留自己的许可。
 
 中文 README 是日常维护入口，现有译文集中在 `docs/translations/`。`preview/` 只保留界面会打开的六份页面，根目录 `index.html` 是可操作应用。
 

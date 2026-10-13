@@ -307,4 +307,4 @@ AI 可以帮忙拟标题、安排顺序和整理说明，事实仍由本人核�
 | [picframe](https://github.com/helgeerbe/picframe) | 在受支持的树莓派设备上展示照片 | 先做照片和故事卡，再按其文档搭相框 |
 | [Paperless-ngx](https://github.com/paperless-ngx/paperless-ngx) | 扫描、索引与归档文档 | 整理信件、扫描件和成稿；原件仍需另存 |
 
-AI 采访与回忆录项目的参考另见[设计取舍](technical.md#related-work)。这些项目遵循各自条款，MFH 的非商业许可不改变它们的许可。
+AI 采访与回忆录项目的参考另见[设计取舍](technical.md#related-work)。这些项目遵循各自条款，MFH 的 Apache-2.0 / MIT 双许可不改变它们的许可。

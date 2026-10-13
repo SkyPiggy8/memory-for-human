@@ -1,10 +1,10 @@
 # Third-party notices
 
-Memory for Human's own code and documentation use PolyForm Noncommercial 1.0.0. Third-party material retains its original terms.
+Memory for Human's original code, documentation, and assets are available under Apache-2.0 OR MIT, at the recipient's choice. Third-party material retains its original terms.
 
 ## Archify diagram viewer
 
-`docs/overview.html` was generated with Archify 2.17 and includes its viewer runtime. The overview SVG files are exports derived from that diagram. Archify's MIT notice is retained below; this does not change the license of Memory for Human's own application.
+`docs/overview.html` was generated with Archify 2.17 and includes its viewer runtime. The localized overview SVG files are exports derived from that diagram. The current Chinese README flowchart in assets/overview.svg is authored separately and follows the project's dual license. Archify's MIT notice is retained below; this does not change the license of Memory for Human's own application.
 
 Source: https://github.com/tt-a1i/archify
 

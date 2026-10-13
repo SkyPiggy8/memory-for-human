@@ -135,4 +135,4 @@ No hay dependencias de interfaz que instalar. El servidor usa funciones incluida
 
 ## Licencia
 
-[PolyForm Noncommercial 1.0.0](../../LICENSE) permite el uso, la modificación y la distribución para fines autorizados por la licencia, y restringe el uso comercial no autorizado. Tus materiales y obras privadas no tienen que publicarse. Las herramientas externas mantienen sus propios términos; consulta [THIRD_PARTY_NOTICES.md](../THIRD_PARTY_NOTICES.md) para el visor del diagrama y otros contenidos de terceros.
+El proyecto está disponible bajo [Apache-2.0](../../LICENSE-APACHE) o [MIT](../../LICENSE-MIT), a tu elección. Se permite el uso comercial según las condiciones de la licencia elegida. Tus materiales y obras privadas no tienen que publicarse. Las herramientas externas mantienen sus propios términos; consulta [THIRD_PARTY_NOTICES.md](../THIRD_PARTY_NOTICES.md) para el visor del diagrama y otros contenidos de terceros.

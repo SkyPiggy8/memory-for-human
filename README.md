@@ -2,6 +2,12 @@
 
 用自己的电脑和 AI 写回忆录。可以自己写，也可以帮家人记录。
 
+![记下故事，交给自己的 AI 整理，本人检查修改，再保存或打印](assets/overview.svg)
+
+先回答问题，或放入已有文字。AI 根据这些材料继续问、整理成一章，你或讲述者读一遍、改好，再保存或打印。一次写一点，之后还能接着写。
+
+AI 可以在网页里连接，也可以复制说明给你平时用的 AI。没有 API Key，也能开始记录。比如给奶奶写回忆录，可以先从“小时候家里是什么样子”聊起，不用一次讲完一生。
+
 ## 1. 下载后，怎么打开可操作的网页？
 
 **Windows：**
@@ -47,15 +53,6 @@
 
 [使用指南：材料、采访、打印与保存](docs/guide.md) · [六类采访模板](docs/templates.md) · [技术说明与项目对比](docs/technical.md) · [开发计划](docs/development.md#roadmap)
 
-<details>
-<summary>项目流程图</summary>
-
-![选择故事、整理材料、逐章写作、本人审阅、制作与保存](assets/overview.svg)
-
-图中包含后续计划。[查看交互流程图](docs/overview.html)
-
-</details>
-
-本项目采用 [PolyForm Noncommercial 1.0.0](LICENSE)，用于非商业用途。[第三方许可说明](docs/THIRD_PARTY_NOTICES.md)。
+本项目采用 [Apache-2.0](LICENSE-APACHE) / [MIT](LICENSE-MIT) 双许可，任选一种，可用于个人或商业项目；使用和分发时遵守所选许可。[许可说明](LICENSE) · [第三方许可](docs/THIRD_PARTY_NOTICES.md)。
 
 其他语言：[English](docs/translations/README.en.md) · [Español](docs/translations/README.es.md)（保留版本）。
