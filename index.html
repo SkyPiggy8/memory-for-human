@@ -125,6 +125,13 @@
   </dialog>
   <dialog id="materialDialog"><div class="dialog-head"><h2 data-i18n="addText"></h2><button class="quiet small" data-close="materialDialog" data-i18n="close"></button></div><form id="materialForm"><div class="field"><label for="materialName" data-i18n="materialName"></label><input id="materialName" maxlength="300" required></div><div class="field"><label for="materialContent" data-i18n="materialContent"></label><textarea id="materialContent" rows="10" required></textarea></div><button class="primary spaced" data-i18n="add"></button></form></dialog>
   <dialog id="editAnswerDialog"><div class="dialog-head"><h2 data-i18n="edit"></h2><button class="quiet small" data-close="editAnswerDialog" data-i18n="close"></button></div><form id="editAnswerForm"><div class="field"><label for="editQuestion" data-i18n="question"></label><textarea id="editQuestion" rows="2"></textarea></div><div class="field"><label for="editAnswer" data-i18n="answerLabel"></label><textarea id="editAnswer" rows="10"></textarea></div><button class="primary spaced" data-i18n="saveAnswer"></button></form></dialog>
+  <dialog id="interviewDraftDialog" aria-labelledby="interviewDraftTitle" aria-describedby="interviewDraftHint">
+    <h2 id="interviewDraftTitle" data-i18n="draftBeforeQuestion"></h2>
+    <p id="interviewDraftHint" data-i18n="draftBeforeQuestionHint"></p>
+    <blockquote id="interviewDraftQuestion" class="draft-question"></blockquote>
+    <p id="interviewDraftStatus" class="hint" role="status" aria-live="polite"></p>
+    <div class="row spaced"><button id="keepInterviewDraft" data-close="interviewDraftDialog" data-i18n="keepInterviewDraft"></button><button id="saveInterviewDraft" class="primary" data-i18n="saveInterviewDraft"></button></div>
+  </dialog>
   <input type="file" id="textFile" accept=".txt,.md,.csv,.json" multiple hidden>
   <input type="file" id="backupFile" accept=".json" hidden>
   <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
